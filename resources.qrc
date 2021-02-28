@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>money.jfif</file>
+        <file>phone.webp</file>
+    </qresource>
+</RCC>
