@@ -1,8 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-//#include "Inventory.h"
-
 #include "player.h"
 #include "room.h"
 
@@ -24,7 +22,8 @@ private:
 
 public:
     Game(QWidget *parent = nullptr);
-    QGraphicsScene *room1scene;
+    QGraphicsScene *room1scene, *room2scene;
+    ~Game();
 };
 
 #endif // GAME_H

@@ -1,5 +1,9 @@
 #include "player.h"
 #include "game.h"
+#include "exit.h"
+
+#include <string>
+using namespace std;
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -11,39 +15,36 @@ Game::Game(QWidget *parent){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-    setFixedSize(800,600);
+    setFixedSize(1000,600);
 
-    //create room 1
+    //room 1 scene
     QGraphicsScene *room1scene = new QGraphicsScene();
-    room1scene->setSceneRect(0,0,800,600);           //set scene dimensions
-    room1scene->setBackgroundBrush(QBrush(QImage(":/images/images/room1bg.png")));
+    room1scene = new QGraphicsScene();
+    room1scene->setSceneRect(0,0,1000,600);           //set scene dimensions
+    room1scene->setBackgroundBrush(QBrush(QImage(":/images/images/room1.png")));
+    Exit *exit = new Exit();
+    exit->setExitImage("north");
+    exit->setPos(450, 0);
+    room1scene->addItem(exit);
 
-    //set QGraphicsScene in QGraphicsView
-    setScene(room1scene);
+
+    //room 2 scene
+    QGraphicsScene *room2scene = new QGraphicsScene();
+    room2scene = new QGraphicsScene();
+    room2scene->setSceneRect(0,0,1000,600);           //set scene dimensions
+    room2scene->setBackgroundBrush(QBrush(QImage(":/images/images/room2.png")));
 
     //add player
     Player *player = new Player();
-    player->setPos(400,300);                            //set position of player
+    player->setPos(300,300);                            //set position of player
     player->setFlag(QGraphicsItem::ItemIsFocusable);    //make player focusable
     player->setFocus();                                 //set focus on player
     room1scene->addItem(player);                        //add player item to scene
 
+    //set QGraphicsScene in QGraphicsView
+    setScene(room1scene);
+
     show(); //show scene in QGraphicsView
-}
-
-void Game::createRooms(){
-    Room *room1, *room2;
-
-    room1 = new Room("Room 1", QImage(":/images/images/room1bg.png"));
-    room2 = new Room("Room 2", QImage(":/images/room2bg.png"));
-
-                     //North, South, East, West
-    room1->setExits(room2, NULL, NULL, NULL);
-    room2->setExits(NULL, room1, NULL, NULL);
-
-    //starting area
-    currentRoom = room1;
-    //load scene for currentRoom
 }
 
 void Game::go(string direction) {
@@ -57,13 +58,17 @@ void Game::go(string direction) {
     }
 }
 
-
 void Game::printWelcome(){
     cout << "Welcome" << endl;
 }
 
 void Game::printHelp(){
 
+}
+
+Game::~Game(){
+    delete room1scene;
+    delete room2scene;
 }
 
 
