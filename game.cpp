@@ -1,6 +1,7 @@
 #include "player.h"
 #include "game.h"
 #include "exit.h"
+#include <QKeyEvent>
 
 #include <string>
 #include <iostream>
@@ -28,7 +29,6 @@ Game::Game(QWidget *parent){
     exit->setPos(450, 0);
     room1scene->addItem(exit);
 
-
     //room 2 scene
     QGraphicsScene *room2scene = new QGraphicsScene();
     room2scene = new QGraphicsScene();
@@ -37,15 +37,14 @@ Game::Game(QWidget *parent){
 
     //add player
     Player *player = new Player();
-    player->setPos(300,300);                            //set position of player
-    player->setFlag(QGraphicsItem::ItemIsFocusable);    //make player focusable
-    player->setFocus();                                 //set focus on player
     room1scene->addItem(player);                        //add player item to scene
 
     //set QGraphicsScene in QGraphicsView
     setScene(room1scene);
 
     show(); //show scene in QGraphicsView
+    //scenecontroller.createRoomScenes()
+    //scenecontroller.setRoom(string room)
 }
 
 void Game::go(string direction) {
@@ -57,6 +56,11 @@ void Game::go(string direction) {
         currentRoom = nextRoom;
         //load scene for currentRoom
     }
+}
+
+void Game::changeRoom(QGraphicsScene *room) {
+    //load the room and scene
+    setScene(room);
 }
 
 void Game::printWelcome(){

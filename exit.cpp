@@ -9,7 +9,6 @@ using namespace std;
 #include <QGraphicsPixmapItem>
 
 Exit::Exit(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
-
 }
 
 void Exit::setExitImage(string direction){

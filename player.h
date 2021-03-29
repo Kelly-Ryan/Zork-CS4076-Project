@@ -11,6 +11,7 @@ private:
     int speed;
 public:
     Player(QGraphicsItem * parent=0);
+    Player(int xPos, int yPos);
     ~Player();
 };
 

@@ -18,11 +18,13 @@ private:
     void printWelcome();
     void printHelp();
     void go(string direction);
-    Player *player;
+
 
 public:
     Game(QWidget *parent = nullptr);
+    Player *player;
     QGraphicsScene *room1scene, *room2scene;
+    void changeRoom(QGraphicsScene *room);
     ~Game();
 };
 
