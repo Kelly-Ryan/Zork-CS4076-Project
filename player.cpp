@@ -1,7 +1,8 @@
+#include "exit.h"
 #include "player.h"
 
+#include <QDebug>
 #include <QKeyEvent>
-#include <math.h>
 
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
     //draw player
@@ -12,8 +13,9 @@ void Player::keyPressEvent(QKeyEvent *event){
     int speed = 10;
 
     if(event->key() == Qt::Key_W){
-        if(pos().y() > 100){
+        if(pos().y() > 50){
             setPos(x(), y() - speed);
+            qDebug() << exitInteraction();
         }
     }
     else if(event->key() == Qt::Key_S){
@@ -31,6 +33,20 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPos(x() + speed, y());
         }
     }
+}
+
+bool Player::exitInteraction(){
+    //list of pointers to all the QGraphicsItems that are colliding with the calling object (the player)
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+
+    //traverse this list and find out of the player is colliding with an exit
+    for(int i = 0, n = colliding_items.size(); i < n; ++i){
+        if(typeid(*(colliding_items[i])) == typeid(Exit)){
+            //set QGraphicsScene in QGraphicsView
+            return true;
+        }
+    }
+    return false;
 }
 
 Player::~Player(){

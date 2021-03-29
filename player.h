@@ -7,8 +7,8 @@
 class Player : public QObject, public QGraphicsPixmapItem {
 private:
     void keyPressEvent(QKeyEvent *event);
-    void keyPressEvent(QKeyEvent *event1, QKeyEvent *event2);
-    double speed, diagSpeed;
+    bool exitInteraction();
+    int speed;
 public:
     Player(QGraphicsItem * parent=0);
     ~Player();

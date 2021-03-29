@@ -1,14 +1,12 @@
 HEADERS += \
     exit.h \
     game.h \
-    item.h \
     player.h \
     room.h
 
 SOURCES += \
     exit.cpp \
     game.cpp \
-    item.cpp \
     main.cpp \
     player.cpp \
     room.cpp

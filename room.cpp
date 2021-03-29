@@ -30,3 +30,7 @@ Room* Room::nextRoom(string direction) {
                 // part of the "pair" (<string, Room*>) and return it.
 }
 
+Room::~Room(){
+
+}
+
