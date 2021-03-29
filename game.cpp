@@ -24,16 +24,18 @@ Game::Game(QWidget *parent){
     room1scene = new QGraphicsScene();
     room1scene->setSceneRect(0,0,1000,600);           //set scene dimensions
     room1scene->setBackgroundBrush(QBrush(QImage(":/images/images/room1.png")));
-    Exit *exit = new Exit();
-    exit->setExitImage("north");
-    exit->setPos(450, 0);
+
+   //draw exits
+    string direction = "north";
+    string *dirPtr = &direction;
+    Exit *exit = new Exit(dirPtr);
     room1scene->addItem(exit);
 
     //room 2 scene
-    QGraphicsScene *room2scene = new QGraphicsScene();
-    room2scene = new QGraphicsScene();
-    room2scene->setSceneRect(0,0,1000,600);           //set scene dimensions
-    room2scene->setBackgroundBrush(QBrush(QImage(":/images/images/room2.png")));
+//    QGraphicsScene *room2scene = new QGraphicsScene();
+//    room2scene = new QGraphicsScene();
+//    room2scene->setSceneRect(0,0,1000,600);           //set scene dimensions
+//    room2scene->setBackgroundBrush(QBrush(QImage(":/images/images/room2.png")));
 
     //add player
     Player *player = new Player();

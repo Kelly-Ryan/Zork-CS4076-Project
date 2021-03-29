@@ -27,17 +27,16 @@ void Player::keyPressEvent(QKeyEvent *event){
     if(event->key() == Qt::Key_W){
         if(pos().y() > 75){
             setPos(x(), y() - speed);
-            qDebug() << exitInteraction();
+            //qDebug() << exitInteraction();
             if(exitInteraction()){
                 //room 2 scene
                 QGraphicsScene *room2scene = new QGraphicsScene();
-                room2scene = new QGraphicsScene();
                 room2scene->setSceneRect(0,0,1000,600);           //set scene dimensions
                 room2scene->setBackgroundBrush(QBrush(QImage(":/images/images/room2.png")));
 
-                Exit *exit = new Exit();
-                exit->setExitImage("south");
-                exit->setPos(450, 500);
+                string direction = "south";
+                string *dirPtr = &direction;
+                Exit *exit = new Exit(dirPtr);
                 room2scene->addItem(exit);
 
                 Player *player = new Player(450,450);

@@ -1,14 +1,18 @@
 #include "room.h"
 #include "game.h"
+#include "exit.h"
 #include <QGraphicsScene>
 
 using namespace std;
 
-Room::Room(string roomName, QImage bgBrush){
-    this->roomName = roomName;
-    QGraphicsScene *room1scene = new QGraphicsScene();
-    room1scene->setSceneRect(0,0,1000,800);           //set scene dimensions
-    room1scene->setBackgroundBrush(QBrush(QImage(":images/images/room1bg.png")));
+Room::Room(){
+    setSceneRect(0,0,1000,600);              //set scene dimensions
+    setBackgroundBrush(QBrush(QImage(":images/images/room1bg.png")));
+
+    //set exits
+
+    Player *player = new Player(450,450);
+    addItem(player);
 }
 
 void Room::setExits(Room *north, Room *south, Room *east, Room *west) {

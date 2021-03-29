@@ -11,7 +11,8 @@ using namespace std;
 class Exit : public QObject, public QGraphicsPixmapItem {
 public:
     Exit(QGraphicsItem * parent=0);
-    void setExitImage(string direction);
+    Exit(string *dir);
+    void setExitImage(string *dir);
     ~Exit();
 };
 
