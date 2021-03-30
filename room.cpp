@@ -1,13 +1,4 @@
 #include "room.h"
-#include "game.h"
-#include "exit.h"
-
-#include <iostream>
-
-#include <QGraphicsScene>
-#include <QDebug>
-
-using namespace std;
 
 Room::Room(string description, QImage background){
     this->description = description;                    //set room description
@@ -50,14 +41,14 @@ void Room::setExits(Room *north, Room *south, Room *east, Room *west) {
 
 Room* Room::nextRoom(string direction) {
     map<string, Room*>::iterator next = exits.find(direction); //returns an iterator for the "pair"
-    if (next == exits.end())
+    if (next == exits.end()){
         return NULL; // if exits.end() was returned, there's no room in that direction.
-    return next->second; // If there is a room, remove the "second" (Room*)
-                // part of the "pair" (<string, Room*>) and return it.
+    } else {
+    return next->second; // If there is a room, remove the "second" (Room*) part of the "pair" (<string, Room*>) and return it.
+    }
 }
 
 Room::~Room(){
-    delete player;
     delete northExit;
     delete southExit;
     delete eastExit;

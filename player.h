@@ -6,9 +6,10 @@
 
 class Player : public QObject, public QGraphicsPixmapItem {
 private:
+    int speed;
     void keyPressEvent(QKeyEvent *event);
     void exitCollision();
-    int speed;
+
 public:
     Player(QGraphicsItem * parent=0);
     Player(int xPos, int yPos);

@@ -1,20 +1,15 @@
-#include "player.h"
 #include "game.h"
 #include "exit.h"
-#include <QKeyEvent>
 
 #include <string>
 #include <iostream>
 
-#include <QGraphicsItem>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimedia/QMediaPlaylist>
 
 using namespace std;
 
-Game::Game(QWidget *parent){
+Game::Game(QWidget *){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
@@ -31,7 +26,6 @@ Game::Game(QWidget *parent){
 }
 
 void Game::createRooms(){
-
     a = new Room("Room A", QImage(":images/images/stoneRoom.png"));
     b = new Room("Room B", QImage(":images/images/stoneRoom.png"));
     c = new Room("Room C", QImage(":images/images/stoneRoom.png"));
@@ -56,14 +50,26 @@ void Game::createRooms(){
 
 void Game::printWelcome(){
     cout << "Welcome" << endl;
+    //welcome message
 }
 
 void Game::printHelp(){
-
+    cout << "Help" << endl;
+    //help text
 }
 
 Game::~Game(){
-
+    delete player;
+    delete currentRoom;
+    delete a;
+    delete b;
+    delete c;
+    delete d;
+    delete e;
+    delete f;
+    delete g;
+    delete h;
+    delete i;
 }
 
 

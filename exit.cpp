@@ -1,14 +1,5 @@
 #include "exit.h"
 
-#include <string>
-#include <iostream>
-
-#include <QDebug>
-#include <QGraphicsItem>
-#include <QGraphicsPixmapItem>
-
-using namespace std;
-
 Exit::Exit(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
 
 }

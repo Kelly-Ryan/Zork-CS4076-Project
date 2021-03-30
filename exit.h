@@ -2,10 +2,11 @@
 #define EXIT_H
 
 #include <string>
-using namespace std;
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
+
+using namespace std;
 
 class Exit : public QObject, public QGraphicsPixmapItem {
 private:

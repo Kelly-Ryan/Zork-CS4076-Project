@@ -1,15 +1,13 @@
 #include "game.h"
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QApplication>
-#include <QWidget>
 
 Game *game; //global game object
 
 int main (int argc, char *argv[]){
     QApplication a(argc, argv);
-    game = new Game();    //create Game object
+    game = new Game();          //create Game object
     game->show();               //show Game object
 
     return a.exec();

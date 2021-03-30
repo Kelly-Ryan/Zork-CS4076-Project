@@ -1,10 +1,7 @@
+#include "player.h"
 #include "exit.h"
 #include "game.h"
-#include "player.h"
 
-#include <iostream>
-
-#include <QDebug>
 #include <QKeyEvent>
 
 extern Game *game;
@@ -15,6 +12,7 @@ Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/images/player.png"));   //draw player
 }
 
+//overloaded constructor for creating new Player object in new Room
 Player::Player(int xPos, int yPos){
     setPos(xPos,yPos);
     setFlag(QGraphicsItem::ItemIsFocusable);
@@ -22,29 +20,28 @@ Player::Player(int xPos, int yPos){
     setPixmap(QPixmap(":/images/images/player.png"));
 }
 
-void Player::keyPressEvent(QKeyEvent *event){
+void Player::keyPressEvent(QKeyEvent *event){       //player movement
     int speed = 10;
 
-    //move north
-    if(event->key() == Qt::Key_W){
+    if(event->key() == Qt::Key_W){          //move north
         if(pos().y() > 75){
             setPos(x(), y() - speed);
             exitCollision();
         }
     }
-    else if(event->key() == Qt::Key_S){
+    else if(event->key() == Qt::Key_S){     //move south
         if(pos().y() + 51 < 525){
             setPos(x(), y() + speed);
             exitCollision();
         }
     }
-    else if(event->key() == Qt::Key_A){
+    else if(event->key() == Qt::Key_A){     //move west
         if(pos().x() > 285){
             setPos(x() - speed, y());
             exitCollision();
         }
     }
-    else if(event->key() == Qt::Key_D){
+    else if(event->key() == Qt::Key_D){     //move east
         if(pos().x() + 45 < 725){
             setPos(x() + speed, y());
             exitCollision();
@@ -68,7 +65,7 @@ void Player::exitCollision(){
                     game->currentRoom->removeItem(this); //remove player item from room we're leaving
                     game->currentRoom = nextRoom;   //set new currentRoom
                     game->player = new Player(475,450);//set position of player in next room
-                    nextRoom->addItem(game->player);
+                    nextRoom->addItem(game->player);    //add new player to new room
                     game->setScene(nextRoom);       //load scene for next room
                 }
             }
@@ -107,6 +104,5 @@ void Player::exitCollision(){
 }
 
 Player::~Player(){
-
 
 }
