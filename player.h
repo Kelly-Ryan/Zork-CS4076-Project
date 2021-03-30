@@ -7,7 +7,7 @@
 class Player : public QObject, public QGraphicsPixmapItem {
 private:
     void keyPressEvent(QKeyEvent *event);
-    bool exitCollision();
+    void exitCollision();
     int speed;
 public:
     Player(QGraphicsItem * parent=0);

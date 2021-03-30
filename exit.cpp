@@ -14,6 +14,8 @@ Exit::Exit(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
 }
 
 Exit::Exit(string direction){
+    this->direction = direction;
+
     if(direction.compare("north") == 0){
         setPos(450,0);
         setPixmap(QPixmap(":/images/images/exit.png"));         //100px x 100px
@@ -33,6 +35,10 @@ Exit::Exit(string direction){
         setPos(260,200);
         setPixmap(QPixmap(":/images/images/westExit.png"));     //43px x 153px
     }
+}
+
+string Exit::getDirection(){
+    return direction;
 }
 
 Exit::~Exit(){

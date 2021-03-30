@@ -8,9 +8,12 @@ using namespace std;
 #include <QObject>
 
 class Exit : public QObject, public QGraphicsPixmapItem {
+private:
+    string direction;
 public:
     Exit(QGraphicsItem * parent=0);
     Exit(string direction);
+    string getDirection();
     ~Exit();
 };
 
