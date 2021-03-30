@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>phone.webp</file>
+        <file>sword.png</file>
+    </qresource>
+</RCC>
