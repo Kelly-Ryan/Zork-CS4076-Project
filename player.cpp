@@ -32,9 +32,10 @@ void Player::keyPressEvent(QKeyEvent *event){
             if(exitCollision()){
                 Room *nextRoom = game->currentRoom->nextRoom("north");
                 if (nextRoom != NULL){              //check if this room has an exit in this direction
+                    game->currentRoom->removeItem(game->player); //remove player item from room we're leaving
                     game->currentRoom = nextRoom;   //set new currentRoom
-                    player = new Player(450,450);//set position of player in next room
-                    nextRoom->addItem(player);
+                    game->player = new Player(450,450);//set position of player in next room
+                    nextRoom->addItem(game->player);
                     game->setScene(nextRoom);       //load scene for next room
                 }
             }
@@ -48,9 +49,10 @@ void Player::keyPressEvent(QKeyEvent *event){
              if(exitCollision()){
                  Room *nextRoom = game->currentRoom->nextRoom("south");
                  if (nextRoom != NULL){
+                     game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     player = new Player(450,100);
-                     nextRoom->addItem(player);
+                     game->player = new Player(450,150);
+                     nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
              }
@@ -64,9 +66,10 @@ void Player::keyPressEvent(QKeyEvent *event){
              if(exitCollision()){
                  Room *nextRoom = game->currentRoom->nextRoom("east");
                  if (nextRoom != NULL){
+                     game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     player = new Player(300,300);
-                     nextRoom->addItem(player);
+                     game->player = new Player(350,350);
+                     nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
              }
@@ -80,9 +83,10 @@ void Player::keyPressEvent(QKeyEvent *event){
              if(exitCollision()){
                  Room *nextRoom = game->currentRoom->nextRoom("west");
                  if (nextRoom != NULL){
+                     game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     player = new Player(350,700);
-                     nextRoom->addItem(player);
+                     game->player = new Player(650,350);
+                     nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
              }
@@ -106,5 +110,5 @@ bool Player::exitCollision(){
 
 Player::~Player(){
 
-    delete player;
+
 }

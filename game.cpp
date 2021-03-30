@@ -42,7 +42,7 @@ void Game::createRooms(){
     h = new Room("Room H", QImage(":images/images/stoneRoom.png"));
     i = new Room("Room I", QImage(":images/images/stoneRoom.png"));
 
-    //         (N, S, E, W)
+    //         (N, E, S, W)
     a->setExits(f, b, d, c);
     b->setExits(NULL, NULL, NULL, a);
     c->setExits(NULL, a, NULL, NULL);

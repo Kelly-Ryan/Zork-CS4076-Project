@@ -2,14 +2,26 @@
 #include "game.h"
 #include "exit.h"
 
+#include <iostream>
+
 #include <QGraphicsScene>
+#include <QDebug>
 
 using namespace std;
 
 Room::Room(string description, QImage background){
     this->description = description;                    //set room description
+    cout << description << endl;
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
+
+    QGraphicsTextItem *roomName = new QGraphicsTextItem(QString::fromStdString(description));
+    QFont roomFont ("Adventure", 25);
+    roomName->setFont(roomFont);
+    roomName->setDefaultTextColor("white");
+    roomName->setPos(25,25);
+    addItem(roomName);
+
 }
 
 void Room::setExits(Room *north, Room *south, Room *east, Room *west) {
