@@ -1,29 +1,41 @@
 #include "room.h"
 #include "game.h"
 #include "exit.h"
+
 #include <QGraphicsScene>
 
 using namespace std;
 
-Room::Room(){
-    setSceneRect(0,0,1000,600);              //set scene dimensions
-    setBackgroundBrush(QBrush(QImage(":images/images/room1bg.png")));
-
-    //set exits
-
-    Player *player = new Player(450,450);
-    addItem(player);
+Room::Room(string description, QImage background){
+    this->description = description;                    //set room description
+    setSceneRect(0,0,1000,600);                         //set scene dimensions
+    setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 }
 
 void Room::setExits(Room *north, Room *south, Room *east, Room *west) {
-    if (north != NULL)
+    if (north != NULL){
         exits["north"] = north;
-    if (east != NULL)
-        exits["east"] = east;
-    if (south != NULL)
+        northExit = new Exit("north");
+        addItem(northExit);
+    }
+
+    if (south != NULL){
         exits["south"] = south;
-    if (west != NULL)
+        southExit = new Exit("south");
+        addItem(southExit);
+    }
+
+    if (east != NULL){
+        exits["east"] = east;
+        eastExit = new Exit("east");
+        addItem(eastExit);
+    }
+
+    if (west != NULL){
         exits["west"] = west;
+        westExit = new Exit("west");
+        addItem(westExit);
+    }
 }
 
 Room* Room::nextRoom(string direction) {
@@ -35,6 +47,10 @@ Room* Room::nextRoom(string direction) {
 }
 
 Room::~Room(){
-
+    delete player;
+    delete northExit;
+    delete southExit;
+    delete eastExit;
+    delete westExit;
 }
 

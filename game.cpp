@@ -5,7 +5,6 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -13,56 +12,46 @@ using namespace std;
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimedia/QMediaPlaylist>
 
+using namespace std;
+
 Game::Game(QWidget *parent){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
 
-    //room 1 scene
-    QGraphicsScene *room1scene = new QGraphicsScene();
-    room1scene = new QGraphicsScene();
-    room1scene->setSceneRect(0,0,1000,600);           //set scene dimensions
-    room1scene->setBackgroundBrush(QBrush(QImage(":/images/images/room1.png")));
+    createRooms();
+    currentRoom = a;            //set current room/scene
 
-   //draw exits
-    string direction = "north";
-    string *dirPtr = &direction;
-    Exit *exit = new Exit(dirPtr);
-    room1scene->addItem(exit);
+    player = new Player(500, 300);   //position player in centre of room
+    a->addItem(player);         //add player to scene
 
-    //room 2 scene
-//    QGraphicsScene *room2scene = new QGraphicsScene();
-//    room2scene = new QGraphicsScene();
-//    room2scene->setSceneRect(0,0,1000,600);           //set scene dimensions
-//    room2scene->setBackgroundBrush(QBrush(QImage(":/images/images/room2.png")));
-
-    //add player
-    Player *player = new Player();
-    room1scene->addItem(player);                        //add player item to scene
-
-    //set QGraphicsScene in QGraphicsView
-    setScene(room1scene);
-
-    show(); //show scene in QGraphicsView
-    //scenecontroller.createRoomScenes()
-    //scenecontroller.setRoom(string room)
+    setScene(a);        //set first scene (room) in QGraphicsView
+    show(); //show QGraphicsView
 }
 
-void Game::go(string direction) {
-    //Move to the next room
-    Room* nextRoom = currentRoom->nextRoom(direction);
-    if (nextRoom == NULL){
-        ;
-    }else{
-        currentRoom = nextRoom;
-        //load scene for currentRoom
-    }
-}
+void Game::createRooms(){
 
-void Game::changeRoom(QGraphicsScene *room) {
-    //load the room and scene
-    setScene(room);
+    a = new Room("Room A", QImage(":images/images/stoneRoom.png"));
+    b = new Room("Room B", QImage(":images/images/stoneRoom.png"));
+    c = new Room("Room C", QImage(":images/images/stoneRoom.png"));
+    d = new Room("Room D", QImage(":images/images/stoneRoom.png"));
+    e = new Room("Room E", QImage(":images/images/stoneRoom.png"));
+    f = new Room("Room F", QImage(":images/images/stoneRoom.png"));
+    g = new Room("Room G", QImage(":images/images/stoneRoom.png"));
+    h = new Room("Room H", QImage(":images/images/stoneRoom.png"));
+    i = new Room("Room I", QImage(":images/images/stoneRoom.png"));
+
+    //         (N, S, E, W)
+    a->setExits(f, b, d, c);
+    b->setExits(NULL, NULL, NULL, a);
+    c->setExits(NULL, a, NULL, NULL);
+    d->setExits(a, e, NULL, i);
+    e->setExits(NULL, NULL, NULL, d);
+    f->setExits(NULL, g, a, h);
+    g->setExits(NULL, NULL, NULL, f);
+    h->setExits(NULL, f, NULL, NULL);
+    i->setExits(NULL, d, NULL, NULL);
 }
 
 void Game::printWelcome(){
@@ -74,8 +63,7 @@ void Game::printHelp(){
 }
 
 Game::~Game(){
-    delete room1scene;
-    delete room2scene;
+
 }
 
 
