@@ -23,7 +23,7 @@ Game::Game(QWidget *parent){
     createRooms();
     currentRoom = a;            //set current room/scene
 
-    player = new Player(500, 300);   //position player in centre of room
+    player = new Player(475, 275);   //position player in centre of room
     a->addItem(player);         //add player to scene
 
     setScene(a);        //set first scene (room) in QGraphicsView
@@ -42,16 +42,16 @@ void Game::createRooms(){
     h = new Room("Room H", QImage(":images/images/stoneRoom.png"));
     i = new Room("Room I", QImage(":images/images/stoneRoom.png"));
 
-    //         (N, E, S, W)
-    a->setExits(f, b, d, c);
+    //         (N, S, E, W)
+    a->setExits(f, d, b, c);
     b->setExits(NULL, NULL, NULL, a);
-    c->setExits(NULL, a, NULL, NULL);
-    d->setExits(a, e, NULL, i);
+    c->setExits(NULL, NULL, a, NULL);
+    d->setExits(a, NULL, e, i);
     e->setExits(NULL, NULL, NULL, d);
-    f->setExits(NULL, g, a, h);
+    f->setExits(NULL, a, g, h);
     g->setExits(NULL, NULL, NULL, f);
-    h->setExits(NULL, f, NULL, NULL);
-    i->setExits(NULL, d, NULL, NULL);
+    h->setExits(NULL, NULL, f, NULL);
+    i->setExits(NULL, NULL, d, NULL);
 }
 
 void Game::printWelcome(){

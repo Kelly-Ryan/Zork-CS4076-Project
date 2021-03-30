@@ -11,7 +11,6 @@ using namespace std;
 
 Room::Room(string description, QImage background){
     this->description = description;                    //set room description
-    cout << description << endl;
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 
@@ -21,7 +20,6 @@ Room::Room(string description, QImage background){
     roomName->setDefaultTextColor("white");
     roomName->setPos(25,25);
     addItem(roomName);
-
 }
 
 void Room::setExits(Room *north, Room *south, Room *east, Room *west) {

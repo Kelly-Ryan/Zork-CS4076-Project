@@ -16,7 +16,7 @@ Exit::Exit(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
 Exit::Exit(string direction){
     if(direction.compare("north") == 0){
         setPos(450,0);
-        setPixmap(QPixmap(":/images/images/exit.png"));
+        setPixmap(QPixmap(":/images/images/exit.png"));         //100px x 100px
     }
 
     else if(direction.compare("south") == 0){
@@ -26,12 +26,12 @@ Exit::Exit(string direction){
 
     else if(direction.compare("east") == 0){
         setPos(700,200);
-        setPixmap(QPixmap(":/images/images/eastExit.png"));
+        setPixmap(QPixmap(":/images/images/eastExit.png"));     //43px x 153px
     }
 
     else if(direction.compare("west") == 0){
         setPos(260,200);
-        setPixmap(QPixmap(":/images/images/westExit.png"));
+        setPixmap(QPixmap(":/images/images/westExit.png"));     //43px x 153px
     }
 }
 

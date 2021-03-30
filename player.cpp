@@ -34,7 +34,7 @@ void Player::keyPressEvent(QKeyEvent *event){
                 if (nextRoom != NULL){              //check if this room has an exit in this direction
                     game->currentRoom->removeItem(game->player); //remove player item from room we're leaving
                     game->currentRoom = nextRoom;   //set new currentRoom
-                    game->player = new Player(450,450);//set position of player in next room
+                    game->player = new Player(475,450);//set position of player in next room
                     nextRoom->addItem(game->player);
                     game->setScene(nextRoom);       //load scene for next room
                 }
@@ -51,7 +51,7 @@ void Player::keyPressEvent(QKeyEvent *event){
                  if (nextRoom != NULL){
                      game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     game->player = new Player(450,150);
+                     game->player = new Player(475,100);
                      nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
@@ -59,16 +59,16 @@ void Player::keyPressEvent(QKeyEvent *event){
         }
     }
     else if(event->key() == Qt::Key_A){
-        if(pos().x() > 275){
+        if(pos().x() > 285){
             setPos(x() - speed, y());
 
             //check for exits
              if(exitCollision()){
-                 Room *nextRoom = game->currentRoom->nextRoom("east");
+                 Room *nextRoom = game->currentRoom->nextRoom("west");
                  if (nextRoom != NULL){
                      game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     game->player = new Player(350,350);
+                     game->player = new Player(650,275);
                      nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
@@ -81,11 +81,11 @@ void Player::keyPressEvent(QKeyEvent *event){
 
             //check for exits
              if(exitCollision()){
-                 Room *nextRoom = game->currentRoom->nextRoom("west");
+                 Room *nextRoom = game->currentRoom->nextRoom("east");
                  if (nextRoom != NULL){
                      game->currentRoom->removeItem(game->player);
                      game->currentRoom = nextRoom;
-                     game->player = new Player(650,350);
+                     game->player = new Player(300,275);
                      nextRoom->addItem(game->player);
                      game->setScene(nextRoom);
                  }
