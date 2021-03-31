@@ -1,0 +1,9 @@
+player has a room - avoids need for global var
+update this room var
+on change room could emit a signal - can pass room in the signal then the slot in game can just be a setScene() that takes a room
+as for the player could possibly pass coords in the signal too and the slot then would use this to do a setPos for player but in the game class
+singal would be in player but slot is in game
+make a connection between player and this(ie game) within the game class
+
+room is passed in constructor that way can "update" when reposition when change room
+if needed could have a getExits in room might make the search easier idk 

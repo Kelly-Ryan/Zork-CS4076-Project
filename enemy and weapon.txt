@@ -1,0 +1,20 @@
+weapon and enemy overloaded +
+health - damage
+if damage <= 0 
+alive = false
+emit signal defeated
+slot for signal defeted deletes enemy obj
+enemy and weapon are friends
+
+do item and inventory even need to be friends anymore
+
+the useItem fn where do they come in
+have an attack button in player
+
+
+player has a var GameItem - this is what the user currently has in their hand
+signals and slot to set this gameitem in hand
+collision between player and enemy and if the gameitem is a weapon take damage
+but need the attack button
+
+could get in dynamic cast somewhere here perhaps
