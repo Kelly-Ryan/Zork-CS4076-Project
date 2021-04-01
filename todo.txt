@@ -1,0 +1,11 @@
+need to refocus after click on inventory
+ok otherwise
+
+need to set the item player is holding
+also how gonna use the items from the list
+
+need to fix enemy movement - keep the enemy to within the room NB
+
+do we need an inventory weight listed somewhere
+be able to delete from inventory perhaps
+probs makes sense if player collides with item and then ask if want to collect it

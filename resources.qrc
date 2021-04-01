@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>eastExit.png</file>
+        <file>exit.png</file>
+        <file>player.png</file>
+        <file>stoneRoom.png</file>
+        <file>westExit.png</file>
+        <file>monster.png</file>
+        <file>sword.png</file>
+        <file>phone.webp</file>
+    </qresource>
+</RCC>
