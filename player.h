@@ -6,21 +6,16 @@
 
 #include "exit.h"
 #include "game.h"
-#include "enemy.h"
-#include "gameitem.h"
 
 class Game;
 
 class Player : public QObject, public QGraphicsPixmapItem {
 private:
-    int speed = 10;
-    GameItem *itemHolding;
+    int speed;
     Game *game;
     void keyPressEvent(QKeyEvent *event);
-    void collision();
-signals:
-    void defeatedEnemy(Enemy *enemy);
-    void itemCollected(GameItem *item);
+    void exitCollision();
+
 public:
     Player(QGraphicsItem * parent=0);
     Player(int xPos, int yPos, Game *game);

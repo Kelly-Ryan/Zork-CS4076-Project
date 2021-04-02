@@ -8,11 +8,11 @@ Enemy::Enemy(string name,string imgPath)
     this->alive = true;
     srand(time(NULL));
     health = rand() % 3 + 3; // 3-5
-    setPos(rand()%1000,rand()%600);
+    setPos(rand()%(700-300+1)+300,rand()%(500-100+1)+100);
     xIncrement = rand()%10; // 0-9
     yIncrement = rand()%10;
     timer = new QTimer();
-    timer->start(40);
+    timer->start(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
 }
@@ -25,9 +25,9 @@ Enemy::~Enemy()
 void Enemy::roam()
 {
     setPos(x()+xIncrement,y()+yIncrement);
-    if(x() > 900 || x() < 100)
+    if(x() > 650 || x() < 350)
         xIncrement *=-1;
-    if(y() > 500 || y() < 100)
+    if(y() > 650 || y() < 350)
         yIncrement *=-1;
 }
 

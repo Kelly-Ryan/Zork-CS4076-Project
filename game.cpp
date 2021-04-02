@@ -21,6 +21,12 @@ Game::Game(QWidget *){
     player = new Player(475, 275, this);  //position player in centre of room
     a->addItem(player);         //add player to scene
 
+    inventory = new Inventory;
+    inventory->show();
+
+    monster = new Enemy("monster",":/images/images/monster.png");
+    a->addItem(monster);
+
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }

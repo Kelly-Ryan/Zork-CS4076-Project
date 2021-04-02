@@ -5,6 +5,7 @@
         <file>images/exit.png</file>
         <file>images/westExit.png</file>
         <file>images/stoneRoom.png</file>
+        <file>images/monster.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
