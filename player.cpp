@@ -1,6 +1,8 @@
 #include "player.h"
 
 #include <QKeyEvent>
+#include <QMessageBox>
+#include <QDebug>
 
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
     setFlag(QGraphicsItem::ItemIsFocusable);            //make player focusable
@@ -18,40 +20,66 @@ Player::Player(int xPos, int yPos, Game *game){
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
-    int speed = 10;
 
     if(event->key() == Qt::Key_W){          //move north
         if(pos().y() > 75){
             setPos(x(), y() - speed);
-            exitCollision();
+            collision();
         }
     }
     else if(event->key() == Qt::Key_S){     //move south
         if(pos().y() + 51 < 525){
             setPos(x(), y() + speed);
-            exitCollision();
+            collision();
         }
     }
     else if(event->key() == Qt::Key_A){     //move west
         if(pos().x() > 285){
             setPos(x() - speed, y());
-            exitCollision();
+            collision();
         }
     }
     else if(event->key() == Qt::Key_D){     //move east
         if(pos().x() + 45 < 725){
             setPos(x() + speed, y());
-            exitCollision();
+            collision();
         }
     }
 }
 
-void Player::exitCollision(){
+void Player::collision(){
     //list of pointers to all the QGraphicsItems that are colliding with the calling object (the player)
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     //traverse this list and find out of the player is colliding with an object of type Exit
     for(int i = 0, n = colliding_items.size(); i < n; ++i){
+        if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
+            qDebug() << "Collided with the enemy with weapon in hand";
+            Weapon& w= dynamic_cast<Weapon&>(*itemHolding);
+            Enemy& e = dynamic_cast<Enemy&>(*colliding_items[i]);
+            qDebug() << e.getHealth();
+            qDebug() << w.getDamage();
+            e+w;
+            qDebug() << e.getHealth();
+            if(!e.isAlive())
+            {
+                emit defeatedEnemy(&e);
+            }
+        }
+        if(typeid(*(colliding_items[i])) == typeid(GameItem)){
+               qDebug() << "Collided with item";
+               GameItem *item = (GameItem *)colliding_items[i];
+               QMessageBox msg;
+               msg.setWindowTitle("Item information");
+               msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
+               msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+               msg.setDefaultButton(QMessageBox::Yes);
+               msg.setWindowFlags(Qt::FramelessWindowHint);
+               msg.setStyleSheet("background-color:gray;border-style:outset");
+               int response = msg.exec();
+
+               if(response == QMessageBox::Yes) emit itemCollected(item);
+        }
         if(typeid(*(colliding_items[i])) == typeid(Exit)){
             Exit *currentExit = (Exit *)colliding_items[i];
             string direction = currentExit->getDirection();
@@ -74,7 +102,7 @@ void Player::exitCollision(){
                     game->player = new Player(475,100, game);
                     nextRoom->addItem(game->player);
                     game->setScene(nextRoom);
-                }
+            }
             }
             else if(direction.compare("east") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("east");
