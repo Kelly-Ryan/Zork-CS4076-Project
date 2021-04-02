@@ -11,10 +11,10 @@ class Game;
 
 class Player : public QObject, public QGraphicsPixmapItem {
 private:
-    int speed;
+    int speed = 10;
     Game *game;
     void keyPressEvent(QKeyEvent *event);
-    void exitCollision();
+    void collision();
 
 public:
     Player(QGraphicsItem * parent=0);

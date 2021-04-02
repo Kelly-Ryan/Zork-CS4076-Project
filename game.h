@@ -7,6 +7,7 @@
 #include "room.h"
 #include "inventory.h"
 #include "enemy.h"
+#include "item.h"
 
 class Player;
 extern string gameTitle; // extern to allow use of var declared in another file

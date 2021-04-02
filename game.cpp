@@ -13,6 +13,7 @@ Game::Game(QWidget *){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
+    setWindowTitle(QString::fromStdString(::gameTitle));
     setFixedSize(1000,600);
 
     createRooms();
@@ -26,6 +27,10 @@ Game::Game(QWidget *){
 
     monster = new Enemy("monster",":/images/images/monster.png");
     a->addItem(monster);
+
+    Item *item2 = new Item("iPhone",400,3,":/images/images/phone.png");
+    item2 -> setPos(200,200);
+    a -> addItem(item2);
 
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView

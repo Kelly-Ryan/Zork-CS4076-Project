@@ -6,6 +6,7 @@
         <file>images/westExit.png</file>
         <file>images/stoneRoom.png</file>
         <file>images/monster.png</file>
+        <file>images/phone.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
