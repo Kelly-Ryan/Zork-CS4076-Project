@@ -1,4 +1,4 @@
-#include "Room.h"
+#include "room.h"
 
 Room::Room(string description, QImage background){
     this->description = description;                    //set room description

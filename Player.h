@@ -3,28 +3,23 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include "Room.h"
-#include "Weapon.h"
-#include "Enemy.h"
+
+#include "exit.h"
+#include "game.h"
+
+class Game;
 
 class Player : public QObject, public QGraphicsPixmapItem {
-    Q_OBJECT
 private:
-    int speed = 10;
-    Room *playerLocation;
-    GameItem *itemHolding;
+    int speed;
+    Game *game;
     void keyPressEvent(QKeyEvent *event);
     void exitCollision();
 
-signals:
-    void defeatedEnemy(Enemy *enemy);
-
 public:
     Player(QGraphicsItem * parent=0);
-    Player(int xPos, int yPos);
+    Player(int xPos, int yPos, Game *game);
     ~Player();
-    GameItem * getItemHolding(); // dont know if need
-
 };
 
 #endif // PLAYER_H

@@ -1,7 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include "Exit.h"
+#include "exit.h"
 
 #include <map>
 #include <string>
