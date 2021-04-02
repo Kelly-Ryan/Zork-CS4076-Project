@@ -1,10 +1,6 @@
 #include "player.h"
-#include "exit.h"
-#include "game.h"
 
 #include <QKeyEvent>
-
-extern Game *game;
 
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
     setFlag(QGraphicsItem::ItemIsFocusable);            //make player focusable
@@ -13,11 +9,12 @@ Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
 }
 
 //overloaded constructor for creating new Player object in new Room
-Player::Player(int xPos, int yPos){
+Player::Player(int xPos, int yPos, Game *game){
     setPos(xPos,yPos);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
     setPixmap(QPixmap(":/images/images/player.png"));
+    this->game = game;
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -64,7 +61,7 @@ void Player::exitCollision(){
                 if (nextRoom != NULL){              //check if this room has an exit in this direction
                     game->currentRoom->removeItem(this); //remove player item from room we're leaving
                     game->currentRoom = nextRoom;   //set new currentRoom
-                    game->player = new Player(475,450);//set position of player in next room
+                    game->player = new Player(475,450, game);//set position of player in next room
                     nextRoom->addItem(game->player);    //add new player to new room
                     game->setScene(nextRoom);       //load scene for next room
                 }
@@ -74,7 +71,7 @@ void Player::exitCollision(){
                 if (nextRoom != NULL){
                     game->currentRoom->removeItem(this);
                     game->currentRoom = nextRoom;
-                    game->player = new Player(475,100);
+                    game->player = new Player(475,100, game);
                     nextRoom->addItem(game->player);
                     game->setScene(nextRoom);
                 }
@@ -84,7 +81,7 @@ void Player::exitCollision(){
                 if (nextRoom != NULL){
                     game->currentRoom->removeItem(this);
                     game->currentRoom = nextRoom;
-                    game->player = new Player(300,275);
+                    game->player = new Player(300,275, game);
                     nextRoom->addItem(game->player);
                     game->setScene(nextRoom);
                 }
@@ -94,7 +91,7 @@ void Player::exitCollision(){
                 if (nextRoom != NULL){
                     game->currentRoom->removeItem(this);
                     game->currentRoom = nextRoom;
-                    game->player = new Player(650,275);
+                    game->player = new Player(650,275, game);
                     nextRoom->addItem(game->player);
                     game->setScene(nextRoom);
                 }

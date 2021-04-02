@@ -1,10 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QGraphicsView>
+
 #include "player.h"
 #include "room.h"
 
-#include <QGraphicsView>
+class Player;
 
 //QGraphicsView class provides a widget for displaying the contents of a QGraphicsScene.
 class Game : public QGraphicsView  {

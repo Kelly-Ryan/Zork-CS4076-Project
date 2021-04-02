@@ -18,7 +18,7 @@ Game::Game(QWidget *){
     createRooms();
     currentRoom = a;            //set current room/scene
 
-    player = new Player(475, 275);   //position player in centre of room
+    player = new Player(475, 275, this);  //position player in centre of room
     a->addItem(player);         //add player to scene
 
     setScene(a);        //set first scene (room) in QGraphicsView
