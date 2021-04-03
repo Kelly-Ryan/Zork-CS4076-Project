@@ -3,6 +3,7 @@ HEADERS += \
     exit.h \
     game.h \
     gameitem.h \
+    healthbar.h \
     inventory.h \
     item.h \
     player.h \
@@ -14,6 +15,7 @@ SOURCES += \
     exit.cpp \
     game.cpp \
     gameitem.cpp \
+    healthbar.cpp \
     inventory.cpp \
     item.cpp \
     main.cpp \

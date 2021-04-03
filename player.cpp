@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QDebug>
 
+// dont ever use this constructor
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
     setFlag(QGraphicsItem::ItemIsFocusable);            //make player focusable
     setFocus();                                         //set focus on player
@@ -17,6 +18,8 @@ Player::Player(int xPos, int yPos, Game *game){
     setFocus();
     setPixmap(QPixmap(":/images/images/player.png"));
     this->game = game;
+    lives = new Healthbar("Player",health);
+    lives->setPos(800,25);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -80,40 +83,60 @@ void Player::collision(){
             if(direction.compare("north") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("north");
                 if (nextRoom != NULL){              //check if this room has an exit in this direction
-                    game->currentRoom->removeItem(this); //remove player item from room we're leaving
+//                    game->currentRoom->removeItem(this); //remove player item from room we're leaving
+//                    hide();
                     game->currentRoom = nextRoom;   //set new currentRoom
-                    game->player = new Player(475,450, game);//set position of player in next room
+                    setPos(475,450);
+//                    game->player = new Player(475,450, game);//set position of player in next room
                     nextRoom->addItem(game->player);    //add new player to new room
+                    setFocus();
+//                    show();
+                    nextRoom->addItem(lives);
                     game->setScene(nextRoom);       //load scene for next room
                 }
             }
             else if(direction.compare("south") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("south");
                 if (nextRoom != NULL){
-                    game->currentRoom->removeItem(this);
+//                    game->currentRoom->removeItem(this);
+//                    hide();
                     game->currentRoom = nextRoom;
-                    game->player = new Player(475,100, game);
+                    setPos(475,100);
+//                    game->player = new Player(475,100, game);
                     nextRoom->addItem(game->player);
+                    setFocus();
+//                    show();
+                    nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
             }
             else if(direction.compare("east") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("east");
                 if (nextRoom != NULL){
-                    game->currentRoom->removeItem(this);
+//                    game->currentRoom->removeItem(this);
+//                    hide();
                     game->currentRoom = nextRoom;
-                    game->player = new Player(300,275, game);
+                    setPos(300,275);
+//                    game->player = new Player(300,275, game);
                     nextRoom->addItem(game->player);
+                    setFocus();
+//                    show();
+                    nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
             }
             else if(direction.compare("west") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("west");
                 if (nextRoom != NULL){
-                    game->currentRoom->removeItem(this);
+//                    game->currentRoom->removeItem(this);
+//                    hide();
                     game->currentRoom = nextRoom;
-                    game->player = new Player(650,275, game);
+                    setPos(650,275);
+//                    game->player = new Player(650,275, game);
                     nextRoom->addItem(game->player);
+                    setFocus();
+                    //                    show();
+                    nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
             }
@@ -121,6 +144,23 @@ void Player::collision(){
     }
 }
 
-Player::~Player(){
+int Player::getHealth()
+{
+    return health;
+}
 
+void Player::takeDamage(int damage)
+{
+    health -= damage;
+
+}
+
+Healthbar *Player::getHealthbar()
+{
+    return lives;
+}
+
+Player::~Player(){
+    delete game;
+    delete lives;
 }

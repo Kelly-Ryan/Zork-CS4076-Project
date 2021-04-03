@@ -21,6 +21,7 @@ Game::Game(QWidget *){
 
     player = new Player(475, 275, this);  //position player in centre of room
     a->addItem(player);         //add player to scene
+    a->addItem(player->getHealthbar());
 
     inventory = new Inventory;
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
