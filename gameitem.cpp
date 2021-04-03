@@ -1,4 +1,4 @@
-#include "GameItem.h"
+#include "gameitem.h"
 #include <QMessageBox>
 #include <QDebug>
 

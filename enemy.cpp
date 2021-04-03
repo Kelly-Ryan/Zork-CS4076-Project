@@ -40,6 +40,16 @@ int Enemy::getHealth()
     return health;
 }
 
+void Enemy::takeDamage(int damage)
+{
+    health -= damage;
+}
+
+int Enemy::getDamage()
+{
+    return damage;
+}
+
 string Enemy::getName()
 {
     return name;
@@ -68,6 +78,9 @@ void Enemy::attackingPlayer()
         if(typeid(*(colliding_items[i])) == typeid(Player))
         {
             qDebug() << "Attacking the player";
+            Player *player = (Player *)colliding_items[i];
+            combat(this,player);
+            player->getHealthbar()->updateHealth(player->getHealth());
         }
     }
 }
