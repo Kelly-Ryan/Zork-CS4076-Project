@@ -1,10 +1,12 @@
 #include "enemy.h"
 #include <cstdlib>
+#include <cctype>
 #include <time.h>
 #include <QDebug>
 
 Enemy::Enemy(string name,int damage,string imgPath)
 {
+    name[0] = toupper(name[0]);
     this->name = name;
     this->alive = true;
     this->damage = damage;
@@ -17,11 +19,14 @@ Enemy::Enemy(string name,int damage,string imgPath)
     timer->start(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
+    lives = new Healthbar(name,health);
+    lives->setPos(800,50);
 }
 
 Enemy::~Enemy()
 {
     delete timer;
+    delete lives;
 }
 
 void Enemy::roam()
@@ -60,13 +65,9 @@ bool Enemy::isAlive()
     return alive;
 }
 
-void operator+(Enemy &enemy,Weapon &weapon)
+Healthbar* Enemy::getHealthbar()
 {
-    enemy.health -= weapon.getDamage();
-    if(enemy.health <= 0)
-    {
-        enemy.alive = false;
-    }
+    return lives;
 }
 
 void Enemy::attackingPlayer()
@@ -82,6 +83,15 @@ void Enemy::attackingPlayer()
             combat(this,player);
             player->getHealthbar()->updateHealth(player->getHealth());
         }
+    }
+}
+
+void operator+(Weapon &weapon,Enemy &enemy)
+{
+    enemy.health -= weapon.getDamage();
+    if(enemy.health <= 0)
+    {
+        enemy.alive = false;
     }
 }
 

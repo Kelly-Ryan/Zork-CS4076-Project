@@ -30,6 +30,7 @@ Game::Game(QWidget *){
 
     monster = new Enemy("monster",3,":/images/images/monster.png");
     a->addItem(monster);
+    a->addItem(monster->getHealthbar());
 
     Item *item2 = new Item("iPhone",400,3,":/images/images/phone.png");
     item2 -> setPos(200,200);
@@ -38,6 +39,7 @@ Game::Game(QWidget *){
     Weapon * weapon = new Weapon("sword",10,2,":/images/images/sword.png");
     weapon->setPos(400,300);
     a->addItem(weapon);
+
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }

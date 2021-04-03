@@ -7,13 +7,15 @@
 #include <QTimer>
 #include "weapon.h"
 #include "player.h"
+#include "healthbar.h"
 
 using std::string;
+class Weapon;
 
 class Enemy: public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
-    friend void operator+(Enemy &enemy,Weapon &weapon);
+    friend void operator+(Weapon &weapon,Enemy &enemy);
 
 private:
     int health;
@@ -23,6 +25,7 @@ private:
     int yIncrement;
     string name;
     QTimer *timer;
+    Healthbar *lives;
     void attackingPlayer();
 
 private slots:
@@ -37,6 +40,7 @@ public:
     string getName();
     bool isAlive();
     int getDamage();
+    Healthbar* getHealthbar();
 };
 
 #endif // ENEMY_H

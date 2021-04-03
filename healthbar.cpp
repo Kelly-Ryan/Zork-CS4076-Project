@@ -5,7 +5,7 @@ Healthbar::Healthbar(string entity, int health)
     this->entity = QString::fromStdString(entity);
     this->health = health;
     setDefaultTextColor(Qt::white);
-    setFont(QFont("Adventure", 15));
+    setFont(QFont("Adventure", 12));
     setPlainText(this->entity + QString("'s Health:") + QString::number(health));
 }
 

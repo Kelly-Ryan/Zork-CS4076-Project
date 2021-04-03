@@ -50,6 +50,18 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
     }
     else if(event->key() == Qt::Key_Space){
         qDebug() << "Space bar pressed";
+        QList<QGraphicsItem *> colliding_items = collidingItems();
+
+        //traverse this list and find out of the player is colliding with an object of type Exit
+        for(int i = 0, n = colliding_items.size(); i < n; ++i){
+            if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
+                    qDebug() << "Launching attack on enemy";
+                    Weapon* weapon = dynamic_cast<Weapon*>(itemHolding);
+                    Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+                    combat(weapon,enemy);
+                    enemy->getHealthbar()->updateHealth(enemy->getHealth());
+            }
+        }
     }
 }
 
@@ -71,10 +83,6 @@ void Player::collision(){
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
-        }
-        if(typeid(*(colliding_items[i])) == typeid(Enemy))
-        {
-            qDebug() << "Attacking enemy";
         }
         if(typeid(*(colliding_items[i])) == typeid(Exit)){
             Exit *currentExit = (Exit *)colliding_items[i];
@@ -152,7 +160,20 @@ int Player::getHealth()
 void Player::takeDamage(int damage)
 {
     health -= damage;
+}
 
+void operator+(Enemy &enemy,Player &player)
+{
+    player.health -= enemy.getDamage();
+    if(player.health <= 0)
+    {
+        player.alive = false;
+    }
+}
+
+bool Player::isAlive()
+{
+    return alive;
 }
 
 Healthbar *Player::getHealthbar()

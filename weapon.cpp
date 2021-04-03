@@ -24,3 +24,4 @@ int Weapon::getDamage()
 {
     return damage;
 }
+
