@@ -13,6 +13,7 @@ class Player : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 private:
     int speed = 10;
+    int health = 5;
     Game *game;
     void keyPressEvent(QKeyEvent *event);
     void collision();

@@ -2,16 +2,16 @@
 #define GAME_H
 
 #include <QGraphicsView>
-
 #include "player.h"
+#include "enemy.h"
 #include "room.h"
 #include "inventory.h"
-#include "enemy.h"
 #include "item.h"
 #include "gameitem.h"
 #include "weapon.h"
 
 class Player;
+class Enemy;
 extern string gameTitle; // extern to allow use of var declared in another file
 //QGraphicsView class provides a widget for displaying the contents of a QGraphicsScene.
 class Game : public QGraphicsView  {

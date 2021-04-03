@@ -1,16 +1,18 @@
 #include "enemy.h"
 #include <cstdlib>
 #include <time.h>
+#include <QDebug>
 
-Enemy::Enemy(string name,string imgPath)
+Enemy::Enemy(string name,int damage,string imgPath)
 {
     this->name = name;
     this->alive = true;
+    this->damage = damage;
     srand(time(NULL));
     health = rand() % 3 + 3; // 3-5
     setPos(rand()%(700-300+1)+300,rand()%(500-100+1)+100);
-    xIncrement = rand()%10; // 0-9
-    yIncrement = rand()%10;
+    xIncrement = rand()%6; // 0-5
+    yIncrement = rand()%6;
     timer = new QTimer();
     timer->start(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
@@ -25,9 +27,11 @@ Enemy::~Enemy()
 void Enemy::roam()
 {
     setPos(x()+xIncrement,y()+yIncrement);
-    if(x() > 650 || x() < 350)
+    attackingPlayer();
+    if(x() > 550 || x() < 50)  //550 50
         xIncrement *=-1;
-    if(y() > 650 || y() < 350)
+
+    else if(y() > 450 || y() < 40) // 450 40
         yIncrement *=-1;
 }
 
@@ -54,3 +58,17 @@ void operator+(Enemy &enemy,Weapon &weapon)
         enemy.alive = false;
     }
 }
+
+void Enemy::attackingPlayer()
+{
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+
+    for(int i = 0;i < colliding_items.size(); i++)
+    {
+        if(typeid(*(colliding_items[i])) == typeid(Player))
+        {
+            qDebug() << "Attacking the player";
+        }
+    }
+}
+

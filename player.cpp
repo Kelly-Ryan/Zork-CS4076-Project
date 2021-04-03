@@ -45,6 +45,9 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
             collision();
         }
     }
+    else if(event->key() == Qt::Key_Space){
+        qDebug() << "Space bar pressed";
+    }
 }
 
 void Player::collision(){
@@ -65,6 +68,10 @@ void Player::collision(){
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
+        }
+        if(typeid(*(colliding_items[i])) == typeid(Enemy))
+        {
+            qDebug() << "Attacking enemy";
         }
         if(typeid(*(colliding_items[i])) == typeid(Exit)){
             Exit *currentExit = (Exit *)colliding_items[i];

@@ -22,12 +22,12 @@ Game::Game(QWidget *){
     player = new Player(475, 275, this);  //position player in centre of room
     a->addItem(player);         //add player to scene
 
-    inventory = new Inventory(1);
+    inventory = new Inventory;
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
     connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     inventory->show();
 
-    monster = new Enemy("monster",":/images/images/monster.png");
+    monster = new Enemy("monster",3,":/images/images/monster.png");
     a->addItem(monster);
 
     Item *item2 = new Item("iPhone",400,3,":/images/images/phone.png");
