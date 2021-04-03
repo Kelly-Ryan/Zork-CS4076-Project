@@ -7,6 +7,7 @@
         <file>images/stoneRoom.png</file>
         <file>images/monster.png</file>
         <file>images/phone.png</file>
+        <file>images/sword.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

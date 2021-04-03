@@ -22,7 +22,9 @@ Game::Game(QWidget *){
     player = new Player(475, 275, this);  //position player in centre of room
     a->addItem(player);         //add player to scene
 
-    inventory = new Inventory;
+    inventory = new Inventory(1);
+    connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
+    connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     inventory->show();
 
     monster = new Enemy("monster",":/images/images/monster.png");
@@ -32,6 +34,9 @@ Game::Game(QWidget *){
     item2 -> setPos(200,200);
     a -> addItem(item2);
 
+    Weapon * weapon = new Weapon("sword",10,2,":/images/images/sword.png");
+    weapon->setPos(400,300);
+    a->addItem(weapon);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
@@ -67,6 +72,11 @@ void Game::printWelcome(){
 void Game::printHelp(){
     cout << "Help" << endl;
     //help text
+}
+
+void Game::removeFromRoom(GameItem *item)
+{
+    item->hide();
 }
 
 Game::~Game(){

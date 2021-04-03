@@ -8,6 +8,8 @@
 #include "inventory.h"
 #include "enemy.h"
 #include "item.h"
+#include "gameitem.h"
+#include "weapon.h"
 
 class Player;
 extern string gameTitle; // extern to allow use of var declared in another file
@@ -21,6 +23,8 @@ private:
     void createRooms();
     void printWelcome();
     void printHelp();
+private slots:
+    void removeFromRoom(GameItem *item);
 public:
     Player *player;
     Room *currentRoom;

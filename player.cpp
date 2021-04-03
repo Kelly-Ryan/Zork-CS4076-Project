@@ -53,11 +53,10 @@ void Player::collision(){
 
     //traverse this list and find out of the player is colliding with an object of type Exit
     for(int i = 0, n = colliding_items.size(); i < n; ++i){
-        if(typeid(*(colliding_items[i])) == typeid(GameItem)){ //if of type item works but we need to make it generic
+        if(typeid(*(colliding_items[i])) == typeid(Item) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                QMessageBox msg;
-               msg.setWindowTitle("Item information");
                msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
@@ -65,7 +64,7 @@ void Player::collision(){
                msg.setStyleSheet("background-color:gray;border-style:outset");
                int response = msg.exec();
 
-//               if(response == QMessageBox::Yes) emit itemCollected(item);
+               if(response == QMessageBox::Yes) emit itemCollected(item);
         }
         if(typeid(*(colliding_items[i])) == typeid(Exit)){
             Exit *currentExit = (Exit *)colliding_items[i];

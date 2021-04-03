@@ -1,28 +1,29 @@
-#include "Inventory.h"
+#include "inventory.h"
 #include <QDebug>
 #include <QMessageBox>
 
-Inventory::Inventory(float maxWeight):maxWeight(maxWeight){
+Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
-    setWindowTitle("Inventory");
+    setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
     setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint);
 }
 
 void Inventory::addToInventory(GameItem *item) {
-    if(currentWeight + item->weight <= maxWeight)
+    if(currentCapacity < maxCapacity)
     {
         inventory.push_back(item);
-        currentWeight += item->weight;
         QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(item->imgPath)),item->itemInfo());
         addItem(inventoryItem);
+        currentCapacity++;
         qDebug() << "Adding to inventory";
-        emit itemCollected(item);
+        emit itemAdded(item);
     }
     else
     {
         QMessageBox msg;
         msg.setText("This item cannot be added to the inventory. The inventory is either at maximum capacity or there is insufficient space to add this item");
-        msg.setWindowTitle("Insufficent space for item ");
+        msg.setWindowFlags(Qt::FramelessWindowHint);
+        msg.setStyleSheet("background-color:gray;border-style:outset");
         msg.exec();
     }
     clearFocus();
@@ -78,7 +79,7 @@ bool Inventory::retrieveItem(GameItem *item)
     return true;
 }
 
-float Inventory::getMaxWeight() const
+int Inventory::getMaxCapacity() const
 {
-    return maxWeight;
+    return maxCapacity;
 }

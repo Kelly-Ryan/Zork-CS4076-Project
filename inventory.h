@@ -14,8 +14,8 @@ class Inventory:public QListWidget{
 
 private:
     vector <GameItem*> inventory;
-    float currentWeight = 0;
-    const float maxWeight;
+    int currentCapacity = 0;
+    const int maxCapacity;
 
 private slots:
     void onSelected(QListWidgetItem * widgetItem);
@@ -24,12 +24,12 @@ public slots:
     void addToInventory(GameItem *item);
 
 signals:
-    void itemCollected(GameItem *item);
+    void itemAdded(GameItem *item);
 
 public:
-    Inventory(float maxWeight = 500);
+    Inventory(int maxCapacity = 5);
     bool retrieveItem(GameItem *item);
-    float getMaxWeight() const;
+    int getMaxCapacity() const;
 };
 
 
