@@ -26,7 +26,6 @@ void Inventory::addToInventory(GameItem *item) {
         msg.setStyleSheet("background-color:gray;border-style:outset");
         msg.exec();
     }
-    clearFocus();
 }
 
 void Inventory::onSelected(QListWidgetItem *widgetItem)
@@ -42,7 +41,6 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
         }
     }
     itemToUse->useItem();
-    clearFocus();
     //retrieveItem(itemToUse);
     /*if(retrieveItem(itemToUse))
     {
