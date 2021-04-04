@@ -6,6 +6,7 @@ HEADERS += \
     healthbar.h \
     inventory.h \
     item.h \
+    mainwindow.h \
     player.h \
     room.h \
     weapon.h
@@ -19,6 +20,7 @@ SOURCES += \
     inventory.cpp \
     item.cpp \
     main.cpp \
+    mainwindow.cpp \
     player.cpp \
     room.cpp \
     weapon.cpp
@@ -32,3 +34,6 @@ RESOURCES += \
     res.qrc
 
 DISTFILES +=
+
+FORMS += \
+    mainwindow.ui
