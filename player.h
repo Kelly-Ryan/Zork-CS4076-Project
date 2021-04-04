@@ -20,19 +20,21 @@ private:
     bool alive = true;
     Game *game;
     Healthbar *lives;
-    GameItem *itemHolding;//= new Weapon("sword",10.5,2,":/images/images/sword.png");
+    GameItem *itemHolding;
     void keyPressEvent(QKeyEvent *event);
     void collision();
 signals:
     void itemCollected(GameItem *item);
+public slots:
+    void equipPlayer(GameItem *item);
 public:
     Player(QGraphicsItem * parent=0);
     Player(int xPos, int yPos, Game *game);
     ~Player();
     int getHealth();
-    void takeDamage(int damage);
     bool isAlive();
     Healthbar* getHealthbar();
+    GameItem* getItemHolding();
 };
 
 #endif // PLAYER_H

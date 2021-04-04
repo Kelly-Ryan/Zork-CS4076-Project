@@ -36,7 +36,6 @@ public:
     ~Enemy();
     Enemy(string name,int damage,string imgPath);
     int getHealth();
-    void takeDamage(int damage);
     string getName();
     bool isAlive();
     int getDamage();

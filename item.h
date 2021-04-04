@@ -14,11 +14,11 @@ public:
 
     Item (string description, float weight, int usuageLimit, string imgPath);
     Item();
-    void useItem();
+    QString howToUse();
     virtual QString itemInfo();
     int getUsuageLimit() const;
     int numberOfUses();
-    Item operator++(int);
+    Item operator++(int); // can get rid of
 };
 
 

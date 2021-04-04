@@ -45,11 +45,6 @@ int Enemy::getHealth()
     return health;
 }
 
-void Enemy::takeDamage(int damage)
-{
-    health -= damage;
-}
-
 int Enemy::getDamage()
 {
     return damage;
@@ -78,10 +73,15 @@ void Enemy::attackingPlayer()
     {
         if(typeid(*(colliding_items[i])) == typeid(Player))
         {
-            qDebug() << "Attacking the player";
+            qDebug() << "Enemy collided with player";
             Player *player = (Player *)colliding_items[i];
-            combat(this,player);
-            player->getHealthbar()->updateHealth(player->getHealth());
+//            if(typeid(*player->getItemHolding()) != typeid(Weapon))
+            {
+                qDebug() << "Attacking the player";
+                qDebug() << player->getItemHolding()->getDescription();
+//                combat(this,player);
+//                player->getHealthbar()->updateHealth(player->getHealth());
+            }
         }
     }
 }
