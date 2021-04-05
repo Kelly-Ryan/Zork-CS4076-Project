@@ -16,6 +16,8 @@ private:
     vector <GameItem*> inventory;
     int currentCapacity = 0;
     const int maxCapacity;
+    int xPos = 1375;
+    int yPos = 650;
 
 private slots:
     void onSelected(QListWidgetItem * widgetItem);
@@ -34,6 +36,8 @@ public:
     int getMaxCapacity() const;
 /*    bool eventFilter(QObject *obj,QEvent *event);
     void mouseMoveEvent(QMouseEvent *event);*/
+    //void dragMoveEvent(QDragMoveEvent *event);
+    void moveEvent(QMoveEvent *event);
 };
 
 

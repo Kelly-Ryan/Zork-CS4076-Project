@@ -7,10 +7,14 @@
 Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
     setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
-    setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
-    /*setMouseTracking(true);
-    installEventFilter(this);
-    move(1000,500);*/
+    setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint);
+    move(xPos,yPos);
+}
+
+void Inventory::moveEvent(QMoveEvent *event)
+{
+    move(xPos,yPos);
+    qDebug() << "Inventory moved";
 }
 
 void Inventory::addToInventory(GameItem *item) {
@@ -97,25 +101,3 @@ int Inventory::getMaxCapacity() const
 {
     return maxCapacity;
 }
-
-/*void Inventory::mouseMoveEvent(QMouseEvent *event)
-{
-    event->accept();
-    move(1000,500);
-    qDebug() << "Moving the inventory";
-}
-
-bool Inventory::eventFilter(QObject *obj, QEvent *event)
-{
-    if(event->type() == QEvent::MouseMove)
-    {
-
-        qDebug() << "Trying to move the inventory";
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-*/
