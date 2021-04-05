@@ -32,6 +32,8 @@ public:
     Inventory(int maxCapacity = 5);
     bool retrieveItem(GameItem *item); // remove after
     int getMaxCapacity() const;
+/*    bool eventFilter(QObject *obj,QEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);*/
 };
 
 
