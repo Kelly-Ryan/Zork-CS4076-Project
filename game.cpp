@@ -16,7 +16,6 @@ Game::Game(QWidget *){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-    setWindowTitle(QString::fromStdString(::gameTitle));
     setFixedSize(1000,600);
 
     createRooms();
@@ -105,5 +104,3 @@ Game::~Game(){
     delete h;
     delete i;
 }
-
-
