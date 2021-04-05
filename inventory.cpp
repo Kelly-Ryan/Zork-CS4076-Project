@@ -6,7 +6,7 @@
 Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
     setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
-    setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 }
 
 void Inventory::addToInventory(GameItem *item) {
