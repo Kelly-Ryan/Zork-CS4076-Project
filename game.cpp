@@ -37,7 +37,7 @@ Game::Game(QWidget *){
     a->addItem(monster->getHealthbar());
 
     Item *item2 = new Item("iPhone",400,3,":/images/images/phone.png");
-    item2 -> setPos(200,200);
+    item2 -> setPos(300,200);
     a -> addItem(item2);
 
     Weapon * weapon = new Weapon("sword",10,2,":/images/images/sword.png");
