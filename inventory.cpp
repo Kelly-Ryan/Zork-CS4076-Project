@@ -2,7 +2,6 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QMessageBox>
-#include <QMouseEvent>
 
 Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
