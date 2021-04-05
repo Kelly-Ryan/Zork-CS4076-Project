@@ -14,6 +14,7 @@ int main (int argc, char *argv[]){
     MainWindow window;                                              //create window
     window.setWindowTitle(QString::fromStdString(gameTitle));
     window.setCentralWidget(game);                                  //set Game object in window
+    window.setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
     window.show();                                                  //show window
 
     return a.exec();
