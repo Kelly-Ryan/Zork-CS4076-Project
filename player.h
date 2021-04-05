@@ -9,6 +9,7 @@
 #include "gameitem.h"
 #include "healthbar.h"
 #include "weapon.h" //can remove after
+
 class Game;
 
 class Player : public QObject, public QGraphicsPixmapItem {

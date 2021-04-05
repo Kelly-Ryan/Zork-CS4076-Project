@@ -9,6 +9,9 @@
 
 using namespace std;
 
+class QMenu;
+class QContextMenuEvent;
+
 Game::Game(QWidget *){
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
@@ -73,9 +76,8 @@ void Game::printWelcome(){
     //welcome message
 }
 
-void Game::printHelp(){
-    cout << "Help" << endl;
-    //help text
+void Game::help(){
+
 }
 
 void Game::removeFromRoom(GameItem *item)

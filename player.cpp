@@ -2,16 +2,12 @@
 
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QDebug>
 
 // dont ever use this constructor
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
-    setFlag(QGraphicsItem::ItemIsFocusable);            //make player focusable
-    setFocus();                                         //set focus on player
-    setPixmap(QPixmap(":/images/images/player.png"));   //draw player
 }
 
-//overloaded constructor for creating new Player object in new Room
+//overloaded constructor for creating new Player object
 Player::Player(int xPos, int yPos, Game *game){
     setPos(xPos,yPos);
     setFlag(QGraphicsItem::ItemIsFocusable);
@@ -91,14 +87,11 @@ void Player::collision(){
             if(direction.compare("north") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("north");
                 if (nextRoom != NULL){              //check if this room has an exit in this direction
-//                    game->currentRoom->removeItem(this); //remove player item from room we're leaving
-//                    hide();
                     game->currentRoom = nextRoom;   //set new currentRoom
-                    setPos(475,450);
-//                    game->player = new Player(475,450, game);//set position of player in next room
-                    nextRoom->addItem(game->player);    //add new player to new room
+                    nextRoom->addItem(game->player);    //add player to new room
+                    setPos(475,450);                //set position of player
                     setFocus();
-//                    show();
+
                     nextRoom->addItem(lives);
                     game->setScene(nextRoom);       //load scene for next room
                 }
@@ -106,14 +99,11 @@ void Player::collision(){
             else if(direction.compare("south") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("south");
                 if (nextRoom != NULL){
-//                    game->currentRoom->removeItem(this);
-//                    hide();
                     game->currentRoom = nextRoom;
-                    setPos(475,100);
-//                    game->player = new Player(475,100, game);
                     nextRoom->addItem(game->player);
+                    setPos(475,100);
                     setFocus();
-//                    show();
+
                     nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
@@ -121,14 +111,11 @@ void Player::collision(){
             else if(direction.compare("east") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("east");
                 if (nextRoom != NULL){
-//                    game->currentRoom->removeItem(this);
-//                    hide();
                     game->currentRoom = nextRoom;
-                    setPos(300,275);
-//                    game->player = new Player(300,275, game);
                     nextRoom->addItem(game->player);
+                    setPos(300,275);
                     setFocus();
-//                    show();
+
                     nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
@@ -136,14 +123,11 @@ void Player::collision(){
             else if(direction.compare("west") == 0){
                 Room *nextRoom = game->currentRoom->nextRoom("west");
                 if (nextRoom != NULL){
-//                    game->currentRoom->removeItem(this);
-//                    hide();
                     game->currentRoom = nextRoom;
-                    setPos(650,275);
-//                    game->player = new Player(650,275, game);
                     nextRoom->addItem(game->player);
+                    setPos(650,275);
                     setFocus();
-                    //                    show();
+
                     nextRoom->addItem(lives);
                     game->setScene(nextRoom);
                 }
