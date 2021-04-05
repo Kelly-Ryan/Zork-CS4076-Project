@@ -32,9 +32,9 @@ Item Item::operator++(int)
     return item;
 }
 
-void Item::useItem()
+QString Item::howToUse()
 {
-    qDebug()<< "Item is being used (in Item class)";
+   return "Item has many uses";
 }
 
 QString Item::itemInfo()

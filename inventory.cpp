@@ -1,4 +1,5 @@
 #include "inventory.h"
+#include <QPushButton>
 #include <QDebug>
 #include <QMessageBox>
 
@@ -21,42 +22,51 @@ void Inventory::addToInventory(GameItem *item) {
     else
     {
         QMessageBox msg;
-        msg.setText("This item cannot be added to the inventory. The inventory is either at maximum capacity or there is insufficient space to add this item");
+        msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
         msg.setWindowFlags(Qt::FramelessWindowHint);
         msg.setStyleSheet("background-color:gray;border-style:outset");
         msg.exec();
-    }
-    clearFocus();
+    }    
 }
 
 void Inventory::onSelected(QListWidgetItem *widgetItem)
 {
-    qDebug() << "Attepting to use item";
-    GameItem * itemToUse = inventory.front();
+    GameItem * item = inventory.front();
     for (vector<GameItem*>::iterator i = inventory.begin(); i != inventory.end(); i++)
     {
         if(widgetItem->text().startsWith((*i)->qtDescription))
         {
-            itemToUse = (*i);
+            item = (*i);
             break;
         }
     }
-    itemToUse->useItem();
-    clearFocus();
-    //retrieveItem(itemToUse);
-    /*if(retrieveItem(itemToUse))
+
+    QMessageBox msg;
+    msg.setText("Would you like to use this item or remove it from your inventory");
+    msg.setInformativeText(item->howToUse());
+    msg.setWindowFlags(Qt::FramelessWindowHint);
+    msg.setStyleSheet("background-color:gray;border-style:outset");
+    QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
+    msg.addButton("Remove",QMessageBox::RejectRole);
+    msg.exec();
+    if(msg.clickedButton() == use)
     {
-        widgetItem->setText(itemToUse->itemInfo());
+        qDebug() << "Chosen to use the item";
+        emit itemSelected(item);
     }
     else
     {
         delete widgetItem;
-    }*/
+        delete item;
+    }
+    delete use;
+    clearFocus();
 }
 
-bool Inventory::retrieveItem(GameItem *item)
+// dont think this is needed
+/*bool Inventory::retrieveItem(GameItem *item)
 {
-    /*if(item->uses < item->usuageLimit)
+    if(item->uses < item->usuageLimit)
     {
           qDebug() << "Using item " << item->qtDescription ;
           Item &temp = *item; // making a reference to item * as cant directly use ++ operator on pointer
@@ -74,10 +84,10 @@ bool Inventory::retrieveItem(GameItem *item)
           return true;
      }
 
-     return false;*/
+     return false;
     item->useItem();
     return true;
-}
+}*/
 
 int Inventory::getMaxCapacity() const
 {

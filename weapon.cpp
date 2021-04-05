@@ -10,9 +10,9 @@ Weapon::Weapon(string description, float weight, int damage,string imgPath):Game
     this->damage = damage;
 }
 
-void Weapon::useItem()
+QString Weapon::howToUse()
 {
-    qDebug() << "Attacking with weapon";
+    return "Attack any enemies using this weapon";
 }
 
 QString Weapon::itemInfo()

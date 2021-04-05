@@ -29,9 +29,10 @@ Game::Game(QWidget *){
     inventory = new Inventory;
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
     connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
+    connect(inventory,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     inventory->show();
 
-    monster = new Enemy("monster",3,":/images/images/monster.png");
+    monster = new Enemy("monster",1,":/images/images/monster.png");
     a->addItem(monster);
     a->addItem(monster->getHealthbar());
 

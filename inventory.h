@@ -25,10 +25,11 @@ public slots:
 
 signals:
     void itemAdded(GameItem *item);
+    void itemSelected(GameItem *item);
 
 public:
     Inventory(int maxCapacity = 5);
-    bool retrieveItem(GameItem *item);
+    bool retrieveItem(GameItem *item); // remove after
     int getMaxCapacity() const;
 };
 

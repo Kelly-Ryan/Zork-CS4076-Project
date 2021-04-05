@@ -141,11 +141,6 @@ int Player::getHealth()
     return health;
 }
 
-void Player::takeDamage(int damage)
-{
-    health -= damage;
-}
-
 void operator+(Enemy &enemy,Player &player)
 {
     player.health -= enemy.getDamage();
@@ -163,6 +158,18 @@ bool Player::isAlive()
 Healthbar *Player::getHealthbar()
 {
     return lives;
+}
+
+void Player::equipPlayer(GameItem *item)
+{
+    itemHolding = item;
+    game->activateWindow();
+    setFocus();
+}
+
+GameItem * Player::getItemHolding()
+{
+    return itemHolding;
 }
 
 Player::~Player(){
