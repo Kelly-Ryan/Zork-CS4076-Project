@@ -28,6 +28,7 @@ private:
     void help();
 private slots:
     void removeFromRoom(GameItem *item);
+    void enableMovement();
 public:
     Player *player;
     Room *currentRoom;

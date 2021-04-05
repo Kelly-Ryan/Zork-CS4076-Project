@@ -60,7 +60,7 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
         delete item;
     }
     delete use;
-    clearFocus();
+    emit restoreFocus();
 }
 
 // dont think this is needed

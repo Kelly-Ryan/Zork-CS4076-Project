@@ -26,6 +26,7 @@ public slots:
 signals:
     void itemAdded(GameItem *item);
     void itemSelected(GameItem *item);
+    void restoreFocus();
 
 public:
     Inventory(int maxCapacity = 5);

@@ -30,6 +30,7 @@ Game::Game(QWidget *){
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
     connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     connect(inventory,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
+    connect(inventory,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
     inventory->show();
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
@@ -83,6 +84,12 @@ void Game::help(){
 void Game::removeFromRoom(GameItem *item)
 {
     item->hide();
+}
+
+void Game::enableMovement()
+{
+    activateWindow();
+    player->setFocus();
 }
 
 Game::~Game(){

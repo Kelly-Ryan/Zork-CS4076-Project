@@ -163,8 +163,6 @@ Healthbar *Player::getHealthbar()
 void Player::equipPlayer(GameItem *item)
 {
     itemHolding = item;
-    game->activateWindow();
-    setFocus();
 }
 
 GameItem * Player::getItemHolding()
