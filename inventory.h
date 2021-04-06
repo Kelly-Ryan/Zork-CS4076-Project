@@ -16,8 +16,8 @@ private:
     vector <GameItem*> inventory;
     int currentCapacity = 0;
     const int maxCapacity;
-    int xPos = 1375;
-    int yPos = 650;
+    int xPos = 740;
+    int yPos = 410;
 
 private slots:
     void onSelected(QListWidgetItem * widgetItem);
