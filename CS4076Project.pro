@@ -12,6 +12,7 @@ HEADERS += \
     weapon.h
 
 SOURCES += \
+    WeaponException.cpp \
     enemy.cpp \
     exit.cpp \
     game.cpp \
