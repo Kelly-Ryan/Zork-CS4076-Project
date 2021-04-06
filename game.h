@@ -14,7 +14,6 @@
 
 class Player;
 class Enemy;
-extern string gameTitle; // extern to allow use of var declared in another file
 
 //QGraphicsView class provides a widget for displaying the contents of a QGraphicsScene.
 class Game : public QGraphicsView  {

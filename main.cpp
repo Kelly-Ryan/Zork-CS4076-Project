@@ -6,15 +6,15 @@
 #include <QMainWindow>
 #include <QString>
 
-string gameTitle = "Zork";
+QString gameTitle = "Zork";
 
 int main (int argc, char *argv[]){
     QApplication a(argc, argv);
     Game *game = new Game();                                        //create Game object
     MainWindow window;                                              //create window
-    window.setWindowTitle(QString::fromStdString(gameTitle));
+    window.setWindowTitle(::gameTitle);
     window.setCentralWidget(game);                                  //set Game object in window
-    window.setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+    window.setWindowFlags(Qt::WindowCloseButtonHint);
     window.show();                                                  //show window
 
     return a.exec();

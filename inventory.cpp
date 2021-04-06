@@ -3,10 +3,20 @@
 #include <QDebug>
 #include <QMessageBox>
 
+using namespace Qt;
+
 Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
     setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
-    setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint);
+//    setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint);
+    setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
+    move(xPos,yPos);
+}
+
+void Inventory::moveEvent(QMoveEvent *event)
+{
+    move(xPos,yPos);
+    qDebug() << "Inventory moved";
 }
 
 void Inventory::addToInventory(GameItem *item) {
@@ -23,7 +33,8 @@ void Inventory::addToInventory(GameItem *item) {
     {
         QMessageBox msg;
         msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
-        msg.setWindowFlags(Qt::FramelessWindowHint);
+//        msg.setWindowFlags(Qt::FramelessWindowHint);
+        msg.setWindowFlags(FramelessWindowHint);
         msg.setStyleSheet("background-color:gray;border-style:outset");
         msg.exec();
     }    
@@ -44,7 +55,8 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
     QMessageBox msg;
     msg.setText("Would you like to use this item or remove it from your inventory");
     msg.setInformativeText(item->howToUse());
-    msg.setWindowFlags(Qt::FramelessWindowHint);
+//    msg.setWindowFlags(Qt::FramelessWindowHint);
+    msg.setWindowFlags(FramelessWindowHint);
     msg.setStyleSheet("background-color:gray;border-style:outset");
     QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
     msg.addButton("Remove",QMessageBox::RejectRole);

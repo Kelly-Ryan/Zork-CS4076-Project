@@ -16,6 +16,8 @@ private:
     vector <GameItem*> inventory;
     int currentCapacity = 0;
     const int maxCapacity;
+    int xPos = 1375;
+    int yPos = 650;
 
 private slots:
     void onSelected(QListWidgetItem * widgetItem);
@@ -32,6 +34,7 @@ public:
     Inventory(int maxCapacity = 5);
     bool retrieveItem(GameItem *item); // remove after
     int getMaxCapacity() const;
+    void moveEvent(QMoveEvent *event);
 };
 
 
