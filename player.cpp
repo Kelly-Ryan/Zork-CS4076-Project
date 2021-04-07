@@ -1,4 +1,5 @@
 #include "weaponException.cpp"
+#include "notEquippedException.cpp"
 #include "player.h"
 
 #include <QKeyEvent>
@@ -48,16 +49,16 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
     else if(event->key() == Qt::Key_Space){
         QList<QGraphicsItem *> colliding_items;
 
-        try {
+       try {
             qDebug() << "Space bar pressed";
             colliding_items = collidingItems();
 
             //exception is thrown if weapon is not equipped when player tries to attack
-            if(typeid(itemHolding)!= typeid(Weapon)){
-                WeaponException e;
-                throw e;
+            if(typeid(*itemHolding)!= typeid(Weapon)){
+                WeaponException e2;
+                throw e2;
             }
-        }  catch (exception &e) {
+        } catch (WeaponException &e) {
             e.what();
         }
 

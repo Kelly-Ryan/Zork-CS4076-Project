@@ -5,14 +5,28 @@ Weapon::Weapon()
 {
 }
 
+
+Weapon::~Weapon()
+{
+    delete d;
+}
+
 Weapon::Weapon(string description, float weight, int damage,string imgPath):GameItem(description,weight,imgPath)
 {
-    this->damage = damage;
+    d = new int;
+    *d = damage;
 }
 
 Weapon::Weapon(string description, int damage):GameItem(description)
 {
-    this->damage = damage;
+    d = new int;
+    *d = damage;
+}
+
+Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
+{
+    d = new int;
+    *d = *(weapon.d);
 }
 
 QString Weapon::howToUse()
@@ -22,11 +36,11 @@ QString Weapon::howToUse()
 
 QString Weapon::itemInfo()
 {
-    return qtDescription + QString::fromStdString("\tDamage Inflicted:") + QString::number(damage);
+    return qtDescription + QString::fromStdString("\tDamage Inflicted:") + QString::number(getDamage());
 }
 
 int Weapon::getDamage()
 {
-    return damage;
+    return *d;
 }
 
