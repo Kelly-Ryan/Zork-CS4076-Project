@@ -3,13 +3,11 @@
 #include <QPushButton>
 #include <QDebug>
 
-
 using namespace Qt;
 
 Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
     setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
-//    setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint);
     setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
     move(xPos,yPos);
 }
