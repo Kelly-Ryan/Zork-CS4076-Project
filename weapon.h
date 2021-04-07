@@ -28,6 +28,7 @@ private:
 public:
     Weapon();
     Weapon(string description, float weight, int damage, string imgPath);
+    Weapon(string description, int damage);
     QString howToUse();
     virtual QString itemInfo();
     int getDamage();

@@ -16,6 +16,7 @@ Player::Player(int xPos, int yPos, Game *game){
     this->game = game;
     lives = new Healthbar("Player",health);
     lives->setPos(800,25);
+    itemHolding = new Weapon("Arrow",2); // can change around later
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -51,9 +52,9 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
         //traverse this list and find out of the player is colliding with an object of type Exit
         for(int i = 0, n = colliding_items.size(); i < n; ++i){
             if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
-                    qDebug() << "Launching attack on enemy";
                     Weapon* weapon = dynamic_cast<Weapon*>(itemHolding);
                     Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+                    qDebug() << "Launching attack on enemy with " << weapon->itemInfo();
                     combat(weapon,enemy);
                     enemy->getHealthbar()->updateHealth(enemy->getHealth());
             }
@@ -174,4 +175,5 @@ GameItem * Player::getItemHolding()
 Player::~Player(){
     delete game;
     delete lives;
+    delete itemHolding;
 }

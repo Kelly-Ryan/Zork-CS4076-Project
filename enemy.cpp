@@ -75,12 +75,12 @@ void Enemy::attackingPlayer()
         {
             qDebug() << "Enemy collided with player";
             Player *player = (Player *)colliding_items[i];
-//            if(typeid(*player->getItemHolding()) != typeid(Weapon))
+            if(typeid(*player->getItemHolding()) != typeid(Weapon))
             {
                 qDebug() << "Attacking the player";
                 qDebug() << player->getItemHolding()->getDescription();
-//                combat(this,player);
-//                player->getHealthbar()->updateHealth(player->getHealth());
+                combat(this,player);
+                player->getHealthbar()->updateHealth(player->getHealth());
             }
         }
     }
