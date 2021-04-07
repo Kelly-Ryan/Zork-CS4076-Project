@@ -16,6 +16,7 @@ Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
 void Inventory::moveEvent(QMoveEvent *event)
 {
     move(xPos,yPos);
+    emit restoreFocus();
 }
 
 void Inventory::addToInventory(GameItem *item) {
