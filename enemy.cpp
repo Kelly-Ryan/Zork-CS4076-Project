@@ -16,7 +16,7 @@ Enemy::Enemy(string name,int damage,string imgPath)
     xIncrement = rand()%6; // 0-5
     yIncrement = rand()%6;
     timer = new QTimer();
-    timer->start(100);
+    timer->start(80);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
     lives = new Healthbar(name,health);
@@ -33,10 +33,10 @@ void Enemy::roam()
 {
     setPos(x()+xIncrement,y()+yIncrement);
     attackingPlayer();
-    if(x() > 550 || x() < 50)  //550 50
+    if(x() > 690 || x() < 310)  //550 50
         xIncrement *=-1;
 
-    else if(y() > 450 || y() < 40) // 450 40
+    if(y() > 490 || y() < 110) // 450 40
         yIncrement *=-1;
 }
 

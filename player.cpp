@@ -17,6 +17,7 @@ Player::Player(int xPos, int yPos, Game *game){
     this->game = game;
     hitPoints = new Healthbar("Player",health);
     hitPoints->setPos(800,25);
+    itemHolding = new Weapon("Arrow",2);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -87,13 +88,7 @@ void Player::collision(){
                msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
-<<<<<<< HEAD
-               msg.setWindowFlags(Qt::FramelessWindowHint);
-               msg.setStyleSheet("background-color:gray;border-style:outset");
-               msg.move(350,300);
-=======
 
->>>>>>> main
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
