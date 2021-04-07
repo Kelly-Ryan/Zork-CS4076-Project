@@ -55,8 +55,8 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
 
             //exception is thrown if weapon is not equipped when player tries to attack
             if(typeid(*itemHolding)!= typeid(Weapon)){
-                WeaponException e2;
-                throw e2;
+                WeaponException e;
+                throw e;
             }
         } catch (WeaponException &e) {
             e.what();
