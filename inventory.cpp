@@ -16,7 +16,6 @@ Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
 void Inventory::moveEvent(QMoveEvent *event)
 {
     move(xPos,yPos);
-    qDebug() << "Inventory moved";
 }
 
 void Inventory::addToInventory(GameItem *item) {
