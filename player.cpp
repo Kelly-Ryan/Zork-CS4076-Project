@@ -53,7 +53,7 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
             colliding_items = collidingItems();
 
             //exception is thrown if weapon is not equipped when player tries to attack
-            if(typeid(itemHolding)!= typeid(Weapon)){
+            if(typeid(*itemHolding)!= typeid(Weapon)){
                 WeaponException e;
                 throw e;
             }
