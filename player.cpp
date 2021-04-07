@@ -76,6 +76,7 @@ void Player::collision(){
                msg.setDefaultButton(QMessageBox::Yes);
                msg.setWindowFlags(Qt::FramelessWindowHint);
                msg.setStyleSheet("background-color:gray;border-style:outset");
+               msg.move(350,300);
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
