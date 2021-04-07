@@ -35,6 +35,7 @@ void Inventory::addToInventory(GameItem *item) {
 //        msg.setWindowFlags(Qt::FramelessWindowHint);
         msg.setWindowFlags(FramelessWindowHint);
         msg.setStyleSheet("background-color:gray;border-style:outset");
+        msg.move(350,300);
         msg.exec();
     }    
 }
@@ -59,6 +60,7 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
     msg.setStyleSheet("background-color:gray;border-style:outset");
     QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
     msg.addButton("Remove",QMessageBox::RejectRole);
+    msg.move(350,300);
     msg.exec();
     if(msg.clickedButton() == use)
     {
