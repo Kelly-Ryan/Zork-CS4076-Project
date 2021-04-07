@@ -2,6 +2,7 @@ HEADERS += \
     enemy.h \
     exit.h \
     game.h \
+    gamePopup.h \
     gameitem.h \
     healthbar.h \
     inventory.h \
@@ -12,10 +13,10 @@ HEADERS += \
     weapon.h
 
 SOURCES += \
-    WeaponException.cpp \
     enemy.cpp \
     exit.cpp \
     game.cpp \
+    gamePopup.cpp \
     gameitem.cpp \
     healthbar.cpp \
     inventory.cpp \
@@ -24,7 +25,8 @@ SOURCES += \
     mainwindow.cpp \
     player.cpp \
     room.cpp \
-    weapon.cpp
+    weapon.cpp \
+    weaponException.cpp
 
 QT       += core gui \
          multimedia

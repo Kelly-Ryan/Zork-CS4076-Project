@@ -1,7 +1,8 @@
 #include "inventory.h"
+#include "gamePopup.h"
 #include <QPushButton>
 #include <QDebug>
-#include <QMessageBox>
+
 
 using namespace Qt;
 
@@ -31,11 +32,8 @@ void Inventory::addToInventory(GameItem *item) {
     }
     else
     {
-        QMessageBox msg;
+        GamePopup msg;
         msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
-//        msg.setWindowFlags(Qt::FramelessWindowHint);
-        msg.setWindowFlags(FramelessWindowHint);
-        msg.setStyleSheet("background-color:gray;border-style:outset");
         msg.exec();
     }    
 }
@@ -52,12 +50,9 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
         }
     }
 
-    QMessageBox msg;
+    GamePopup msg;
     msg.setText("Would you like to use this item or remove it from your inventory");
     msg.setInformativeText(item->howToUse());
-//    msg.setWindowFlags(Qt::FramelessWindowHint);
-    msg.setWindowFlags(FramelessWindowHint);
-    msg.setStyleSheet("background-color:gray;border-style:outset");
     QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
     msg.addButton("Remove",QMessageBox::RejectRole);
     msg.exec();

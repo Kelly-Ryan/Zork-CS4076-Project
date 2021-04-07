@@ -1,4 +1,4 @@
-#include "WeaponException.cpp"
+#include "weaponException.cpp"
 #include "player.h"
 
 #include <QKeyEvent>
@@ -83,12 +83,11 @@ void Player::collision(){
         if(typeid(*(colliding_items[i])) == typeid(Item) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
-               QMessageBox msg;
+               GamePopup msg;
                msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
-               msg.setWindowFlags(Qt::FramelessWindowHint);
-               msg.setStyleSheet("background-color:gray;border-style:outset");
+
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
