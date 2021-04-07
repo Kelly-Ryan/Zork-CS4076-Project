@@ -14,6 +14,11 @@ GameItem::GameItem (string description,float weight,string imgPath)
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
 }
 
+GameItem::GameItem(std::string description)
+{
+    setDescription(description);
+}
+
 void GameItem::setWeight(float weight)
 {
     if (weight > 9999 || weight < 0)

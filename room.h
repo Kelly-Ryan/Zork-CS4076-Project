@@ -2,6 +2,7 @@
 #define ROOM_H
 
 #include "exit.h"
+#include "gameitem.h"
 
 #include <map>
 #include <string>
@@ -17,9 +18,10 @@ private:
 
 public:
    Room(string description, QImage background);
+   ~Room();
    void setExits(Room *north, Room *east, Room *south, Room *west);
    Room* nextRoom(string direction);
-   ~Room();
+   void populateRoom(GameItem *roomItems[],int numItems);
 };
 
 #endif // ROOM_H

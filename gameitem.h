@@ -26,6 +26,7 @@ protected:
 
 public:
     GameItem (string description, float weight,string imgPath);
+    GameItem (string description);
     GameItem(const GameItem &item); // must provide a copy constructor since the copy constructor in base class is marked as deleted
     GameItem();
     virtual QString howToUse() = 0;

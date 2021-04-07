@@ -1,5 +1,9 @@
 #include "room.h"
 
+#include <cstdlib>
+#include <cctype>
+#include <time.h>
+
 Room::Room(string description, QImage background){
     this->description = description;                    //set room description
     setSceneRect(0,0,1000,600);                         //set scene dimensions
@@ -46,6 +50,17 @@ Room* Room::nextRoom(string direction) {
     } else {
     return next->second; // If there is a room, remove the "second" (Room*) part of the "pair" (<string, Room*>) and return it.
     }
+}
+
+void Room::populateRoom(GameItem *roomItems[],int numItems)
+{
+    srand(time(NULL));
+    for(int i=0;i<numItems;i++)
+    {
+      roomItems[i]->setPos(rand()%(700-300+1)+300,rand()%(500-100+1)+100);
+      addItem(roomItems[i]);
+    }
+
 }
 
 Room::~Room(){

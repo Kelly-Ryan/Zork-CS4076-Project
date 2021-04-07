@@ -15,7 +15,7 @@ Inventory::Inventory(int maxCapacity):maxCapacity(maxCapacity){
 void Inventory::moveEvent(QMoveEvent *event)
 {
     move(xPos,yPos);
-    qDebug() << "Inventory moved";
+    emit restoreFocus();
 }
 
 void Inventory::addToInventory(GameItem *item) {
@@ -53,6 +53,7 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
     msg.setInformativeText(item->howToUse());
     QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
     msg.addButton("Remove",QMessageBox::RejectRole);
+    msg.move(350,300);
     msg.exec();
     if(msg.clickedButton() == use)
     {

@@ -64,9 +64,9 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
         //traverse this list and find out of the player is colliding with an object of type Enemy
         for(int i = 0, n = colliding_items.size(); i < n; ++i){
             if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
-                    qDebug() << "Launching attack on enemy";
                     Weapon* weapon = dynamic_cast<Weapon*>(itemHolding);
                     Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+                    qDebug() << "Launching attack on enemy with " << weapon->itemInfo();
                     combat(weapon,enemy);
                     enemy->getHealthbar()->updateHealth(enemy->getHealth());
             }
@@ -87,7 +87,13 @@ void Player::collision(){
                msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
+<<<<<<< HEAD
+               msg.setWindowFlags(Qt::FramelessWindowHint);
+               msg.setStyleSheet("background-color:gray;border-style:outset");
+               msg.move(350,300);
+=======
 
+>>>>>>> main
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
@@ -184,5 +190,6 @@ GameItem * Player::getItemHolding()
 
 Player::~Player(){
     delete game;
+    delete itemHolding;
     delete hitPoints;
 }
