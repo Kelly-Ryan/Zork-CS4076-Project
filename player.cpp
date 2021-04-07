@@ -1,3 +1,4 @@
+#include "weaponException.cpp"
 #include "player.h"
 
 #include <QKeyEvent>
@@ -14,9 +15,8 @@ Player::Player(int xPos, int yPos, Game *game){
     setFocus();
     setPixmap(QPixmap(":/images/images/player.png"));
     this->game = game;
-    lives = new Healthbar("Player",health);
-    lives->setPos(800,25);
-    itemHolding = new Weapon("Arrow",2); // can change around later
+    hitPoints = new Healthbar("Player",health);
+    hitPoints->setPos(800,25);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -46,10 +46,22 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
         }
     }
     else if(event->key() == Qt::Key_Space){
-        qDebug() << "Space bar pressed";
-        QList<QGraphicsItem *> colliding_items = collidingItems();
+        QList<QGraphicsItem *> colliding_items;
 
-        //traverse this list and find out of the player is colliding with an object of type Exit
+        try {
+            qDebug() << "Space bar pressed";
+            colliding_items = collidingItems();
+
+            //exception is thrown if weapon is not equipped when player tries to attack
+            if(typeid(getItemHolding())!= typeid(Weapon)){
+                WeaponException e;
+                throw e;
+            }
+        }  catch (exception &e) {
+            e.what();
+        }
+
+        //traverse this list and find out of the player is colliding with an object of type Enemy
         for(int i = 0, n = colliding_items.size(); i < n; ++i){
             if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
                     Weapon* weapon = dynamic_cast<Weapon*>(itemHolding);
@@ -71,13 +83,17 @@ void Player::collision(){
         if(typeid(*(colliding_items[i])) == typeid(Item) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
-               QMessageBox msg;
+               GamePopup msg;
                msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
+<<<<<<< HEAD
                msg.setWindowFlags(Qt::FramelessWindowHint);
                msg.setStyleSheet("background-color:gray;border-style:outset");
                msg.move(350,300);
+=======
+
+>>>>>>> main
                int response = msg.exec();
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
@@ -94,7 +110,7 @@ void Player::collision(){
                     setPos(475,450);                //set position of player
                     setFocus();
 
-                    nextRoom->addItem(lives);
+                    nextRoom->addItem(hitPoints);
                     game->setScene(nextRoom);       //load scene for next room
                 }
             }
@@ -106,7 +122,7 @@ void Player::collision(){
                     setPos(475,100);
                     setFocus();
 
-                    nextRoom->addItem(lives);
+                    nextRoom->addItem(hitPoints);
                     game->setScene(nextRoom);
                 }
             }
@@ -118,7 +134,7 @@ void Player::collision(){
                     setPos(300,275);
                     setFocus();
 
-                    nextRoom->addItem(lives);
+                    nextRoom->addItem(hitPoints);
                     game->setScene(nextRoom);
                 }
             }
@@ -130,7 +146,7 @@ void Player::collision(){
                     setPos(650,275);
                     setFocus();
 
-                    nextRoom->addItem(lives);
+                    nextRoom->addItem(hitPoints);
                     game->setScene(nextRoom);
                 }
             }
@@ -159,7 +175,7 @@ bool Player::isAlive()
 
 Healthbar *Player::getHealthbar()
 {
-    return lives;
+    return hitPoints;
 }
 
 void Player::equipPlayer(GameItem *item)
@@ -174,6 +190,6 @@ GameItem * Player::getItemHolding()
 
 Player::~Player(){
     delete game;
-    delete lives;
     delete itemHolding;
+    delete hitPoints;
 }

@@ -20,7 +20,7 @@ private:
     int health = 5;
     bool alive = true;
     Game *game;
-    Healthbar *lives;
+    Healthbar *hitPoints;
     GameItem *itemHolding;
     void keyPressEvent(QKeyEvent *event);
     void collision();
