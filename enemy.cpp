@@ -33,10 +33,10 @@ void Enemy::roam()
 {
     setPos(x()+xIncrement,y()+yIncrement);
     attackingPlayer();
-    if(x() > 690 || x() < 310)  //550 50
+    if(x() >= 700 || x() <= 300)  // room x coords are 300 - 700   690 310
         xIncrement *=-1;
 
-    if(y() > 490 || y() < 110) // 450 40
+    if(y() >= 500 || y() <= 100) // room y coords are 100 - 500    490 110
         yIncrement *=-1;
 }
 
@@ -75,10 +75,9 @@ void Enemy::attackingPlayer()
         {
             qDebug() << "Enemy collided with player";
             Player *player = (Player *)colliding_items[i];
-            if(typeid(*player->getItemHolding()) != typeid(Weapon))
+            //if(typeid(*player->getItemHolding()) != typeid(Weapon))
             {
                 qDebug() << "Attacking the player";
-                qDebug() << player->getItemHolding()->getDescription();
                 combat(this,player);
                 player->getHealthbar()->updateHealth(player->getHealth());
             }
@@ -94,4 +93,3 @@ void operator+(Weapon &weapon,Enemy &enemy)
         enemy.alive = false;
     }
 }
-

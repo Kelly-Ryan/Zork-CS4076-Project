@@ -21,7 +21,7 @@ private:
     bool alive = true;
     Game *game;
     Healthbar *hitPoints;
-    GameItem *itemHolding;
+    GameItem *itemHolding = 0;
     void keyPressEvent(QKeyEvent *event);
     void collision();
 signals:

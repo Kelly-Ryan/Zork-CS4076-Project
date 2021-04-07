@@ -17,7 +17,6 @@ Player::Player(int xPos, int yPos, Game *game){
     this->game = game;
     hitPoints = new Healthbar("Player",health);
     hitPoints->setPos(800,25);
-    itemHolding = new Weapon("Arrow",2);
 }
 
 void Player::keyPressEvent(QKeyEvent *event){       //player movement
@@ -54,7 +53,7 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
             colliding_items = collidingItems();
 
             //exception is thrown if weapon is not equipped when player tries to attack
-            if(typeid(getItemHolding())!= typeid(Weapon)){
+            if(typeid(itemHolding)!= typeid(Weapon)){
                 WeaponException e;
                 throw e;
             }
