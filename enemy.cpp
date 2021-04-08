@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "gamePopup.h"
 #include <cstdlib>
 #include <cctype>
 #include <time.h>
@@ -16,7 +17,7 @@ Enemy::Enemy(string name,int damage,string imgPath)
     xIncrement = rand()%6; // 0-5
     yIncrement = rand()%6;
     timer = new QTimer();
-    timer->start(80);
+    timer->start(200);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
     lives = new Healthbar(name,health);
@@ -32,11 +33,11 @@ Enemy::~Enemy()
 void Enemy::roam()
 {
     setPos(x()+xIncrement,y()+yIncrement);
-    attackingPlayer();
-    if(x() >= 700 || x() <= 300)  // room x coords are 300 - 700   690 310
+    collision();
+    if(x() >= 700 || x() <= 300)  // room x coords are 300 - 700
         xIncrement *=-1;
 
-    if(y() >= 500 || y() <= 100) // room y coords are 100 - 500    490 110
+    if(y() >= 500 || y() <= 100) // room y coords are 100 - 500
         yIncrement *=-1;
 }
 
@@ -65,7 +66,16 @@ Healthbar* Enemy::getHealthbar()
     return lives;
 }
 
-void Enemy::attackingPlayer()
+void Enemy::defeated()
+{
+    timer->stop();
+    GamePopup congrats;
+    congrats.setText("Congratulations you defeated the enemy");
+    congrats.exec();
+    delete this;
+}
+
+void Enemy::collision()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
@@ -73,19 +83,18 @@ void Enemy::attackingPlayer()
     {
         if(typeid(*(colliding_items[i])) == typeid(Player))
         {
-            qDebug() << "Enemy collided with player";
-            Player *player = (Player *)colliding_items[i];
-            //if(typeid(*player->getItemHolding()) != typeid(Weapon))
-            {
-                qDebug() << "Attacking the player";
-                combat(this,player);
-                player->getHealthbar()->updateHealth(player->getHealth());
-            }
+             Player *player = (Player *)colliding_items[i];
+             qDebug() << "Attacking the player";
+             combat(this,player);
+             if(player->isAlive())
+                 player->getHealthbar()->updateHealth(player->getHealth());
+//             setPos(x()+xIncrement*2,y()+yIncrement*2); // tbh its just a temp idea
+             //QTimer::singleShot(100,this,SLOT(launchAttack())); soln is to make a subclassed timer with signal
         }
     }
 }
 
-void operator+(Weapon &weapon,Enemy &enemy)
+void operator+(Weapon weapon,Enemy &enemy)
 {
     enemy.health -= weapon.getDamage();
     if(enemy.health <= 0)

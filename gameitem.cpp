@@ -19,6 +19,13 @@ GameItem::GameItem(std::string description)
     setDescription(description);
 }
 
+GameItem::GameItem(const GameItem &item):QGraphicsPixmapItem() //QObject(),
+{
+    weight = item.weight;
+    imgPath = item.imgPath;
+    qtDescription = item.qtDescription;
+}
+
 void GameItem::setWeight(float weight)
 {
     if (weight > 9999 || weight < 0)

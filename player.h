@@ -8,16 +8,16 @@
 #include "game.h"
 #include "gameitem.h"
 #include "healthbar.h"
-#include "weapon.h" //can remove after
 
 class Game;
+class Enemy;
 
 class Player : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
     friend void operator+(Enemy &enemy,Player &player);
 private:
     int speed = 10;
-    int health = 5;
+    int health = 10;
     bool alive = true;
     Game *game;
     Healthbar *hitPoints;
@@ -36,6 +36,7 @@ public:
     bool isAlive();
     Healthbar* getHealthbar();
     GameItem* getItemHolding();
+    void defeated();
 };
 
 #endif // PLAYER_H

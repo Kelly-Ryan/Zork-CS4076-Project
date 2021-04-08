@@ -10,9 +10,9 @@ using std::string;
 
 // GameItem is an abstract class
 
-class GameItem:public QObject,public QGraphicsPixmapItem
+class GameItem:public QGraphicsPixmapItem //,public QObject
 {
-    Q_OBJECT
+//    Q_OBJECT
     friend class Inventory;
 
 private:
@@ -35,9 +35,9 @@ public:
     string getImgPath();
     void setImgPath(string imgPath);
     QString getDescription();
-
+/*
 signals:
-    void itemSelected(GameItem *);
+    void itemSelected(GameItem *); this not actually used anymore?*/
 };
 
 #endif // GAMEITEM_H

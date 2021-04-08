@@ -32,9 +32,9 @@ signals:
 
 public:
     Inventory(int maxCapacity = 5);
-    bool retrieveItem(GameItem *item); // remove after
     int getMaxCapacity() const;
     void moveEvent(QMoveEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 };
 
 

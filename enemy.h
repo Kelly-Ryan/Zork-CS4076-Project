@@ -15,7 +15,7 @@ class Weapon;
 class Enemy: public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
-    friend void operator+(Weapon &weapon,Enemy &enemy);
+    friend void operator+(Weapon weapon,Enemy &enemy);
 
 private:
     int health;
@@ -26,7 +26,7 @@ private:
     string name;
     QTimer *timer;
     Healthbar *lives;
-    void attackingPlayer();
+    void collision();
 
 private slots:
     void roam();
@@ -40,6 +40,7 @@ public:
     bool isAlive();
     int getDamage();
     Healthbar* getHealthbar();
+    void defeated();
 };
 
 #endif // ENEMY_H

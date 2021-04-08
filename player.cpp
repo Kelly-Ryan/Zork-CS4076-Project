@@ -1,8 +1,9 @@
 #include "weaponException.cpp"
+#include "notEquippedException.cpp"
 #include "player.h"
+#include "gamePopup.h"
 
 #include <QKeyEvent>
-#include <QMessageBox>
 
 // dont ever use this constructor
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
@@ -48,16 +49,22 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
     else if(event->key() == Qt::Key_Space){
         QList<QGraphicsItem *> colliding_items;
 
-        try {
+       try {
             qDebug() << "Space bar pressed";
             colliding_items = collidingItems();
 
             //exception is thrown if weapon is not equipped when player tries to attack
+            if(itemHolding == 0){
+                NotEquippedException e;
+                throw e;
+            }
             if(typeid(*itemHolding)!= typeid(Weapon)){
                 WeaponException e;
                 throw e;
             }
-        }  catch (exception &e) {
+        } catch (WeaponException &e) {
+            e.what();
+        } catch (NotEquippedException &e) {
             e.what();
         }
 
@@ -68,7 +75,8 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
                     Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
                     qDebug() << "Launching attack on enemy with " << weapon->itemInfo();
                     combat(weapon,enemy);
-                    enemy->getHealthbar()->updateHealth(enemy->getHealth());
+                    if(enemy->isAlive())
+                        enemy->getHealthbar()->updateHealth(enemy->getHealth());
             }
         }
     }
@@ -180,6 +188,15 @@ void Player::equipPlayer(GameItem *item)
 GameItem * Player::getItemHolding()
 {
     return itemHolding;
+}
+
+void Player::defeated()
+{
+    clearFocus();
+    GamePopup gameOver;
+    gameOver.setText("You loose game over");
+    gameOver.exec();
+    exit(0);
 }
 
 Player::~Player(){

@@ -14,7 +14,9 @@ template<class T1,class T2> void combat(T1 attacker,T2 attackee)
    if(!attackee->isAlive())
    {
        qDebug() << "defeated";
-       attackee->hide();
+       attackee->getHealthbar()->updateHealth(0);
+       attackee->defeated();
+       //delete attackee;
    }
    // use overloaded + instead and then do the isAlive check so a proper fn
    // perhaps do attackee.isAlive and if not emit a signal
@@ -23,12 +25,14 @@ template<class T1,class T2> void combat(T1 attacker,T2 attackee)
 class Weapon : public GameItem
 {
 private:
-    int damage;
+    int *d;
 
 public:
     Weapon();
+    ~Weapon();
     Weapon(string description, float weight, int damage, string imgPath);
     Weapon(string description, int damage);
+    Weapon(const Weapon &weapon);
     QString howToUse();
     virtual QString itemInfo();
     int getDamage();
