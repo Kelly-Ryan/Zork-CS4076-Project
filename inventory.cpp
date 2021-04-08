@@ -18,6 +18,11 @@ void Inventory::moveEvent(QMoveEvent *event)
     emit restoreFocus();
 }
 
+void Inventory::mousePressEvent(QMouseEvent *event)
+{
+    emit restoreFocus();
+}
+
 void Inventory::addToInventory(GameItem *item) {
     if(currentCapacity < maxCapacity)
     {
