@@ -23,7 +23,7 @@ Weapon::Weapon(string description, int damage):GameItem(description)
     *d = damage;
 }
 
-Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
+Weapon::Weapon(const Weapon &weapon)
 {
     d = new int;
     *d = *(weapon.d);
