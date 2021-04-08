@@ -31,7 +31,6 @@ public:
     Weapon();
     ~Weapon();
     Weapon(string description, float weight, int damage, string imgPath);
-    Weapon(string description, int damage);
     Weapon(const Weapon &weapon);
     QString howToUse();
     virtual QString itemInfo();

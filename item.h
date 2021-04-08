@@ -18,7 +18,6 @@ public:
     virtual QString itemInfo();
     int getUsuageLimit() const;
     int numberOfUses();
-    Item operator++(int); // can get rid of
 };
 
 

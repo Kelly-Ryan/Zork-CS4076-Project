@@ -25,13 +25,6 @@ int Item::numberOfUses()
     return uses;
 }
 
-Item Item::operator++(int)
-{
-    Item item;
-    item.uses = uses++;
-    return item;
-}
-
 QString Item::howToUse()
 {
    return "Item has many uses";
