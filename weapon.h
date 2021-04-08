@@ -16,10 +16,7 @@ template<class T1,class T2> void combat(T1 attacker,T2 attackee)
        qDebug() << "defeated";
        attackee->getHealthbar()->updateHealth(0);
        attackee->defeated();
-       //delete attackee;
    }
-   // use overloaded + instead and then do the isAlive check so a proper fn
-   // perhaps do attackee.isAlive and if not emit a signal
 }
 
 class Weapon : public GameItem

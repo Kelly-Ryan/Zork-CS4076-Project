@@ -13,7 +13,7 @@ using std::string;
 class GameItem:public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
-    friend class Inventory;
+    //friend class Inventory;
 
 private:
     float weight;
