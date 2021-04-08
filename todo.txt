@@ -1,0 +1,27 @@
+NB !!!! - tomorrow
+double click in inventory that is then set as item in hand - makes sense for key and weapon
+if double click and if potion then increase the lives by that amt just do a check to see if of type potion
+will need to add a check to see if collide with potion and if lives not full then directly apply potion
+else ask if want to add to inventory
+
+-> need health potion and key to be their own classes rather than as a general item class
+
+
+itemInfo for key says single use for health potion says # lives extra it gives
+
+----------------------------------------------------------------------------------------------------
+
+player or enemy reaches 0 lives have hiding for now
+enemy is deleted
+but for player want game to end
+could disconnect the enemy and have popup or have a game over scene
+for now just debug message saying game over
+
+General things to fix
+how many enemies per room - if multiple have to edit the setPos in enemy
+check enemy movement with kelly - sometimes it goes off screen to right and spawns out of room
+inventory can close and also move it - dont want this behaviour
+-> think there is a signal for close button override this
+add an array somewhere
+pass by value somewhere to use the copy constructor
+do want to restrict lives to a certain level - for eg if add lives and it would give more than # start with

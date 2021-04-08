@@ -17,12 +17,6 @@ Weapon::Weapon(string description, float weight, int damage,string imgPath):Game
     *d = damage;
 }
 
-Weapon::Weapon(string description, int damage):GameItem(description)
-{
-    d = new int;
-    *d = damage;
-}
-
 Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
 {
     d = new int;

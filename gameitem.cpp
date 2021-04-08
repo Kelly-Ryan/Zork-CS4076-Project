@@ -19,7 +19,7 @@ GameItem::GameItem(std::string description)
     setDescription(description);
 }
 
-GameItem::GameItem(const GameItem &item):QObject(),QGraphicsPixmapItem()
+GameItem::GameItem(const GameItem &item):QGraphicsPixmapItem()
 {
     weight = item.weight;
     imgPath = item.imgPath;

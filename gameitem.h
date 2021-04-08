@@ -8,9 +8,10 @@
 
 using std::string;
 
-class GameItem:public QObject,public QGraphicsPixmapItem
+class GameItem:public QGraphicsPixmapItem
 {
-    Q_OBJECT
+    //friend class Inventory;
+
 private:
     float weight;
     string imgPath;
@@ -30,9 +31,6 @@ public:
     string getImgPath();
     void setImgPath(string imgPath);
     QString getDescription();
-
-signals:
-    void itemSelected(GameItem *);
 };
 
 #endif // GAMEITEM_H
