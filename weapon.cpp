@@ -31,7 +31,7 @@ Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
 
 QString Weapon::itemInfo()
 {
-    return qtDescription + QString::fromStdString("\tDamage Inflicted:") + QString::number(getDamage());
+    return qtDescription + QString::fromStdString("\tDamage:") + QString::number(getDamage());
 }
 
 int Weapon::getDamage()

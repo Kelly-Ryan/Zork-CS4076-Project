@@ -24,7 +24,7 @@ private:
     string title;
     void onSelected(QListWidgetItem * widgetItem);
     void addToInventory(GameItem *itemCollected);
-
+    void moveEvent(QMoveEvent *event);
 public:
     Inventory(string title,int maxCapacity = 5);
     int getMaxCapacity() const;
@@ -37,6 +37,9 @@ template<typename T> Inventory<T>::Inventory(string title,int maxCapacity):maxCa
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
     setWindowTitle(QString::fromStdString(title)+ "\t Max Capacity:" + QString::number(maxCapacity));
     setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
+    setHorizontalScrollBarPolicy(ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(ScrollBarAlwaysOff);
+    resize(240,150);
     show();
 }
 
@@ -115,4 +118,9 @@ template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
     }
 }
 
+template <typename T> void Inventory<T>::moveEvent(QMoveEvent *event)
+{
+    move(xPos,yPos);
+    emit restoreFocus();
+}
 #endif
