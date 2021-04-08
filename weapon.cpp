@@ -29,11 +29,6 @@ Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
     *d = *(weapon.d);
 }
 
-QString Weapon::howToUse()
-{
-    return "Attack any enemies using this weapon";
-}
-
 QString Weapon::itemInfo()
 {
     return qtDescription + QString::fromStdString("\tDamage Inflicted:") + QString::number(getDamage());

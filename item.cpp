@@ -1,4 +1,4 @@
-#include "Item.h"
+#include "item.h"
 #include <QDebug>
 #include <QMessageBox>
 
@@ -23,18 +23,6 @@ int Item::getUsuageLimit() const
 int Item::numberOfUses()
 {
     return uses;
-}
-
-Item Item::operator++(int)
-{
-    Item item;
-    item.uses = uses++;
-    return item;
-}
-
-QString Item::howToUse()
-{
-   return "Item has many uses";
 }
 
 QString Item::itemInfo()

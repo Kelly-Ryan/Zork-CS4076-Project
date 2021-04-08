@@ -25,8 +25,10 @@ Game::Game(QWidget *){
     a->addItem(player);         //add player to scene
     a->addItem(player->getHealthbar());
 
-    inventory = new Inventory<Item>("Inventory",2);
+
     armoury = new Inventory<Weapon>("Armoury");
+
+    inventory = new Inventory<Item>("inventory");
 
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
     connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
@@ -39,7 +41,7 @@ Game::Game(QWidget *){
     connect(armoury,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
     inventory->setPosition(740,410);
-    armoury->setPosition(740,110);
+    armoury->setPosition(740,150);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
     a->addItem(monster);

@@ -1,47 +1,7 @@
-#include "inventory.h"
-#include "gamePopup.h"
-#include <QPushButton>
-#include <QDebug>
 
-using namespace Qt;
 
-template<typename T>
-Inventory<T>::Inventory(string title, int maxCapacity):maxCapacity(maxCapacity)
-{
-    connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
-    setWindowTitle(QString::fromStdString(title) + "\tMax Capacity:" + QString::number(maxCapacity));
-    setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
-    show();
-}
 
-template<typename T>
-int Inventory<T>::getMaxCapacity() const
-{
-    return maxCapacity;
-}
-
-template<typename T>
-void Inventory<T>::moveEvent(QMoveEvent *event)
-{
-    move(xPos,yPos);
-//    emit restoreFocus();
-}
-
-template<typename T>
-void Inventory<T>::setPosition(int xPos, int yPos)
-{
-    this->xPos = xPos;
-    this->yPos = yPos;
-    move(xPos,yPos);
-}
-
-template<typename T>
-string Inventory<T>::getTitle()
-{
-    return title;
-}
-
-template<typename T>
+/*template<typename T>
 void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
 {
     GameItem * item = inventory.front();
@@ -95,6 +55,8 @@ void Inventory<T>::addToInventory(GameItem *item)
             msg.exec();
         }
 }
+
+*/
 
 
 

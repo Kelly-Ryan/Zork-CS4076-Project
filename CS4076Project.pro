@@ -1,4 +1,5 @@
 HEADERS += \
+    customlistwidget.h \
     enemy.h \
     exit.h \
     game.h \
