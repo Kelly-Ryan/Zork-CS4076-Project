@@ -34,7 +34,6 @@ public:
     string getImgPath();
     void setImgPath(string imgPath);
     QString getDescription();
-
 };
 
 #endif // GAMEITEM_H

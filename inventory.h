@@ -34,7 +34,7 @@ public:
     Inventory(int maxCapacity = 5);
     int getMaxCapacity() const;
     void moveEvent(QMoveEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    //void mousePressEvent(QMouseEvent *event);
 };
 
 
