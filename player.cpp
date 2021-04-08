@@ -92,7 +92,7 @@ void Player::collision(){
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                GamePopup msg;
-               msg.setText("Do you want to add " + item->getDescription() + " to the inventory?");
+               msg.setText("Do you want to add " + item->getDescription() + " to the inventory/armoury?");
                msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                msg.setDefaultButton(QMessageBox::Yes);
 

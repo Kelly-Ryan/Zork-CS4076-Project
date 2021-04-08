@@ -14,7 +14,6 @@ public:
 
     Item (string description, float weight, int usuageLimit, string imgPath);
     Item();
-    QString howToUse();
     virtual QString itemInfo();
     int getUsuageLimit() const;
     int numberOfUses();

@@ -8,7 +8,7 @@ public:
     const char *what() const throw(){
         GamePopup msg;
         msg.setText("You are currently holding no item");
-        msg.setInformativeText("Select a weapon from inventory to attack");
+        msg.setInformativeText("Select a weapon from armoury to attack");
         msg.exec();
     }
 };

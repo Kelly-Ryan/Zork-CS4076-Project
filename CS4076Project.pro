@@ -1,4 +1,5 @@
 HEADERS += \
+    customlistwidget.h \
     enemy.h \
     exit.h \
     game.h \
@@ -19,7 +20,6 @@ SOURCES += \
     gamePopup.cpp \
     gameitem.cpp \
     healthbar.cpp \
-    inventory.cpp \
     item.cpp \
     main.cpp \
     mainwindow.cpp \

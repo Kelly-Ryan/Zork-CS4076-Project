@@ -8,11 +8,9 @@
 
 using std::string;
 
-// GameItem is an abstract class
-
 class GameItem:public QGraphicsPixmapItem
 {
-    friend class Inventory;
+    //friend class Inventory;
 
 private:
     float weight;
@@ -28,7 +26,6 @@ public:
     GameItem (string description);
     GameItem(const GameItem &item); // must provide a copy constructor since the copy constructor in base class is marked as deleted
     GameItem();
-    virtual QString howToUse() = 0;
     float getWeight();
     virtual QString itemInfo();
     string getImgPath();
