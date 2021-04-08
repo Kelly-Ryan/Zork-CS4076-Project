@@ -38,9 +38,10 @@ Game::Game(QWidget *){
 
     Item *item = new Item("iPhone",400,3,":/images/images/phone.png");
     Weapon * weapon = new Weapon("sword",10,2,":/images/images/sword.png");
+    Weapon * sword = new Weapon("special sword",10,2,":/images/images/sword.png");
 
-    GameItem * roomAItems[] = {item,weapon};
-    a->populateRoom(roomAItems,2);
+    GameItem * roomAItems[] = {item,weapon,sword};
+    a->populateRoom(roomAItems,3);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }

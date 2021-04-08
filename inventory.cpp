@@ -62,6 +62,7 @@ void Inventory::onSelected(QListWidgetItem *widgetItem)
     }
     else
     {
+        currentCapacity--;
         delete widgetItem;
         delete item;
     }
