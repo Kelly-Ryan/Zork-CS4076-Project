@@ -30,7 +30,6 @@ private:
 
 private slots:
     void roam();
-    void launchAttack();
 
 public:
     Enemy();
@@ -41,6 +40,7 @@ public:
     bool isAlive();
     int getDamage();
     Healthbar* getHealthbar();
+    void defeated();
 };
 
 #endif // ENEMY_H

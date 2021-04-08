@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "gamePopup.h"
 #include <cstdlib>
 #include <cctype>
 #include <time.h>
@@ -65,6 +66,15 @@ Healthbar* Enemy::getHealthbar()
     return lives;
 }
 
+void Enemy::defeated()
+{
+    timer->stop();
+    GamePopup congrats;
+    congrats.setText("Congratulations you defeated the enemy");
+    congrats.exec();
+    delete this;
+}
+
 void Enemy::collision()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -76,8 +86,9 @@ void Enemy::collision()
              Player *player = (Player *)colliding_items[i];
              qDebug() << "Attacking the player";
              combat(this,player);
-             player->getHealthbar()->updateHealth(player->getHealth());
-             setPos(x()+xIncrement*2,y()+yIncrement*2); // tbh its just a temp idea
+             if(player->isAlive())
+                 player->getHealthbar()->updateHealth(player->getHealth());
+//             setPos(x()+xIncrement*2,y()+yIncrement*2); // tbh its just a temp idea
              //QTimer::singleShot(100,this,SLOT(launchAttack())); soln is to make a subclassed timer with signal
         }
     }
@@ -90,9 +101,4 @@ void operator+(Weapon weapon,Enemy &enemy)
     {
         enemy.alive = false;
     }
-}
-
-void Enemy::launchAttack()
-{
-    qDebug() << "Signal called";
 }
