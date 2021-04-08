@@ -17,6 +17,7 @@ private:
     const int maxCapacity;
     int xPos;
     int yPos;
+    string title;
 
 private slots:
     void onSelected(QListWidgetItem * widgetItem);
@@ -24,16 +25,17 @@ private slots:
 public slots:
     void addToInventory(GameItem *item);
 
-signals:
+/*signals:
     void itemAdded(GameItem *item);
     void itemSelected(GameItem *item);
-    void restoreFocus();
+    void restoreFocus();*/
 
 public:
-    Inventory(int maxCapacity = 5);
+    Inventory(string title,int maxCapacity = 5);
     int getMaxCapacity() const;
     void moveEvent(QMoveEvent *event);
     void setPosition(int xPos, int yPos);
+    string getTitle();
 };
 
 

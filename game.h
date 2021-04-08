@@ -14,6 +14,7 @@
 
 class Player;
 class Enemy;
+class Weapon;
 
 //QGraphicsView class provides a widget for displaying the contents of a QGraphicsScene.
 class Game : public QGraphicsView  {
@@ -21,7 +22,8 @@ class Game : public QGraphicsView  {
 private:
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
     Enemy *monster;
-    Inventory *inventory;
+    Inventory<Weapon> *armoury;
+    Inventory<Item> *inventory;
     void createRooms();
     void printWelcome();
     void help();

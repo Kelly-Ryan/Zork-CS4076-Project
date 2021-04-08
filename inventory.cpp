@@ -6,11 +6,12 @@
 using namespace Qt;
 
 template<typename T>
-Inventory<T>::Inventory(int maxCapacity):maxCapacity(maxCapacity)
+Inventory<T>::Inventory(string title, int maxCapacity):maxCapacity(maxCapacity)
 {
     connect(this,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(onSelected(QListWidgetItem *)));
-    setWindowTitle("Inventory \tMax Capacity:" + QString::number(maxCapacity));
+    setWindowTitle(QString::fromStdString(title) + "\tMax Capacity:" + QString::number(maxCapacity));
     setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
+    show();
 }
 
 template<typename T>
@@ -23,7 +24,7 @@ template<typename T>
 void Inventory<T>::moveEvent(QMoveEvent *event)
 {
     move(xPos,yPos);
-    emit restoreFocus();
+//    emit restoreFocus();
 }
 
 template<typename T>
@@ -32,6 +33,12 @@ void Inventory<T>::setPosition(int xPos, int yPos)
     this->xPos = xPos;
     this->yPos = yPos;
     move(xPos,yPos);
+}
+
+template<typename T>
+string Inventory<T>::getTitle()
+{
+    return title;
 }
 
 template<typename T>
@@ -57,15 +64,16 @@ void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
         if(msg.clickedButton() == use)
         {
             qDebug() << "Chosen to use the item";
-            emit itemSelected(item);
+//            emit itemSelected(item);
         }
         else
         {
+            currentCapacity--;
             delete widgetItem;
             delete item;
         }
         delete use;
-        emit restoreFocus();
+//        emit restoreFocus();
 }
 
 template<typename T>
@@ -78,7 +86,7 @@ void Inventory<T>::addToInventory(GameItem *item)
             addItem(inventoryItem);
             currentCapacity++;
             qDebug() << "Adding to inventory";
-            emit itemAdded(item);
+//            emit itemAdded(item);
         }
         else
         {
