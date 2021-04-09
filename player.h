@@ -11,6 +11,8 @@
 #include "weapon.h"
 #include "item.h"
 
+#define SPEED 10
+
 class Game;
 class Enemy;
 
@@ -44,7 +46,6 @@ Q_OBJECT
 
     friend void operator+(Enemy &enemy,Player &player);
 private:
-    int speed = 10;
     int health = 10;
     bool alive = true;
     Game *game;

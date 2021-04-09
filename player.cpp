@@ -23,25 +23,25 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
 
     if(event->key() == Qt::Key_W){          //move north
         if(pos().y() > 75){
-            setPos(x(), y() - speed);
+            setPos(x(), y() - SPEED);
             collision();
         }
     }
     else if(event->key() == Qt::Key_S){     //move south
         if(pos().y() + 51 < 525){
-            setPos(x(), y() + speed);
+            setPos(x(), y() + SPEED);
             collision();
         }
     }
     else if(event->key() == Qt::Key_A){     //move west
         if(pos().x() > 285){
-            setPos(x() - speed, y());
+            setPos(x() - SPEED, y());
             collision();
         }
     }
     else if(event->key() == Qt::Key_D){     //move east
         if(pos().x() + 45 < 725){
-            setPos(x() + speed, y());
+            setPos(x() + SPEED, y());
             collision();
         }
     }
