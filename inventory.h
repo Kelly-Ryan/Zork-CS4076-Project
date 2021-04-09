@@ -100,7 +100,7 @@ template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
 
     if(currentCapacity < maxCapacity)
     {
-        if(typeid(*itemCollected) == typeid(T))
+        if(typeid(*itemCollected) == typeid(T)) //necessary so not added to both on screen
         {
             inventory.push_back(item);
             QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->getImgPath())),itemCollected->itemInfo());

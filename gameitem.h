@@ -19,7 +19,7 @@ private:
     void setDescription(string description);
 
 protected:
-     QString qtDescription;
+    QString qtDescription;
 
 public:
     GameItem (string description, float weight,string imgPath);

@@ -13,14 +13,12 @@ class CustomListWidget:public QListWidget
 
 public slots:
     virtual void addToInventory(GameItem *itemCollected) = 0;
-    virtual void onSelected(QListWidgetItem * widgetItem) = 0;
+    virtual void onSelected(QListWidgetItem *widgetItem) = 0;
+    virtual void moveEvent(QMoveEvent *event) = 0;
 signals:
     void itemAdded(GameItem *item);
     void itemSelected(GameItem *item);
     void restoreFocus();
-
-public:
-    //void moveEvent(QMoveEvent *event);
 };
 
 #endif // CUSTOMLISTWIDGET_H

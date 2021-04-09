@@ -8,12 +8,40 @@
 #include "game.h"
 #include "gameitem.h"
 #include "healthbar.h"
+#include "weapon.h"
+#include "item.h"
 
 class Game;
 class Enemy;
 
 class Player : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
+    enum Type{WEAPON,ITEM};
+
+
+    /* ItemHolding is a tagged union, the enum above acts as the tag
+     * Need the tag to do exception checking and also to prevent undefined behaviour
+     */
+    struct ItemHolding{
+    Type type;
+
+    union {
+        Weapon *weapon;
+        Item *item;
+    } inHand;
+
+    void setType(Type t)
+    {
+        type = t;
+    }
+
+    Type getType()
+    {
+        return type;
+    }
+
+};
+
     friend void operator+(Enemy &enemy,Player &player);
 private:
     int speed = 10;
@@ -21,13 +49,16 @@ private:
     bool alive = true;
     Game *game;
     Healthbar *hitPoints;
-    GameItem *itemHolding = 0;
+    struct ItemHolding holding;
     void keyPressEvent(QKeyEvent *event);
     void collision();
+
 signals:
     void itemCollected(GameItem *item);
+
 public slots:
-    void equipPlayer(GameItem *item);
+    void equipPlayer(GameItem *itemSelected);
+
 public:
     Player(QGraphicsItem * parent=0);
     Player(int xPos, int yPos, Game *game);
@@ -35,7 +66,6 @@ public:
     int getHealth();
     bool isAlive();
     Healthbar* getHealthbar();
-    GameItem* getItemHolding();
     void defeated();
 };
 
