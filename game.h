@@ -11,6 +11,7 @@
 #include "item.h"
 #include "gameitem.h"
 #include "weapon.h"
+#include "treasure.h"
 
 class Player;
 class Enemy;

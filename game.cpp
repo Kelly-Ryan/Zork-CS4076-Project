@@ -77,6 +77,9 @@ void Game::createRooms(){
     g->setExits(NULL, NULL, NULL, f);
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
+
+    GameItem * roomBItems[] = {new Treasure};
+    b->populateRoom(roomBItems,1);
 }
 
 void Game::printWelcome(){
