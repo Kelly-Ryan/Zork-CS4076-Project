@@ -8,9 +8,9 @@
 #include "enemy.h"
 #include "room.h"
 #include "inventory.h"
-#include "item.h"
 #include "gameitem.h"
 #include "weapon.h"
+#include "healthpotion.h"
 
 class Player;
 class Enemy;
@@ -23,7 +23,7 @@ private:
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
     Enemy *monster;
     Inventory<Weapon> *armoury;
-    Inventory<Item> *inventory;
+    Inventory<HealthPotion> *potions;
     void createRooms();
     void printWelcome();
     void help();

@@ -9,7 +9,7 @@
 #include "gameitem.h"
 #include "healthbar.h"
 #include "weapon.h"
-#include "item.h"
+#include "roomkey.h"
 
 #define SPEED 10
 
@@ -18,7 +18,7 @@ class Enemy;
 
 class Player : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
-    enum Type{WEAPON,ITEM};
+    enum Type{WEAPON,KEY};
 
 
     /* ItemHolding is a tagged union, the enum above acts as the tag
@@ -29,7 +29,7 @@ Q_OBJECT
 
     union {
         Weapon *weapon;
-        Item *item;
+        RoomKey *key;
     } inHand;
 
     void setType(Type t)

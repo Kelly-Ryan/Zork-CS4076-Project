@@ -6,10 +6,9 @@ GameItem::GameItem()
 {
 }
 
-GameItem::GameItem (string description,float weight,string imgPath)
+GameItem::GameItem (string description, string imgPath)
 {
     setDescription(description);
-    setWeight(weight);
     this->imgPath = imgPath;
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
 }
@@ -21,23 +20,8 @@ GameItem::GameItem(std::string description)
 
 GameItem::GameItem(const GameItem &item):QGraphicsPixmapItem()
 {
-    weight = item.weight;
     imgPath = item.imgPath;
     qtDescription = item.qtDescription;
-}
-
-void GameItem::setWeight(float weight)
-{
-    if (weight > 9999 || weight < 0)
-       //cout << "weight invalid, must be 0<weight<9999" ; user defined exception below is only temporary
-        this->weight = 100;
-    else
-        this->weight = weight;
-}
-
-float GameItem::getWeight()
-{
-    return weight;
 }
 
 void GameItem::setDescription(string description)
@@ -47,7 +31,6 @@ void GameItem::setDescription(string description)
 
 QString GameItem::itemInfo()
 {
-
     return qtDescription;
 }
 

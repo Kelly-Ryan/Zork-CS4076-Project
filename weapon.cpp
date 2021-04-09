@@ -11,7 +11,7 @@ Weapon::~Weapon()
     delete d;
 }
 
-Weapon::Weapon(string description, float weight, int damage,string imgPath):GameItem(description,weight,imgPath)
+Weapon::Weapon(string description, int damage,string imgPath):GameItem(description,imgPath)
 {
     d = new int;
     *d = damage;

@@ -27,7 +27,7 @@ private:
 public:
     Weapon();
     ~Weapon();
-    Weapon(string description, float weight, int damage, string imgPath);
+    Weapon(string description, int damage, string imgPath);
     Weapon(const Weapon &weapon);
     virtual QString itemInfo();
     int getDamage();

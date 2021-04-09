@@ -27,30 +27,31 @@ Game::Game(QWidget *){
 
 
     armoury = new Inventory<Weapon>("Armoury");
-    inventory = new Inventory<Item>("Inventory");
+    potions = new Inventory<HealthPotion>("Potions");
 
-    connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));
-    connect(inventory,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
-    connect(inventory,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
-    connect(inventory,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
+    connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));
+    connect(potions,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
+    connect(potions,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
+    connect(potions,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
     connect(player,SIGNAL(itemCollected(GameItem *)),armoury,SLOT(addToInventory(GameItem*)));
     connect(armoury,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     connect(armoury,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(armoury,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
-    inventory->setPosition(760,420);
+    potions->setPosition(760,420);
     armoury->setPosition(760,170);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
     a->addItem(monster);
     a->addItem(monster->getHealthbar());
 
-    Item *item = new Item("iPhone",400,3,":/images/images/phone.png");
-    Weapon * weapon = new Weapon("sword",10,2,":/images/images/sword.png");
-    Weapon * sword = new Weapon("special sword",10,2,":/images/images/sword.png");
 
-    GameItem * roomAItems[] = {item,weapon,sword};
+    Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
+    Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
+    HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
+
+    GameItem * roomAItems[] = {weapon,sword,oneLife};
     a->populateRoom(roomAItems,3);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView

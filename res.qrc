@@ -8,6 +8,10 @@
         <file>images/monster.png</file>
         <file>images/phone.png</file>
         <file>images/sword.png</file>
+        <file>images/2Lives.png</file>
+        <file>images/3Lives.png</file>
+        <file>images/1Life.png</file>
+        <file>images/key.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

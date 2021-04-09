@@ -3,6 +3,8 @@
 #include "gamePopup.h"
 
 #include <QKeyEvent>
+#include <type_traits>
+#include <typeinfo>
 
 // dont ever use this constructor
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
@@ -77,7 +79,11 @@ void Player::collision(){
 
     //traverse this list and find out of the player is colliding with an object of type Exit
     for(int i = 0, n = colliding_items.size(); i < n; ++i){
-        if(typeid(*(colliding_items[i])) == typeid(Item) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
+//        ypeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon)
+//        bool b = std::is_base_of<GameItem,colliding_items[i]>::value;
+//        qDebug() << typeid(*(colliding_items[i])).name();
+//        qDebug() << typeid(GameItem).name();
+        if(typeid(*(colliding_items[i])) == typeid(Weapon) || typeid(*(colliding_items[i])) == typeid(HealthPotion)){ //if of type item works but we need to make it generic
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                GamePopup msg;
@@ -177,11 +183,17 @@ void Player::equipPlayer(GameItem *itemSelected)
         holding.inHand.weapon = weapon;
         holding.setType(WEAPON);
     }
+    else if(typeid(*itemSelected) == typeid(Key))
+    {
+        RoomKey* key = dynamic_cast<RoomKey*>(itemSelected);
+        holding.inHand.key = key;
+        holding.setType(KEY);
+    }
     else
     {
-        Item* item = dynamic_cast<Item*>(itemSelected);
-        holding.inHand.item = item;
-        holding.setType(ITEM);
+        HealthPotion &potion = dynamic_cast<HealthPotion&>(*itemSelected);
+        health += potion.getBonus();
+        hitPoints->updateHealth(health);
     }
 }
 
