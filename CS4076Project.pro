@@ -11,6 +11,7 @@ HEADERS += \
     mainwindow.h \
     player.h \
     room.h \
+    treasure.h \
     weapon.h
 
 SOURCES += \
@@ -25,6 +26,7 @@ SOURCES += \
     mainwindow.cpp \
     player.cpp \
     room.cpp \
+    treasure.cpp \
     weapon.cpp \
     weaponException.cpp
 
