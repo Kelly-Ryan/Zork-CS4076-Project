@@ -27,7 +27,6 @@ Game::Game(QWidget *){
 
 
     armoury = new Inventory<Weapon>("Armoury");
-
     inventory = new Inventory<Item>("Inventory");
 
     connect(player,SIGNAL(itemCollected(GameItem *)),inventory,SLOT(addToInventory(GameItem*)));

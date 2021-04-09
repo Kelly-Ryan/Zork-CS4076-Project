@@ -51,14 +51,20 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
 
        try {
             qDebug() << "Space bar pressed";
+//            bool w = holding.weapon == 0;
+//            bool i = holding.item == 0;
+            qDebug() << holding.getType();
+
             colliding_items = collidingItems();
 
             //exception is thrown if weapon is not equipped when player tries to attack
-            if(itemHolding == 0){
+            /*if(itemHolding == 0){
                 NotEquippedException e;
                 throw e;
-            }
-            if(typeid(*itemHolding)!= typeid(Weapon)){
+            }*/
+            //typeid(*itemHolding)!= typeid(Weapon)
+
+            if(holding.getType() != WEAPON){
                 WeaponException e;
                 throw e;
             }
@@ -70,11 +76,10 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
 
         //traverse this list and find out of the player is colliding with an object of type Enemy
         for(int i = 0, n = colliding_items.size(); i < n; ++i){
-            if(typeid(*(colliding_items[i])) == typeid(Enemy) && typeid(*itemHolding) == typeid(Weapon)){
-                    Weapon* weapon = dynamic_cast<Weapon*>(itemHolding);
+            if(typeid(*(colliding_items[i])) == typeid(Enemy) && holding.getType() == WEAPON){
                     Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
-                    qDebug() << "Launching attack on enemy with " << weapon->itemInfo();
-                    combat(weapon,enemy);
+                    qDebug() << "Launching attack on enemy with " << holding.inHand.weapon->itemInfo();
+                    combat(holding.inHand.weapon,enemy);
                     if(enemy->isAlive())
                         enemy->getHealthbar()->updateHealth(enemy->getHealth());
             }
@@ -180,14 +185,20 @@ Healthbar *Player::getHealthbar()
     return hitPoints;
 }
 
-void Player::equipPlayer(GameItem *item)
+void Player::equipPlayer(GameItem *itemSelected)
 {
-    itemHolding = item;
-}
-
-GameItem * Player::getItemHolding()
-{
-    return itemHolding;
+    if(typeid(*itemSelected) == typeid(Weapon))
+    {
+        Weapon* weapon = dynamic_cast<Weapon*>(itemSelected);
+        holding.inHand.weapon = weapon;
+        holding.setType(WEAPON);
+    }
+    else
+    {
+        Item* item = dynamic_cast<Item*>(itemSelected);
+        holding.inHand.item = item;
+        holding.setType(ITEM);
+    }
 }
 
 void Player::defeated()
@@ -201,6 +212,5 @@ void Player::defeated()
 
 Player::~Player(){
     delete game;
-    delete itemHolding;
     delete hitPoints;
 }
