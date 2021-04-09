@@ -26,7 +26,7 @@ Game::Game(QWidget *){
     a->addItem(player->getHealthbar());
 
 
-    armoury = new Inventory<Weapon>("Armoury");
+    armoury = new Inventory<Weapon>("Armoury",1);
     potions = new Inventory<HealthPotion>("Potions");
 
     connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));

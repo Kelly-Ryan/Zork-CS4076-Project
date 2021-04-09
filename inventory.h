@@ -17,7 +17,6 @@ template <typename T >class Inventory :public CustomListWidget
 
 private:
     vector <T*> inventory;
-    int currentCapacity = 0;
     const int maxCapacity;
     int xPos;
     int yPos;
@@ -25,6 +24,7 @@ private:
     void onSelected(QListWidgetItem * widgetItem);
     void addToInventory(GameItem *itemCollected);
     void moveEvent(QMoveEvent *event);
+
 public:
     Inventory(string title,int maxCapacity = 5);
     int getMaxCapacity() const;
@@ -62,7 +62,7 @@ template<typename T> string Inventory<T>::getTitle()
 
 template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
 {
-        T *item = inventory.front();
+        T *item;
         typename vector<T*>::iterator i;
         for (i = inventory.begin(); i != inventory.end(); i++)
         {
@@ -77,7 +77,6 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
         msg.setText("Would you like to use this item or remove it from your inventory");
         QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
         msg.addButton("Remove",QMessageBox::RejectRole);
-        msg.move(350,300);
         msg.exec();
         if(msg.clickedButton() == use)
         {
@@ -86,7 +85,7 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
         }
         else
         {
-            currentCapacity--;
+            inventory.erase(i);
             delete widgetItem;
             delete item;
         }
@@ -98,14 +97,13 @@ template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
 {
     T* item = dynamic_cast<T*>(itemCollected);
 
-    if(currentCapacity < maxCapacity)
+    if(inventory.size() < maxCapacity)
     {
         if(typeid(*itemCollected) == typeid(T)) //necessary so not added to both on screen
         {
             inventory.push_back(item);
             QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->getImgPath())),itemCollected->itemInfo());
             addItem(inventoryItem);
-            currentCapacity++;
             qDebug() << "Adding to inventory";
             emit itemAdded(itemCollected);
         }
