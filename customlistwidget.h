@@ -13,6 +13,7 @@ class CustomListWidget:public QListWidget
 
 public slots:
     virtual void addToInventory(GameItem *itemCollected) = 0;
+    virtual void removeFromInventory() = 0;
     virtual void onSelected(QListWidgetItem *widgetItem) = 0;
     virtual void moveEvent(QMoveEvent *event) = 0;
 signals:

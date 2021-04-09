@@ -23,7 +23,9 @@ private:
     string title;
     void onSelected(QListWidgetItem * widgetItem);
     void addToInventory(GameItem *itemCollected);
+    void removeFromInventory();
     void moveEvent(QMoveEvent *event);
+    T* convert(QListWidgetItem *widgetItem);
 
 public:
     Inventory(string title,int maxCapacity = 5);
@@ -62,35 +64,52 @@ template<typename T> string Inventory<T>::getTitle()
 
 template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
 {
-        T *item;
-        typename vector<T*>::iterator i;
-        for (i = inventory.begin(); i != inventory.end(); i++)
+    T *item;
+    typename vector<T*>::iterator i;
+    for (i = inventory.begin(); i != inventory.end(); i++)
+    {
+        if(widgetItem->text().startsWith((*i)->getDescription()))
         {
-            if(widgetItem->text().startsWith((*i)->getDescription()))
-            {
-                item = (*i);
-                break;
-            }
+            item = (*i);
+            break;
         }
+    }
+    GamePopup msg;
+    msg.setText("Would you like to use this item or remove it from your inventory");
+    QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
+    msg.addButton("Remove",QMessageBox::RejectRole);
+    msg.exec();
+    if(msg.clickedButton() == use)
+    {
+        qDebug() << "Chosen to use the item";
+        emit itemSelected(item);
+    }
+    else
+    {
+        inventory.erase(i);
+        delete widgetItem;
+        delete item;
+    }
+    delete use;
+    emit restoreFocus();
+}
 
-        GamePopup msg;
-        msg.setText("Would you like to use this item or remove it from your inventory");
-        QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
-        msg.addButton("Remove",QMessageBox::RejectRole);
-        msg.exec();
-        if(msg.clickedButton() == use)
+template <typename T> void Inventory<T>::removeFromInventory()
+{
+    QListWidgetItem *widgetItem = currentItem();
+    T *item;
+    typename vector<T*>::iterator i;
+    for (i = inventory.begin(); i != inventory.end(); i++)
+    {
+        if(widgetItem->text().startsWith((*i)->getDescription()))
         {
-            qDebug() << "Chosen to use the item";
-            emit itemSelected(item);
+            item = (*i);
+            break;
         }
-        else
-        {
-            inventory.erase(i);
-            delete widgetItem;
-            delete item;
-        }
-        delete use;
-        emit restoreFocus();
+    }
+    inventory.erase(i);
+    delete widgetItem;
+    delete item;
 }
 
 template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
