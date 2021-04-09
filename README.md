@@ -7,3 +7,10 @@ https://docs.google.com/document/d/1NcyyaZvAnZPWy2SfOub6P3jCGjCtzBmSXqhm0TTRzQI/
 
 Assets
 https://itch.io/game-assets/free/tag-2d
+
+
+Credit for background track might use:
+Dragon Slayer by 魔界Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com
+Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/deed.en_US
