@@ -1,5 +1,4 @@
 #include "weaponException.cpp"
-#include "notEquippedException.cpp"
 #include "player.h"
 #include "gamePopup.h"
 
@@ -51,18 +50,6 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
 
        try {
             qDebug() << "Space bar pressed";
-//            bool w = holding.weapon == 0;
-//            bool i = holding.item == 0;
-            qDebug() << holding.getType();
-
-            colliding_items = collidingItems();
-
-            //exception is thrown if weapon is not equipped when player tries to attack
-            /*if(itemHolding == 0){
-                NotEquippedException e;
-                throw e;
-            }*/
-            //typeid(*itemHolding)!= typeid(Weapon)
 
             if(holding.getType() != WEAPON){
                 WeaponException e;
@@ -70,10 +57,7 @@ void Player::keyPressEvent(QKeyEvent *event){       //player movement
             }
         } catch (WeaponException &e) {
             e.what();
-        } catch (NotEquippedException &e) {
-            e.what();
         }
-
         //traverse this list and find out of the player is colliding with an object of type Enemy
         for(int i = 0, n = colliding_items.size(); i < n; ++i){
             if(typeid(*(colliding_items[i])) == typeid(Enemy) && holding.getType() == WEAPON){

@@ -23,7 +23,6 @@ SOURCES += \
     item.cpp \
     main.cpp \
     mainwindow.cpp \
-    notEquippedException.cpp \
     player.cpp \
     room.cpp \
     weapon.cpp \
