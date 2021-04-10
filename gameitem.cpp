@@ -20,6 +20,7 @@ GameItem::GameItem(std::string description)
 
 GameItem::GameItem(const GameItem &item):QGraphicsPixmapItem()
 {
+    qDebug() << "copy constructor of gameitem";
     imgPath = item.imgPath;
     qtDescription = item.qtDescription;
 }

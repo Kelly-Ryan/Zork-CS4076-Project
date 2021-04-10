@@ -7,8 +7,8 @@ RoomKey::RoomKey(string description, string imgPath):GameItem()
     setImgPath(imgPath);
 }
 
-
 QString RoomKey::itemInfo()
 {
     return qtDescription;
 }
+

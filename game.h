@@ -25,7 +25,6 @@ class Game : public QGraphicsView  {
     Q_OBJECT
 private:
     Room *stoneRoom, *b, *c, *d, *e, *f, *g, *h, *i;
-    Enemy *monster;
     Inventory<Weapon> *armoury;
     Inventory<HealthPotion> *potions;
     Inventory<RoomKey> *keys;

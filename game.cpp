@@ -16,10 +16,11 @@ Game::Game(QWidget *)
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
 
-    playlist -> addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
-    playlist -> setPlaybackMode(QMediaPlaylist::Loop);
-    mediaPlayer -> setPlaylist(playlist);
-    mediaPlayer -> play();
+    playlist->addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    mediaPlayer->setPlaylist(playlist);
+    mediaPlayer->setAudioRole(QAudio::GameRole);
+    mediaPlayer->play();
 
     createRooms();
     currentRoom = stoneRoom;            //set current room/scene
@@ -28,7 +29,7 @@ Game::Game(QWidget *)
     stoneRoom->addItem(player);         //add player to scene
     stoneRoom->addItem(player->getHealthbar());
 
-    armoury = new Inventory<Weapon>("Armoury");
+    armoury = new Inventory<Weapon>("Armoury",3);
     potions = new Inventory<HealthPotion>("Potions",1);
     keys = new Inventory<RoomKey>("Keys",3);
 
@@ -47,9 +48,9 @@ Game::Game(QWidget *)
     connect(keys,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(keys,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
-    potions->setPosition(760,370);
-    armoury->setPosition(760,170);
-    keys->setPosition(760,600);
+    armoury->setPosition(760,150);
+    potions->setPosition(760,315);
+    keys->setPosition(760,480);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
     stoneRoom->addItem(monster);
@@ -99,8 +100,43 @@ void Game::createRooms()
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
 
-    GameItem * roomBItems[] = {new Treasure};
-    b->populateRoom(roomBItems,1);
+    GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("Sword",2,":/images/images/sword.png")};
+    a->populateRoom(roomAItems,2);
+    Enemy *centaur = new Enemy("Centaur",1,":/images/images/centaur.png");
+    a->addItem(centaur);
+    a->addItem(centaur->getHealthbar());
+
+    GameItem * roomBItems[] = {new Treasure,new Weapon("Axe",3,":/images/images/axe.png"),new HealthPotion(":/images/images/2Lives.png",2)};
+    b->populateRoom(roomBItems,3);
+    Enemy *dragon = new Enemy("Dragon",4,":/images/images/dragon.png");
+    b->addItem(dragon);
+    b->addItem(dragon->getHealthbar());
+
+    GameItem * roomCItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    c->populateRoom(roomCItems,1);
+
+    Enemy *troll = new Enemy("Troll",2,":/images/images/troll.png");
+    d->addItem(troll);
+    d->addItem(troll->getHealthbar());
+
+    GameItem * roomEItems[] = {new Weapon("Bow",1,":/images/images/bow.png"),new HealthPotion(":/images/images/3Lives.png",3)};
+    e->populateRoom(roomEItems,2);
+
+    Enemy *giant = new Enemy("Giant",3,":/images/images/giant.png");
+    f->addItem(giant);
+    f->addItem(giant->getHealthbar());
+
+    GameItem * roomGItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    g->populateRoom(roomGItems,1);
+
+    GameItem * roomHItems[] = {new Weapon("Axe",2,":/images/images/axe.png")};
+    h->populateRoom(roomHItems,1);
+    Enemy *cyclops = new Enemy("Cyclops",2,":/images/images/cyclops.png");
+    h->addItem(cyclops);
+    h->addItem(cyclops->getHealthbar());
+
+    GameItem * roomIItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    i->populateRoom(roomIItems,1);
 }
 
 void Game::removeFromRoom(GameItem *item)

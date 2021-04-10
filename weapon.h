@@ -22,12 +22,12 @@ template<class T1,class T2> void combat(T1 attacker,T2 attackee)
 class Weapon : public GameItem
 {
 private:
-    int *d;
+    int *damage;
 
 public:
     Weapon();
     ~Weapon();
-    Weapon(string description, int damage, string imgPath);
+    Weapon(string description, int destruction, string imgPath);
     Weapon(const Weapon &weapon);
     virtual QString itemInfo();
     int getDamage();
