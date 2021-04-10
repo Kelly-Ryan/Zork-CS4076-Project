@@ -4,8 +4,10 @@
 #include <cctype>
 #include <time.h>
 
-Room::Room(string description, QImage background){
+Room::Room(string description, QImage background, bool isLocked)
+{
     this->description = description;                    //set room description
+    this->isLocked = isLocked;                          //set locked status
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 

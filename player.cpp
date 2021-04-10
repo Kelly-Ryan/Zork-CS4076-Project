@@ -160,47 +160,58 @@ void Player::collision()
                 Room *nextRoom = game->currentRoom->nextRoom("east");
                 if (nextRoom != NULL)
                 {
-                    if(nextRoom->getRoomName() == "Room G")     //if it is a locked room
+                    if(nextRoom->isLocked)
                     {
-                       if(holding.getType() != NULL)           //if the player is holding an item
-                       {
-                           if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Silver Key")
-                           {
-                               game->currentRoom = nextRoom;
-                               nextRoom->addItem(game->player);
-                               setPos(300,275);
-                               setFocus();
+                        if(nextRoom->getRoomName() == "Room G")     //if it is a locked room
+                        {
+                            if(holding.getType() != NULL)           //if the player is holding an item
+                            {
+                               if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Silver Key")
+                               {
+                                   game->currentRoom = nextRoom;
+                                   game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                   nextRoom->addItem(game->player);
+                                   setPos(300,275);
+                                   setFocus();
 
-                               nextRoom->addItem(hitPoints);
-                               game->setScene(nextRoom);
-                           }
+                                   nextRoom->addItem(hitPoints);
+                                   game->setScene(nextRoom);
+                               }
+                               else
+                               {
+                                  GamePopup msg;
+                                  msg.setText("You need the silver key to open this door!");
+                                  msg.exec();
+                               }
+                            }
                            else
-                          {
+                            {
                               GamePopup msg;
                               msg.setText("You need the silver key to open this door!");
                               msg.exec();
-                          }
-                      }
-                      else
-                      {
-                          GamePopup msg;
-                          msg.setText("You need the silver key to open this door!");
-                          msg.exec();
-                      }
-                  }
-                  else if(nextRoom->getRoomName() == "Room B")
-                  {
-                      if(holding.getType() != NULL)           //if the player is holding an item
-                      {
-                           if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Gold Key")
-                           {
-                                game->currentRoom = nextRoom;
-                                nextRoom->addItem(game->player);
-                                setPos(650,275);
-                                setFocus();
+                            }
+                        }
+                        else if(nextRoom->getRoomName() == "Room B")
+                        {
+                          if(holding.getType() != NULL)           //if the player is holding an item
+                          {
+                               if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Gold Key")
+                               {
+                                    game->currentRoom = nextRoom;
+                                    game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                    nextRoom->addItem(game->player);
+                                    setPos(300,275);
+                                    setFocus();
 
-                                nextRoom->addItem(hitPoints);
-                                game->setScene(nextRoom);
+                                    nextRoom->addItem(hitPoints);
+                                    game->setScene(nextRoom);
+                                }
+                                else
+                                {
+                                    GamePopup msg;
+                                    msg.setText("You need the gold key to open this door!");
+                                    msg.exec();
+                                }
                             }
                             else
                             {
@@ -211,9 +222,13 @@ void Player::collision()
                         }
                         else
                         {
-                            GamePopup msg;
-                            msg.setText("You need the gold key to open this door!");
-                            msg.exec();
+                            game->currentRoom = nextRoom;
+                            nextRoom->addItem(game->player);
+                            setPos(300,275);
+                            setFocus();
+
+                            nextRoom->addItem(hitPoints);
+                            game->setScene(nextRoom);
                         }
                     }
                     else
@@ -233,19 +248,30 @@ void Player::collision()
                 Room *nextRoom = game->currentRoom->nextRoom("west");
                 if (nextRoom != NULL)
                 {
-                    if(nextRoom->getRoomName() == "Room H")     //if it is a locked room
+                    if(nextRoom->isLocked)
                     {
-                        if(holding.getType() != NULL)           //if the player is holding an item
+                        if(nextRoom->getRoomName() == "Room H")     //if it is a locked room
                         {
-                            if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Bronze Key")
+                            if(holding.getType() != NULL && nextRoom->isLocked)           //if the player is holding an item
                             {
-                                game->currentRoom = nextRoom;
-                                nextRoom->addItem(game->player);
-                                setPos(650,275);
-                                setFocus();
+                                if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Bronze Key")
+                                {
 
-                                nextRoom->addItem(hitPoints);
-                                game->setScene(nextRoom);
+                                    game->currentRoom = nextRoom;
+                                    game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                    nextRoom->addItem(game->player);
+                                    setPos(650,275);
+                                    setFocus();
+
+                                    nextRoom->addItem(hitPoints);
+                                    game->setScene(nextRoom);
+                                }
+                                else
+                                {
+                                    GamePopup msg;
+                                    msg.setText("You need the bronze key to open this door!");
+                                    msg.exec();
+                                }
                             }
                             else
                             {
@@ -256,9 +282,13 @@ void Player::collision()
                         }
                         else
                         {
-                            GamePopup msg;
-                            msg.setText("You need the bronze key to open this door!");
-                            msg.exec();
+                            game->currentRoom = nextRoom;
+                            nextRoom->addItem(game->player);
+                            setPos(650,275);
+                            setFocus();
+
+                            nextRoom->addItem(hitPoints);
+                            game->setScene(nextRoom);
                         }
                     }
                     else

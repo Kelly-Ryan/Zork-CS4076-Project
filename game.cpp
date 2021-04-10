@@ -68,24 +68,25 @@ Game::Game(QWidget *)
 
 void Game::createRooms()
 {
-    stoneRoom = new Room("Stone Room", QImage(":images/images/stoneRoom.png"));
-    b = new Room("Room B", QImage(":images/images/stoneRoom.png"));
-    c = new Room("Room C", QImage(":images/images/stoneRoom.png"));
-    d = new Room("Room D", QImage(":images/images/stoneRoom.png"));
-    e = new Room("Room E", QImage(":images/images/stoneRoom.png"));
+                        //room name, background image, isLocked
+    stoneRoom = new Room("Stone Room", QImage(":images/images/stoneRoom.png"), false);
+    b = new Room("Room B", QImage(":images/images/stoneRoom.png"), true);
+    c = new Room("Room C", QImage(":images/images/stoneRoom.png"), false);
+    d = new Room("Room D", QImage(":images/images/stoneRoom.png"), false);
+    e = new Room("Room E", QImage(":images/images/stoneRoom.png"), false);
         RoomKey *bronzeKey = new RoomKey("Bronze Key",":images/images/bronze-key.png");
         e->addItem(bronzeKey);
         bronzeKey->setPos(500,300);
-    f = new Room("Room F", QImage(":images/images/stoneRoom.png"));
-    g = new Room("Room G", QImage(":images/images/stoneRoom.png"));
+    f = new Room("Room F", QImage(":images/images/stoneRoom.png"), false);
+    g = new Room("Room G", QImage(":images/images/stoneRoom.png"), true);
         RoomKey *goldKey = new RoomKey("Gold Key",":images/images/gold-key.png");
         g->addItem(goldKey);
         goldKey->setPos(500,300);
-    h = new Room("Room H", QImage(":images/images/stoneRoom.png"));
+    h = new Room("Room H", QImage(":images/images/stoneRoom.png"), true);
         RoomKey *silverKey = new RoomKey("Silver Key",":images/images/silver-key.png");
         h->addItem(silverKey);
         silverKey->setPos(500,300);
-    i = new Room("Room I", QImage(":images/images/stoneRoom.png"));
+    i = new Room("Room I", QImage(":images/images/stoneRoom.png"), false);
 
     //         (N, S, E, W)
     stoneRoom->setExits(f, d, b, c);
