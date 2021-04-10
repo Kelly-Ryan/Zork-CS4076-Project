@@ -7,6 +7,7 @@ Character is controlled using the standard WASD keys. Character attacks with the
 Survive attacks from enemies and navigate to the final room where you will collect your treasure.
 ## Project Team
 Team Name : The A Team
+
 Level : 1
 - Clodagh Walsh 19230737
 - Kelly Ryan 0347345 
