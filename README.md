@@ -1,17 +1,23 @@
-# CS4067Project
-Checklist of stuff to include
-https://docs.google.com/spreadsheets/d/1SXrsRD2dCXr2kv2_z3GwKCCkGc8AUraxHIdrV26QV9k/edit?usp=sharing
+#  CS4076 Project - Zork Adaptation
+GUI implementation of the text based adventure game Zork
+## How to Play
+### Controls
+Character is controlled using the standard WASD keys. Character attacks with the space bar. Double clicking on items in the inventory to use or remove them.
+### Objective
+Survive attacks from enemies and navigate to the final room where you will collect your treasure.
+## Project Team
+Team Name : The A Team
+Level : 1
+- Clodagh Walsh 19230737
+- Kelly Ryan 0347345 
 
-Storyline and how to play game
-https://docs.google.com/document/d/1NcyyaZvAnZPWy2SfOub6P3jCGjCtzBmSXqhm0TTRzQI/edit?usp=sharing
 
-Assets
-https://itch.io/game-assets/free/tag-2d
-
-
-Credit for background track might use:
+### Credits
+#### Sound : 
 Dragon Slayer by 魔界Symphony | https://soundcloud.com/makai-symphony
 Music promoted by https://www.chosic.com
 Creative Commons Attribution-ShareAlike 3.0 Unported
 https://creativecommons.org/licenses/by-sa/3.0/deed.en_US
-Gameover sound from the freesound website
+#### Art : 
+Artwork from https://opengameart.org/
+
