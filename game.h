@@ -12,6 +12,7 @@
 #include "weapon.h"
 #include "healthpotion.h"
 #include "treasure.h"
+#include "roomkey.h"
 
 class Player;
 class Enemy;
@@ -25,6 +26,7 @@ private:
     Enemy *monster;
     Inventory<Weapon> *armoury;
     Inventory<HealthPotion> *potions;
+    Inventory<RoomKey> *keys;
     void createRooms();
     void printWelcome();
     void help();

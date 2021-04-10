@@ -87,7 +87,7 @@ void Player::collision(){
             msg.exec();
             exit(0);
         }
-        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
+        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon) || typeid(*(colliding_items[i])) == typeid(RoomKey)){
 
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
@@ -189,7 +189,7 @@ void Player::equipPlayer(GameItem *itemSelected)
         holding.setType(WEAPON);
 
     }
-    else if(typeid(*itemSelected) == typeid(Key))
+    else if(typeid(*itemSelected) == typeid(RoomKey))
     {
         RoomKey* key = dynamic_cast<RoomKey*>(itemSelected);
         holding.inHand.key = key;
