@@ -15,10 +15,11 @@ Game::Game(QWidget *){
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
 
-    playlist -> addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
-    playlist -> setPlaybackMode(QMediaPlaylist::Loop);
-    mediaPlayer -> setPlaylist(playlist);
-    mediaPlayer -> play();
+    playlist->addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    mediaPlayer->setPlaylist(playlist);
+    mediaPlayer->setAudioRole(QAudio::GameRole);
+    mediaPlayer->play();
 
     createRooms();
     currentRoom = a;            //set current room/scene
@@ -46,9 +47,9 @@ Game::Game(QWidget *){
     connect(keys,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(keys,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
-    potions->setPosition(760,370);
-    armoury->setPosition(760,170);
-    keys->setPosition(760,600);
+    armoury->setPosition(760,150);
+    potions->setPosition(760,315);
+    keys->setPosition(760,480);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
     a->addItem(monster);
@@ -57,12 +58,15 @@ Game::Game(QWidget *){
 
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
+    Weapon *w = new Weapon("sword",2,":/images/images/sword.png");
+    Weapon *s = new Weapon("special sword",2,":/images/images/sword.png");
+    Weapon *s2 = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
     HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
     RoomKey *key = new RoomKey();
 
-    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives,key};
-    a->populateRoom(roomAItems,5);
+    GameItem * roomAItems[] = {weapon,sword,w,s,s2,oneLife,twoLives,key};
+    a->populateRoom(roomAItems,8);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
