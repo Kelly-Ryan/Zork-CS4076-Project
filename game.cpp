@@ -19,7 +19,7 @@ Game::Game(QWidget *)
     playlist -> addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
     playlist -> setPlaybackMode(QMediaPlaylist::Loop);
     mediaPlayer -> setPlaylist(playlist);
-    //mediaPlayer -> play();
+    mediaPlayer -> play();
 
     createRooms();
     currentRoom = stoneRoom;            //set current room/scene
