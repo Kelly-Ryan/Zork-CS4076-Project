@@ -52,10 +52,6 @@ Game::Game(QWidget *)
     potions->setPosition(760,315);
     keys->setPosition(760,480);
 
-    monster = new Enemy("monster",1,":/images/images/monster.png");
-    stoneRoom->addItem(monster);
-    stoneRoom->addItem(monster->getHealthbar());
-
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
@@ -101,10 +97,10 @@ void Game::createRooms()
     i->setExits(NULL, NULL, d, NULL);
 
     GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("Sword",2,":/images/images/sword.png")};
-    a->populateRoom(roomAItems,2);
+    stoneRoom->populateRoom(roomAItems,2);
     Enemy *centaur = new Enemy("Centaur",1,":/images/images/centaur.png");
-    a->addItem(centaur);
-    a->addItem(centaur->getHealthbar());
+    stoneRoom->addItem(centaur);
+    stoneRoom->addItem(centaur->getHealthbar());
 
     GameItem * roomBItems[] = {new Treasure,new Weapon("Axe",3,":/images/images/axe.png"),new HealthPotion(":/images/images/2Lives.png",2)};
     b->populateRoom(roomBItems,3);
