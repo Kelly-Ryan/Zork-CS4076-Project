@@ -19,6 +19,7 @@ Weapon::Weapon(string description, int destruction,string imgPath):GameItem(desc
 
 Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
 {
+    qDebug() << "copy constructor of weapon";
     damage = new int;
     *damage = *(weapon.damage);
 }
