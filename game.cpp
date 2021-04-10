@@ -4,9 +4,6 @@
 #include <string>
 #include <iostream>
 
-#include <QtMultimedia/QMediaPlayer>
-#include <QtMultimedia/QMediaPlaylist>
-
 using namespace std;
 
 class QMenu;
@@ -17,6 +14,11 @@ Game::Game(QWidget *){
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
+
+    playlist -> addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
+    playlist -> setPlaybackMode(QMediaPlaylist::Loop);
+    mediaPlayer -> setPlaylist(playlist);
+    mediaPlayer -> play();
 
     createRooms();
     currentRoom = a;            //set current room/scene
@@ -114,6 +116,11 @@ void Game::enableMovement()
 Game::~Game(){
     delete player;
     delete currentRoom;
+    delete armoury;
+    delete potions;
+    delete keys;
+    delete mediaPlayer;
+    delete playlist;
     delete a;
     delete b;
     delete c;

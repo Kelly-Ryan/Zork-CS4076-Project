@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 #include <QMainWindow>
+#include <QtMultimedia/QMediaPlayer>
+#include <QtMultimedia/QMediaPlaylist>
 
 #include "player.h"
 #include "enemy.h"
@@ -27,6 +29,8 @@ private:
     Inventory<Weapon> *armoury;
     Inventory<HealthPotion> *potions;
     Inventory<RoomKey> *keys;
+    QMediaPlaylist* playlist = new QMediaPlaylist();
+    QMediaPlayer* mediaPlayer = new QMediaPlayer();
     void createRooms();
     void printWelcome();
     void help();

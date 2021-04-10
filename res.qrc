@@ -14,5 +14,8 @@
         <file>images/key.png</file>
         <file>images/treasure.png</file>
     </qresource>
-    <qresource prefix="/"/>
+    <qresource prefix="/sounds">
+        <file>sounds/gameWon.wav</file>
+        <file>sounds/makai-symphony-dragon-slayer.mp3</file>
+    </qresource>
 </RCC>
