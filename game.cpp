@@ -9,7 +9,8 @@ using namespace std;
 class QMenu;
 class QContextMenuEvent;
 
-Game::Game(QWidget *){
+Game::Game(QWidget *)
+{
     //set size of QGraphicsView and remove scroll bars
     setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
@@ -18,7 +19,7 @@ Game::Game(QWidget *){
     playlist -> addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
     playlist -> setPlaybackMode(QMediaPlaylist::Loop);
     mediaPlayer -> setPlaylist(playlist);
-    mediaPlayer -> play();
+    //mediaPlayer -> play();
 
     createRooms();
     currentRoom = stoneRoom;            //set current room/scene
@@ -54,20 +55,19 @@ Game::Game(QWidget *){
     stoneRoom->addItem(monster);
     stoneRoom->addItem(monster->getHealthbar());
 
-
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
     HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
-    RoomKey *key = new RoomKey("room key", ":/images/images/key.png");
 
-    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives,key};
-    stoneRoom->populateRoom(roomAItems,5);
+    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives};
+    stoneRoom->populateRoom(roomAItems,4);
     setScene(stoneRoom);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
 
-void Game::createRooms(){
+void Game::createRooms()
+{
     stoneRoom = new Room("Stone Room", QImage(":images/images/stoneRoom.png"));
     b = new Room("Room B", QImage(":images/images/stoneRoom.png"));
     c = new Room("Room C", QImage(":images/images/stoneRoom.png"));
@@ -113,7 +113,8 @@ void Game::enableMovement()
     player->setFocus();
 }
 
-Game::~Game(){
+Game::~Game()
+{
     delete player;
     delete currentRoom;
     delete armoury;

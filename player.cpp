@@ -6,12 +6,16 @@
 #include <type_traits>
 #include <typeinfo>
 
+#include <iostream>
+
 // dont ever use this constructor
-Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
+Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
+{
 }
 
 //overloaded constructor for creating new Player object
-Player::Player(int xPos, int yPos, Game *game){
+Player::Player(int xPos, int yPos, Game *game)
+{
     setPos(xPos,yPos);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
@@ -21,74 +25,92 @@ Player::Player(int xPos, int yPos, Game *game){
     hitPoints->setPos(800,25);
 }
 
-void Player::keyPressEvent(QKeyEvent *event){       //player movement
-
-    if(event->key() == Qt::Key_W){          //move north
-        if(pos().y() > 75){
+void Player::keyPressEvent(QKeyEvent *event) //player movement
+{
+    if(event->key() == Qt::Key_W) //move north
+    {
+        if(pos().y() > 75)
+        {
             setPos(x(), y() - SPEED);
             collision();
         }
     }
-    else if(event->key() == Qt::Key_S){     //move south
-        if(pos().y() + 51 < 525){
+    else if(event->key() == Qt::Key_S)  //move south
+    {
+        if(pos().y() + 51 < 525)
+        {
             setPos(x(), y() + SPEED);
             collision();
         }
     }
-    else if(event->key() == Qt::Key_A){     //move west
-        if(pos().x() > 285){
+    else if(event->key() == Qt::Key_A)  //move west
+    {
+        if(pos().x() > 285)
+        {
             setPos(x() - SPEED, y());
             collision();
         }
     }
-    else if(event->key() == Qt::Key_D){     //move east
+    else if(event->key() == Qt::Key_D)      //move east
+    {
         if(pos().x() + 45 < 725){
             setPos(x() + SPEED, y());
             collision();
         }
     }
-    else if(event->key() == Qt::Key_Space){
+    else if(event->key() == Qt::Key_Space)
+    {
         QList<QGraphicsItem *> colliding_items;
 
        try {
             qDebug() << "Space bar pressed";
 
-            if(holding.getType() != WEAPON){
+            if(holding.getType() != WEAPON)
+            {
                 WeaponException e;
                 throw e;
             }
-        } catch (WeaponException &e) {
+        }
+        catch (WeaponException &e)
+        {
             e.what();
         }
         //traverse this list and find out of the player is colliding with an object of type Enemy
-        for(int i = 0, n = colliding_items.size(); i < n; ++i){
-            if(typeid(*(colliding_items[i])) == typeid(Enemy) && holding.getType() == WEAPON){
-                    Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
-                    qDebug() << "Launching attack on enemy with " << holding.inHand.weapon->itemInfo();
-                    combat(holding.inHand.weapon,enemy);
-                    if(enemy->isAlive())
-                        enemy->getHealthbar()->updateHealth(enemy->getHealth());
+        for(int i = 0, n = colliding_items.size(); i < n; ++i)
+        {
+            if(typeid(*(colliding_items[i])) == typeid(Enemy) && holding.getType() == WEAPON)
+            {
+                Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+                qDebug() << "Launching attack on enemy with " << holding.inHand.weapon->itemInfo();
+                combat(holding.inHand.weapon,enemy);
+                if(enemy->isAlive())
+                {
+                    enemy->getHealthbar()->updateHealth(enemy->getHealth());
+                }
             }
         }
     }
 }
 
-void Player::collision(){
+void Player::collision()
+{
     //list of pointers to all the QGraphicsItems that are colliding with the calling object (the player)
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     //traverse this list and find out of the player is colliding with an object of type Exit
-    for(int i = 0, n = colliding_items.size(); i < n; ++i){
-
-        if(typeid(*(colliding_items[i])) == typeid(Treasure)){
+    for(int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+        if(typeid(*(colliding_items[i])) == typeid(Treasure))
+        {
             qDebug() << "Game Over";
             GamePopup msg;
             msg.setText("Congratulations you found the treasure.\nYour quest is now complete");
             msg.exec();
             exit(0);
         }
-        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon) || typeid(*(colliding_items[i])) == typeid(RoomKey)){
 
+        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon) || typeid(*(colliding_items[i])) == typeid(RoomKey))
+        {
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                GamePopup msg;
@@ -100,13 +122,16 @@ void Player::collision(){
 
                if(response == QMessageBox::Yes) emit itemCollected(item);
         }
-        if(typeid(*(colliding_items[i])) == typeid(Exit)){
+        if(typeid(*(colliding_items[i])) == typeid(Exit))
+        {
             Exit *currentExit = (Exit *)colliding_items[i];
             string direction = currentExit->getDirection();
 
-            if(direction.compare("north") == 0){
+            if(direction.compare("north") == 0)
+            {
                 Room *nextRoom = game->currentRoom->nextRoom("north");
-                if (nextRoom != NULL){              //check if this room has an exit in this direction
+                if (nextRoom != NULL) //check if this room has an exit in this direction
+                {
                     game->currentRoom = nextRoom;   //set new currentRoom
                     nextRoom->addItem(game->player);    //add player to new room
                     setPos(475,450);                //set position of player
@@ -116,9 +141,11 @@ void Player::collision(){
                     game->setScene(nextRoom);       //load scene for next room
                 }
             }
-            else if(direction.compare("south") == 0){
+            else if(direction.compare("south") == 0)
+            {
                 Room *nextRoom = game->currentRoom->nextRoom("south");
-                if (nextRoom != NULL){
+                if (nextRoom != NULL)
+                {
                     game->currentRoom = nextRoom;
                     nextRoom->addItem(game->player);
                     setPos(475,100);
@@ -128,28 +155,122 @@ void Player::collision(){
                     game->setScene(nextRoom);
                 }
             }
-            else if(direction.compare("east") == 0){
+            else if(direction.compare("east") == 0)
+            {
                 Room *nextRoom = game->currentRoom->nextRoom("east");
-                if (nextRoom != NULL){
-                    game->currentRoom = nextRoom;
-                    nextRoom->addItem(game->player);
-                    setPos(300,275);
-                    setFocus();
+                if (nextRoom != NULL)
+                {
+                    if(nextRoom->getRoomName() == "Room G")     //if it is a locked room
+                    {
+                       if(holding.getType() != NULL)           //if the player is holding an item
+                       {
+                           if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Silver Key")
+                           {
+                               game->currentRoom = nextRoom;
+                               nextRoom->addItem(game->player);
+                               setPos(300,275);
+                               setFocus();
 
-                    nextRoom->addItem(hitPoints);
-                    game->setScene(nextRoom);
+                               nextRoom->addItem(hitPoints);
+                               game->setScene(nextRoom);
+                           }
+                           else
+                          {
+                              GamePopup msg;
+                              msg.setText("You need the silver key to open this door!");
+                              msg.exec();
+                          }
+                      }
+                      else
+                      {
+                          GamePopup msg;
+                          msg.setText("You need the silver key to open this door!");
+                          msg.exec();
+                      }
+                  }
+                  else if(nextRoom->getRoomName() == "Room B")
+                  {
+                      if(holding.getType() != NULL)           //if the player is holding an item
+                      {
+                           if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Gold Key")
+                           {
+                                game->currentRoom = nextRoom;
+                                nextRoom->addItem(game->player);
+                                setPos(650,275);
+                                setFocus();
+
+                                nextRoom->addItem(hitPoints);
+                                game->setScene(nextRoom);
+                            }
+                            else
+                            {
+                                GamePopup msg;
+                                msg.setText("You need the gold key to open this door!");
+                                msg.exec();
+                            }
+                        }
+                        else
+                        {
+                            GamePopup msg;
+                            msg.setText("You need the gold key to open this door!");
+                            msg.exec();
+                        }
+                    }
+                    else
+                    {
+                        game->currentRoom = nextRoom;
+                        nextRoom->addItem(game->player);
+                        setPos(300,275);
+                        setFocus();
+
+                        nextRoom->addItem(hitPoints);
+                        game->setScene(nextRoom);
+                    }
                 }
             }
-            else if(direction.compare("west") == 0){
+            else if(direction.compare("west") == 0)
+            {
                 Room *nextRoom = game->currentRoom->nextRoom("west");
-                if (nextRoom != NULL){
-                    game->currentRoom = nextRoom;
-                    nextRoom->addItem(game->player);
-                    setPos(650,275);
-                    setFocus();
+                if (nextRoom != NULL)
+                {
+                    if(nextRoom->getRoomName() == "Room H")     //if it is a locked room
+                    {
+                        if(holding.getType() != NULL)           //if the player is holding an item
+                        {
+                            if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Bronze Key")
+                            {
+                                game->currentRoom = nextRoom;
+                                nextRoom->addItem(game->player);
+                                setPos(650,275);
+                                setFocus();
 
-                    nextRoom->addItem(hitPoints);
-                    game->setScene(nextRoom);
+                                nextRoom->addItem(hitPoints);
+                                game->setScene(nextRoom);
+                            }
+                            else
+                            {
+                                GamePopup msg;
+                                msg.setText("You need the bronze key to open this door!");
+                                msg.exec();
+                            }
+                        }
+                        else
+                        {
+                            GamePopup msg;
+                            msg.setText("You need the bronze key to open this door!");
+                            msg.exec();
+                        }
+                    }
+                    else
+                    {
+                        game->currentRoom = nextRoom;
+                        nextRoom->addItem(game->player);
+                        setPos(650,275);
+                        setFocus();
+
+                        nextRoom->addItem(hitPoints);
+                        game->setScene(nextRoom);
+                    }
                 }
             }
         }
@@ -223,7 +344,8 @@ void Player::defeated()
     exit(0);
 }
 
-Player::~Player(){
+Player::~Player()
+{
     delete game;
     delete hitPoints;
 }

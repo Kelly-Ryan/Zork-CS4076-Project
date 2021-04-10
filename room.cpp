@@ -63,6 +63,10 @@ void Room::populateRoom(GameItem *roomItems[],int numItems)
 
 }
 
+string Room::getRoomName(){
+    return description;
+}
+
 Room::~Room(){
     delete northExit;
     delete southExit;

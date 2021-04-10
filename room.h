@@ -10,7 +10,8 @@
 #include <QGraphicsScene>
 #include <QImage>
 
-class Room : public QGraphicsScene {
+class Room : public QGraphicsScene
+{
 private:
     Exit *northExit, *southExit, *eastExit, *westExit;
     string description;
@@ -18,6 +19,7 @@ private:
 
 public:
    Room(string description, QImage background);
+   string getRoomName();
    ~Room();
    void setExits(Room *north, Room *east, Room *south, Room *west);
    Room* nextRoom(string direction);
