@@ -27,6 +27,7 @@ Game::Game(QWidget *){
 
     armoury = new Inventory<Weapon>("Armoury");
     potions = new Inventory<HealthPotion>("Potions",1);
+    keys = new Inventory<RoomKey>("Keys",2);
 
     connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));
     connect(potions,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
@@ -38,8 +39,14 @@ Game::Game(QWidget *){
     connect(armoury,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(armoury,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
-    potions->setPosition(760,420);
+    connect(player,SIGNAL(itemCollected(GameItem *)),keys,SLOT(addToInventory(GameItem*)));
+    connect(keys,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
+    connect(keys,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
+    connect(keys,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
+
+    potions->setPosition(760,370);
     armoury->setPosition(760,170);
+    keys->setPosition(760,600);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
     a->addItem(monster);
@@ -50,9 +57,10 @@ Game::Game(QWidget *){
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
     HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
+    RoomKey *key = new RoomKey();
 
-    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives};
-    a->populateRoom(roomAItems,4);
+    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives,key};
+    a->populateRoom(roomAItems,5);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
