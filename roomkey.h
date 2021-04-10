@@ -7,7 +7,6 @@ class RoomKey: public GameItem
 {
 public:
     RoomKey();
-    virtual QString itemInfo();
 };
 
 #endif // ROOMKEY_H

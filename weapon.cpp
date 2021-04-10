@@ -8,19 +8,19 @@ Weapon::Weapon()
 
 Weapon::~Weapon()
 {
-    delete d;
+    delete damage;
 }
 
-Weapon::Weapon(string description, int damage,string imgPath):GameItem(description,imgPath)
+Weapon::Weapon(string description, int destruction,string imgPath):GameItem(description,imgPath)
 {
-    d = new int;
-    *d = damage;
+    damage = new int;
+    *damage = destruction;
 }
 
 Weapon::Weapon(const Weapon &weapon):GameItem(weapon)
 {
-    d = new int;
-    *d = *(weapon.d);
+    damage = new int;
+    *damage = *(weapon.damage);
 }
 
 QString Weapon::itemInfo()
@@ -30,6 +30,6 @@ QString Weapon::itemInfo()
 
 int Weapon::getDamage()
 {
-    return *d;
+    return *damage;
 }
 
