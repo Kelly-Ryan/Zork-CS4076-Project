@@ -1,7 +1,14 @@
 #include "roomkey.h"
 
-RoomKey::RoomKey():GameItem("Key")
+RoomKey::RoomKey(string description, string imgPath):GameItem()
 {
-    setPixmap(QPixmap(":/images/images/key.png"));
-    setImgPath(":/images/images/key.png");
+    this->qtDescription = QString::fromStdString(description);
+    setPixmap(QPixmap(QString::fromStdString(imgPath)));
+    setImgPath(imgPath);
 }
+
+QString RoomKey::itemInfo()
+{
+    return qtDescription;
+}
+

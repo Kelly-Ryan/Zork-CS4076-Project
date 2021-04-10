@@ -9,5 +9,6 @@ public:
         GamePopup msg;
         msg.setText("You must have a weapon equipped to attack!");
         msg.exec();
+        return 0;
     }
 };
