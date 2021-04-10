@@ -79,11 +79,16 @@ void Player::collision(){
 
     //traverse this list and find out of the player is colliding with an object of type Exit
     for(int i = 0, n = colliding_items.size(); i < n; ++i){
-//        ypeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon)
-//        bool b = std::is_base_of<GameItem,colliding_items[i]>::value;
-//        qDebug() << typeid(*(colliding_items[i])).name();
-//        qDebug() << typeid(GameItem).name();
-        if(typeid(*(colliding_items[i])) == typeid(Weapon) || typeid(*(colliding_items[i])) == typeid(HealthPotion)){ //if of type item works but we need to make it generic
+
+        if(typeid(*(colliding_items[i])) == typeid(Treasure)){
+            qDebug() << "Game Over";
+            GamePopup msg;
+            msg.setText("Congratulations you found the treasure.\nYour quest is now complete");
+            msg.exec();
+            exit(0);
+        }
+        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
+
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                GamePopup msg;

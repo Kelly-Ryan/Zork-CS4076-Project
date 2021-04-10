@@ -11,6 +11,7 @@
 #include "gameitem.h"
 #include "weapon.h"
 #include "healthpotion.h"
+#include "treasure.h"
 
 class Player;
 class Enemy;
