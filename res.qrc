@@ -13,6 +13,9 @@
         <file>images/1Life.png</file>
         <file>images/key.png</file>
         <file>images/treasure.png</file>
+        <file>images/bronze-key.png</file>
+        <file>images/gold-key.png</file>
+        <file>images/silver-key.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>sounds/gameWon.wav</file>

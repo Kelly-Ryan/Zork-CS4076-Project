@@ -21,15 +21,15 @@ Game::Game(QWidget *){
     mediaPlayer -> play();
 
     createRooms();
-    currentRoom = a;            //set current room/scene
+    currentRoom = stoneRoom;            //set current room/scene
 
     player = new Player(475, 275, this);  //position player in centre of room
-    a->addItem(player);         //add player to scene
-    a->addItem(player->getHealthbar());
+    stoneRoom->addItem(player);         //add player to scene
+    stoneRoom->addItem(player->getHealthbar());
 
     armoury = new Inventory<Weapon>("Armoury");
     potions = new Inventory<HealthPotion>("Potions",1);
-    keys = new Inventory<RoomKey>("Keys",2);
+    keys = new Inventory<RoomKey>("Keys",3);
 
     connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));
     connect(potions,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
@@ -51,40 +51,49 @@ Game::Game(QWidget *){
     keys->setPosition(760,600);
 
     monster = new Enemy("monster",1,":/images/images/monster.png");
-    a->addItem(monster);
-    a->addItem(monster->getHealthbar());
+    stoneRoom->addItem(monster);
+    stoneRoom->addItem(monster->getHealthbar());
 
 
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
     HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
-    RoomKey *key = new RoomKey();
+    RoomKey *key = new RoomKey("room key", ":/images/images/key.png");
 
     GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives,key};
-    a->populateRoom(roomAItems,5);
-    setScene(a);        //set first scene (room) in QGraphicsView
+    stoneRoom->populateRoom(roomAItems,5);
+    setScene(stoneRoom);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
 
 void Game::createRooms(){
-    a = new Room("Room A", QImage(":images/images/stoneRoom.png"));
+    stoneRoom = new Room("Stone Room", QImage(":images/images/stoneRoom.png"));
     b = new Room("Room B", QImage(":images/images/stoneRoom.png"));
     c = new Room("Room C", QImage(":images/images/stoneRoom.png"));
     d = new Room("Room D", QImage(":images/images/stoneRoom.png"));
     e = new Room("Room E", QImage(":images/images/stoneRoom.png"));
+        RoomKey *bronzeKey = new RoomKey("Bronze Key",":images/images/bronze-key.png");
+        e->addItem(bronzeKey);
+        bronzeKey->setPos(500,300);
     f = new Room("Room F", QImage(":images/images/stoneRoom.png"));
     g = new Room("Room G", QImage(":images/images/stoneRoom.png"));
+        RoomKey *goldKey = new RoomKey("Gold Key",":images/images/gold-key.png");
+        g->addItem(goldKey);
+        goldKey->setPos(500,300);
     h = new Room("Room H", QImage(":images/images/stoneRoom.png"));
+        RoomKey *silverKey = new RoomKey("Silver Key",":images/images/silver-key.png");
+        h->addItem(silverKey);
+        silverKey->setPos(500,300);
     i = new Room("Room I", QImage(":images/images/stoneRoom.png"));
 
     //         (N, S, E, W)
-    a->setExits(f, d, b, c);
-    b->setExits(NULL, NULL, NULL, a);
-    c->setExits(NULL, NULL, a, NULL);
-    d->setExits(a, NULL, e, i);
+    stoneRoom->setExits(f, d, b, c);
+    b->setExits(NULL, NULL, NULL, stoneRoom);
+    c->setExits(NULL, NULL, stoneRoom, NULL);
+    d->setExits(stoneRoom, NULL, e, i);
     e->setExits(NULL, NULL, NULL, d);
-    f->setExits(NULL, a, g, h);
+    f->setExits(NULL, stoneRoom, g, h);
     g->setExits(NULL, NULL, NULL, f);
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
@@ -112,7 +121,7 @@ Game::~Game(){
     delete keys;
     delete mediaPlayer;
     delete playlist;
-    delete a;
+    delete stoneRoom;
     delete b;
     delete c;
     delete d;
