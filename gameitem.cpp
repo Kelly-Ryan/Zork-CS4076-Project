@@ -6,7 +6,7 @@ GameItem::GameItem()
 {
 }
 
-GameItem::GameItem (string description, string imgPath)
+GameItem::GameItem (string description,string imgPath)
 {
     setDescription(description);
     this->imgPath = imgPath;
@@ -32,6 +32,16 @@ void GameItem::setDescription(string description)
 QString GameItem::itemInfo()
 {
     return qtDescription;
+}
+
+bool GameItem::isOutOfUse()
+{
+    return outOfUse;
+}
+
+void GameItem::setOutOfUse(bool outOfUse)
+{
+    this->outOfUse = outOfUse;
 }
 
 string GameItem::getImgPath()

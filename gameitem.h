@@ -12,17 +12,20 @@ class GameItem:public QGraphicsPixmapItem
 {
 private:
     string imgPath;
+    bool outOfUse = false;
     void setDescription(string description);
 
 protected:
     QString qtDescription;
 
 public:
-    GameItem (string description, string imgPath);
-    GameItem (string description);
+    GameItem(string description,string imgPath);
+    GameItem(string description);
     GameItem(const GameItem &item); // must provide a copy constructor since the copy constructor in base class is marked as deleted
     GameItem();
     virtual QString itemInfo();
+    bool isOutOfUse();
+    void setOutOfUse(bool outOfUse);
     string getImgPath();
     void setImgPath(string imgPath);
     QString getDescription();

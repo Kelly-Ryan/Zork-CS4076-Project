@@ -23,7 +23,6 @@ private:
     string title;
     void onSelected(QListWidgetItem * widgetItem);
     void addToInventory(GameItem *itemCollected);
-    void removeFromInventory();
     void moveEvent(QMoveEvent *event);
     T* convert(QListWidgetItem *widgetItem);
 
@@ -83,6 +82,12 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
     {
         qDebug() << "Chosen to use the item";
         emit itemSelected(item);
+        if(item->isOutOfUse())
+        {
+            inventory.erase(i);
+            delete widgetItem;
+            delete item;
+        }
     }
     else
     {
@@ -94,31 +99,13 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
     emit restoreFocus();
 }
 
-template <typename T> void Inventory<T>::removeFromInventory()
-{
-    QListWidgetItem *widgetItem = currentItem();
-    T *item;
-    typename vector<T*>::iterator i;
-    for (i = inventory.begin(); i != inventory.end(); i++)
-    {
-        if(widgetItem->text().startsWith((*i)->getDescription()))
-        {
-            item = (*i);
-            break;
-        }
-    }
-    inventory.erase(i);
-    delete widgetItem;
-    delete item;
-}
-
 template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
 {
     T* item = dynamic_cast<T*>(itemCollected);
 
-    if(inventory.size() < maxCapacity)
+    if(typeid(*itemCollected) == typeid(T)) // check needed since the inventory is templated
     {
-        if(typeid(*itemCollected) == typeid(T)) //necessary so not added to both on screen
+        if(inventory.size() < maxCapacity)
         {
             inventory.push_back(item);
             QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->getImgPath())),itemCollected->itemInfo());
@@ -126,12 +113,12 @@ template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
             qDebug() << "Adding to inventory";
             emit itemAdded(itemCollected);
         }
-    }
-    else
-    {
-        GamePopup msg;
-        msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
-        msg.exec();
+        else
+        {
+            GamePopup msg;
+            msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
+            msg.exec();
+        }
     }
 }
 

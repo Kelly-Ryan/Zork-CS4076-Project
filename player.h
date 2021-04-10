@@ -12,6 +12,7 @@
 #include "roomkey.h"
 
 #define SPEED 10
+#define MAX_HEALTH 10
 
 class Game;
 class Enemy;
@@ -46,7 +47,7 @@ Q_OBJECT
 
     friend void operator+(Enemy &enemy,Player &player);
 private:
-    int health = 10;
+    int health = MAX_HEALTH;
     bool alive = true;
     Game *game;
     Healthbar *hitPoints;

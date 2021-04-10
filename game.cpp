@@ -25,11 +25,10 @@ Game::Game(QWidget *){
     a->addItem(player);         //add player to scene
     a->addItem(player->getHealthbar());
 
-    armoury = new Inventory<Weapon>("Armoury",1);
-    potions = new Inventory<HealthPotion>("Potions");
+    armoury = new Inventory<Weapon>("Armoury");
+    potions = new Inventory<HealthPotion>("Potions",1);
 
     connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));
-    connect(player,SIGNAL(healthPotion()),potions,SLOT(removeFromInventory()));
     connect(potions,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     connect(potions,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(potions,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
@@ -50,9 +49,10 @@ Game::Game(QWidget *){
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
     HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
+    HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
 
-    GameItem * roomAItems[] = {weapon,sword,oneLife};
-    a->populateRoom(roomAItems,3);
+    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives};
+    a->populateRoom(roomAItems,4);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }

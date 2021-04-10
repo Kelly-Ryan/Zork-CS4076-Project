@@ -182,6 +182,7 @@ void Player::equipPlayer(GameItem *itemSelected)
         Weapon* weapon = dynamic_cast<Weapon*>(itemSelected);
         holding.inHand.weapon = weapon;
         holding.setType(WEAPON);
+
     }
     else if(typeid(*itemSelected) == typeid(Key))
     {
@@ -192,10 +193,19 @@ void Player::equipPlayer(GameItem *itemSelected)
     else
     {
         HealthPotion *potion = dynamic_cast<HealthPotion*>(itemSelected);
-        health += potion->getBonus();
-        hitPoints->updateHealth(health);
-        emit healthPotion();
-        delete potion;
+        if(health < MAX_HEALTH)
+        {
+            health += potion->getBonus();
+            hitPoints->updateHealth(health);
+            potion->setOutOfUse(true);
+        }
+        else
+        {
+            GamePopup msg;
+            msg.setText("You are currently at full health");
+            msg.setInformativeText("If you are attacked by an enmy use this potion to restore your health");
+            msg.exec();
+        }
     }
 }
 
