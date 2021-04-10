@@ -28,7 +28,7 @@ Game::Game(QWidget *){
     a->addItem(player);         //add player to scene
     a->addItem(player->getHealthbar());
 
-    armoury = new Inventory<Weapon>("Armoury");
+    armoury = new Inventory<Weapon>("Armoury",3);
     potions = new Inventory<HealthPotion>("Potions",1);
     keys = new Inventory<RoomKey>("Keys",2);
 
@@ -51,22 +51,6 @@ Game::Game(QWidget *){
     potions->setPosition(760,315);
     keys->setPosition(760,480);
 
-    monster = new Enemy("monster",1,":/images/images/monster.png");
-    a->addItem(monster);
-    a->addItem(monster->getHealthbar());
-
-
-    Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
-    Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
-    Weapon *w = new Weapon("sword",2,":/images/images/sword.png");
-    Weapon *s = new Weapon("special sword",2,":/images/images/sword.png");
-    Weapon *s2 = new Weapon("special sword",2,":/images/images/sword.png");
-    HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
-    HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
-    RoomKey *key = new RoomKey();
-
-    GameItem * roomAItems[] = {weapon,sword,w,s,s2,oneLife,twoLives,key};
-    a->populateRoom(roomAItems,8);
     setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
@@ -93,8 +77,43 @@ void Game::createRooms(){
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
 
-    GameItem * roomBItems[] = {new Treasure};
-    b->populateRoom(roomBItems,1);
+    GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("Sword",2,":/images/images/sword.png")};
+    a->populateRoom(roomAItems,2);
+    Enemy *centaur = new Enemy("Centaur",1,":/images/images/centaur.png");
+    a->addItem(centaur);
+    a->addItem(centaur->getHealthbar());
+
+    GameItem * roomBItems[] = {new Treasure,new Weapon("Axe",3,":/images/images/axe.png"),new HealthPotion(":/images/images/2Lives.png",2)};
+    b->populateRoom(roomBItems,3);
+    Enemy *dragon = new Enemy("Dragon",4,":/images/images/dragon.png");
+    b->addItem(dragon);
+    b->addItem(dragon->getHealthbar());
+
+    GameItem * roomCItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    c->populateRoom(roomCItems,1);
+
+    Enemy *troll = new Enemy("Troll",2,":/images/images/troll.png");
+    d->addItem(troll);
+    d->addItem(troll->getHealthbar());
+
+    GameItem * roomEItems[] = {new Weapon("Bow",1,":/images/images/bow.png"),new HealthPotion(":/images/images/3Lives.png",3)};
+    e->populateRoom(roomEItems,2);
+
+    Enemy *giant = new Enemy("Giant",3,":/images/images/giant.png");
+    f->addItem(giant);
+    f->addItem(giant->getHealthbar());
+
+    GameItem * roomGItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    g->populateRoom(roomGItems,1);
+
+    GameItem * roomHItems[] = {new Weapon("Axe",2,":/images/images/axe.png")};
+    h->populateRoom(roomHItems,1);
+    Enemy *cyclops = new Enemy("Cyclops",2,":/images/images/cyclops.png");
+    h->addItem(cyclops);
+    h->addItem(cyclops->getHealthbar());
+
+    GameItem * roomIItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    i->populateRoom(roomIItems,1);
 }
 
 void Game::printWelcome(){
