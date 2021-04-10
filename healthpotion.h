@@ -6,7 +6,9 @@
 class HealthPotion: public GameItem
 {
 private:
-    int bonus;
+    struct{
+      unsigned int bonus : 2; //Allows to store values between 0-2
+    };
 public:
     HealthPotion(string imgPath,int bonus);
     virtual QString itemInfo();

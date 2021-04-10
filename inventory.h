@@ -12,6 +12,10 @@ using namespace Qt;
 
 using std::vector;
 
+/* QT doesnt allow a template class to use slots and singals
+ * Subclassing the QWidgetList overcomes the problem and allows to define custom slots and signals
+ */
+
 template <typename T >class Inventory :public CustomListWidget
 {
 
@@ -102,8 +106,8 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
 template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
 {
     T* item = dynamic_cast<T*>(itemCollected);
-
-    if(typeid(*itemCollected) == typeid(T)) // check needed since the inventory is templated
+// check needed since the inventory is templated and slot is general cant use a template with slots and singals
+    if(typeid(*itemCollected) == typeid(T))
     {
         if(inventory.size() < maxCapacity)
         {

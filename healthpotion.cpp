@@ -7,7 +7,7 @@ HealthPotion::HealthPotion(string imgPath, int bonus):GameItem("Health Potion",i
 
 QString HealthPotion::itemInfo()
 {
-    return qtDescription + QString::fromStdString("\tBonus:") + QString::number(bonus);
+    return qtDescription + QString::fromStdString(" Bonus:") + QString::number(bonus);
 }
 
 int HealthPotion::getBonus()
