@@ -180,14 +180,14 @@ void Player::collision()
                                else
                                {
                                   GamePopup msg;
-                                  msg.setText("You need the silver key to open this door!");
+                                  msg.setText("Use the silver key to open this door!");
                                   msg.exec();
                                }
                             }
                            else
                             {
                               GamePopup msg;
-                              msg.setText("You need the silver key to open this door!");
+                              msg.setText("Use the silver key to open this door!");
                               msg.exec();
                             }
                         }
@@ -209,14 +209,14 @@ void Player::collision()
                                 else
                                 {
                                     GamePopup msg;
-                                    msg.setText("You need the gold key to open this door!");
+                                    msg.setText("Use the gold key to open this door!");
                                     msg.exec();
                                 }
                             }
                             else
                             {
                                 GamePopup msg;
-                                msg.setText("You need the gold key to open this door!");
+                                msg.setText("Use the gold key to open this door!");
                                 msg.exec();
                             }
                         }
@@ -269,14 +269,14 @@ void Player::collision()
                                 else
                                 {
                                     GamePopup msg;
-                                    msg.setText("You need the bronze key to open this door!");
+                                    msg.setText("Use the bronze key to open this door!");
                                     msg.exec();
                                 }
                             }
                             else
                             {
                                 GamePopup msg;
-                                msg.setText("You need the bronze key to open this door!");
+                                msg.setText("Use the bronze key to open this door!");
                                 msg.exec();
                             }
                         }
