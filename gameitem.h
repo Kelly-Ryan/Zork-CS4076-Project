@@ -10,24 +10,22 @@ using std::string;
 
 class GameItem:public QGraphicsPixmapItem
 {
-    //friend class Inventory;
-
 private:
-    float weight;
     string imgPath;
-    void setWeight(float weight);
+    bool outOfUse = false;
     void setDescription(string description);
 
 protected:
     QString qtDescription;
 
 public:
-    GameItem (string description, float weight,string imgPath);
-    GameItem (string description);
+    GameItem(string description,string imgPath);
+    GameItem(string description);
     GameItem(const GameItem &item); // must provide a copy constructor since the copy constructor in base class is marked as deleted
     GameItem();
-    float getWeight();
     virtual QString itemInfo();
+    bool isOutOfUse();
+    void setOutOfUse(bool outOfUse);
     string getImgPath();
     void setImgPath(string imgPath);
     QString getDescription();

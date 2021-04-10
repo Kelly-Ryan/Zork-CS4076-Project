@@ -3,6 +3,8 @@
 #include "gamePopup.h"
 
 #include <QKeyEvent>
+#include <type_traits>
+#include <typeinfo>
 
 // dont ever use this constructor
 Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem(parent){
@@ -77,6 +79,7 @@ void Player::collision(){
 
     //traverse this list and find out of the player is colliding with an object of type Exit
     for(int i = 0, n = colliding_items.size(); i < n; ++i){
+
         if(typeid(*(colliding_items[i])) == typeid(Treasure)){
             qDebug() << "Game Over";
             GamePopup msg;
@@ -84,7 +87,8 @@ void Player::collision(){
             msg.exec();
             exit(0);
         }
-        if(typeid(*(colliding_items[i])) == typeid(Item) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
+        if(typeid(*(colliding_items[i])) == typeid(HealthPotion) || typeid(*(colliding_items[i])) == typeid(Weapon)){ //if of type item works but we need to make it generic
+
                qDebug() << "Collided with item";
                GameItem *item = (GameItem *)colliding_items[i];
                GamePopup msg;
@@ -183,12 +187,30 @@ void Player::equipPlayer(GameItem *itemSelected)
         Weapon* weapon = dynamic_cast<Weapon*>(itemSelected);
         holding.inHand.weapon = weapon;
         holding.setType(WEAPON);
+
+    }
+    else if(typeid(*itemSelected) == typeid(Key))
+    {
+        RoomKey* key = dynamic_cast<RoomKey*>(itemSelected);
+        holding.inHand.key = key;
+        holding.setType(KEY);
     }
     else
     {
-        Item* item = dynamic_cast<Item*>(itemSelected);
-        holding.inHand.item = item;
-        holding.setType(ITEM);
+        HealthPotion *potion = dynamic_cast<HealthPotion*>(itemSelected);
+        if(health < MAX_HEALTH)
+        {
+            health += potion->getBonus();
+            hitPoints->updateHealth(health);
+            potion->setOutOfUse(true);
+        }
+        else
+        {
+            GamePopup msg;
+            msg.setText("You are currently at full health");
+            msg.setInformativeText("If you are attacked by an enmy use this potion to restore your health");
+            msg.exec();
+        }
     }
 }
 

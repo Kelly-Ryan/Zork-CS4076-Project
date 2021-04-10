@@ -70,7 +70,7 @@ void Enemy::defeated()
 {
     timer->stop();
     GamePopup congrats;
-    congrats.setText("Congratulations you defeated the enemy");
+    congrats.setText("Congratulations you defeated the " + QString::fromStdString(name));
     congrats.exec();
     delete this;
 }

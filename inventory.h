@@ -12,12 +12,15 @@ using namespace Qt;
 
 using std::vector;
 
+/* QT doesnt allow a template class to use slots and singals
+ * Subclassing the QWidgetList overcomes the problem and allows to define custom slots and signals
+ */
+
 template <typename T >class Inventory :public CustomListWidget
 {
 
 private:
     vector <T*> inventory;
-    int currentCapacity = 0;
     const int maxCapacity;
     int xPos;
     int yPos;
@@ -25,6 +28,8 @@ private:
     void onSelected(QListWidgetItem * widgetItem);
     void addToInventory(GameItem *itemCollected);
     void moveEvent(QMoveEvent *event);
+    T* convert(QListWidgetItem *widgetItem);
+
 public:
     Inventory(string title,int maxCapacity = 5);
     int getMaxCapacity() const;
@@ -62,59 +67,62 @@ template<typename T> string Inventory<T>::getTitle()
 
 template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
 {
-        T *item = inventory.front();
-        typename vector<T*>::iterator i;
-        for (i = inventory.begin(); i != inventory.end(); i++)
+    T *item;
+    typename vector<T*>::iterator i;
+    for (i = inventory.begin(); i != inventory.end(); i++)
+    {
+        if(widgetItem->text().startsWith((*i)->getDescription()))
         {
-            if(widgetItem->text().startsWith((*i)->getDescription()))
-            {
-                item = (*i);
-                break;
-            }
+            item = (*i);
+            break;
         }
-
-        GamePopup msg;
-        msg.setText("Would you like to use this item or remove it from your inventory");
-        QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
-        msg.addButton("Remove",QMessageBox::RejectRole);
-        msg.move(350,300);
-        msg.exec();
-        if(msg.clickedButton() == use)
+    }
+    GamePopup msg;
+    msg.setText("Would you like to use this item or remove it from your inventory");
+    QPushButton *use = msg.addButton("Use",QMessageBox::YesRole);
+    msg.addButton("Remove",QMessageBox::RejectRole);
+    msg.exec();
+    if(msg.clickedButton() == use)
+    {
+        qDebug() << "Chosen to use the item";
+        emit itemSelected(item);
+        if(item->isOutOfUse())
         {
-            qDebug() << "Chosen to use the item";
-            emit itemSelected(item);
-        }
-        else
-        {
-            currentCapacity--;
+            inventory.erase(i);
             delete widgetItem;
             delete item;
         }
-        delete use;
-        emit restoreFocus();
+    }
+    else
+    {
+        inventory.erase(i);
+        delete widgetItem;
+        delete item;
+    }
+    delete use;
+    emit restoreFocus();
 }
 
 template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
 {
     T* item = dynamic_cast<T*>(itemCollected);
-
-    if(currentCapacity < maxCapacity)
+// check needed since the inventory is templated and slot is general cant use a template with slots and singals
+    if(typeid(*itemCollected) == typeid(T))
     {
-        if(typeid(*itemCollected) == typeid(T)) //necessary so not added to both on screen
+        if(inventory.size() < maxCapacity)
         {
             inventory.push_back(item);
             QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->getImgPath())),itemCollected->itemInfo());
             addItem(inventoryItem);
-            currentCapacity++;
             qDebug() << "Adding to inventory";
             emit itemAdded(itemCollected);
         }
-    }
-    else
-    {
-        GamePopup msg;
-        msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
-        msg.exec();
+        else
+        {
+            GamePopup msg;
+            msg.setText("This item cannot be added to the inventory. The inventory is at maximum capacity.");
+            msg.exec();
+        }
     }
 }
 

@@ -6,12 +6,16 @@ HEADERS += \
     gamePopup.h \
     gameitem.h \
     healthbar.h \
+    healthpotion.h \
     inventory.h \
-    item.h \
     mainwindow.h \
     player.h \
     room.h \
+<<<<<<< HEAD
+    roomkey.h \
+=======
     treasure.h \
+>>>>>>> main
     weapon.h
 
 SOURCES += \
@@ -21,12 +25,16 @@ SOURCES += \
     gamePopup.cpp \
     gameitem.cpp \
     healthbar.cpp \
-    item.cpp \
+    healthpotion.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
     room.cpp \
+<<<<<<< HEAD
+    roomkey.cpp \
+=======
     treasure.cpp \
+>>>>>>> main
     weapon.cpp \
     weaponException.cpp
 
