@@ -8,14 +8,11 @@
         <file>images/monster.png</file>
         <file>images/phone.png</file>
         <file>images/sword.png</file>
-<<<<<<< HEAD
         <file>images/2Lives.png</file>
         <file>images/3Lives.png</file>
         <file>images/1Life.png</file>
         <file>images/key.png</file>
-=======
         <file>images/treasure.png</file>
->>>>>>> main
     </qresource>
     <qresource prefix="/"/>
 </RCC>

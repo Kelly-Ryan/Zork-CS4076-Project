@@ -11,11 +11,8 @@ HEADERS += \
     mainwindow.h \
     player.h \
     room.h \
-<<<<<<< HEAD
     roomkey.h \
-=======
     treasure.h \
->>>>>>> main
     weapon.h
 
 SOURCES += \
@@ -30,11 +27,8 @@ SOURCES += \
     mainwindow.cpp \
     player.cpp \
     room.cpp \
-<<<<<<< HEAD
     roomkey.cpp \
-=======
     treasure.cpp \
->>>>>>> main
     weapon.cpp \
     weaponException.cpp
 
