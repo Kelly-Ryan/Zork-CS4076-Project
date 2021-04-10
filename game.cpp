@@ -93,15 +93,6 @@ void Game::createRooms(){
     b->populateRoom(roomBItems,1);
 }
 
-void Game::printWelcome(){
-    cout << "Welcome" << endl;
-    //welcome message
-}
-
-void Game::help(){
-
-}
-
 void Game::removeFromRoom(GameItem *item)
 {
     item->hide();
