@@ -56,6 +56,7 @@ private:
 
 signals:
     void itemCollected(GameItem *item);
+    void healthPotion();
 
 public slots:
     void equipPlayer(GameItem *itemSelected);

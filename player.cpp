@@ -194,6 +194,7 @@ void Player::equipPlayer(GameItem *itemSelected)
         HealthPotion *potion = dynamic_cast<HealthPotion*>(itemSelected);
         health += potion->getBonus();
         hitPoints->updateHealth(health);
+        emit healthPotion();
         delete potion;
     }
 }

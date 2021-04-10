@@ -25,11 +25,11 @@ Game::Game(QWidget *){
     a->addItem(player);         //add player to scene
     a->addItem(player->getHealthbar());
 
-
     armoury = new Inventory<Weapon>("Armoury",1);
     potions = new Inventory<HealthPotion>("Potions");
 
     connect(player,SIGNAL(itemCollected(GameItem *)),potions,SLOT(addToInventory(GameItem*)));
+    connect(player,SIGNAL(healthPotion()),potions,SLOT(removeFromInventory()));
     connect(potions,SIGNAL(itemAdded(GameItem *)),this,SLOT(removeFromRoom(GameItem *)));
     connect(potions,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(potions,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
