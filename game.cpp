@@ -59,23 +59,14 @@ Game::Game(QWidget *)
 void Game::createRooms()
 {
                         //room name, background image, isLocked
-    a = new Room("Stone Room", QImage(":images/images/stoneRoom.png"), false);
+    a = new Room("Room A", QImage(":images/images/stoneRoom.png"), false);
     b = new Room("Room B", QImage(":images/images/stoneRoom.png"), true);
     c = new Room("Room C", QImage(":images/images/stoneRoom.png"), false);
     d = new Room("Room D", QImage(":images/images/stoneRoom.png"), false);
     e = new Room("Room E", QImage(":images/images/stoneRoom.png"), false);
-        RoomKey *bronzeKey = new RoomKey("Bronze Key",":images/images/bronze-key.png");
-        e->addItem(bronzeKey);
-        bronzeKey->setPos(500,300);
     f = new Room("Room F", QImage(":images/images/stoneRoom.png"), false);
     g = new Room("Room G", QImage(":images/images/stoneRoom.png"), true);
-        RoomKey *goldKey = new RoomKey("Gold Key",":images/images/gold-key.png");
-        g->addItem(goldKey);
-        goldKey->setPos(500,300);
-    h = new Room("Room H", QImage(":images/images/stoneRoom.png"), true);
-        RoomKey *silverKey = new RoomKey("Silver Key",":images/images/silver-key.png");
-        h->addItem(silverKey);
-        silverKey->setPos(500,300);
+    h = new Room("Room H", QImage(":images/images/stoneRoom.png"), true); 
     i = new Room("Room I", QImage(":images/images/stoneRoom.png"), false);
 
     //         (N, S, E, W)
@@ -108,18 +99,18 @@ void Game::createRooms()
     d->addItem(troll);
     d->addItem(troll->getHealthbar());
 
-    GameItem * roomEItems[] = {new Weapon("Bow",1,":/images/images/bow.png"),new HealthPotion(":/images/images/3Lives.png",3)};
-    e->populateRoom(roomEItems,2);
+    GameItem * roomEItems[] = {new Weapon("Bow",1,":/images/images/bow.png"),new HealthPotion(":/images/images/3Lives.png",3), new RoomKey("Bronze Key",":images/images/bronze-key.png")};
+    e->populateRoom(roomEItems,3);
 
     Enemy *giant = new Enemy("Giant",3,":/images/images/giant.png");
     f->addItem(giant);
     f->addItem(giant->getHealthbar());
 
-    GameItem * roomGItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
-    g->populateRoom(roomGItems,1);
+    GameItem * roomGItems[] = {new HealthPotion(":/images/images/1Life.png",1), new RoomKey("Gold Key",":images/images/gold-key.png")};
+    g->populateRoom(roomGItems,2);
 
-    GameItem * roomHItems[] = {new Weapon("Axe",2,":/images/images/axe.png")};
-    h->populateRoom(roomHItems,1);
+    GameItem * roomHItems[] = {new Weapon("Axe",2,":/images/images/axe.png"), new RoomKey("Silver Key",":images/images/silver-key.png")};
+    h->populateRoom(roomHItems,2);
     Enemy *cyclops = new Enemy("Cyclops",2,":/images/images/cyclops.png");
     h->addItem(cyclops);
     h->addItem(cyclops->getHealthbar());

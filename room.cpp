@@ -12,12 +12,12 @@ Room::Room(string name, QImage background, bool isLocked)
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 
-    QGraphicsTextItem *roomName = new QGraphicsTextItem(Zork::toQString(name));
-    QFont roomFont ("Adventure", 25);
-    roomName->setFont(roomFont);
-    roomName->setDefaultTextColor("white");
-    roomName->setPos(25,25);
-    addItem(roomName);
+    QGraphicsTextItem *instructions = new QGraphicsTextItem(Zork::toQString("How to Play\n\nUp = W\nDown = S\nLeft = A\nRight = D\nAttack = Spacebar\nPick-up Item = Walk into it\nEquip/Use Item = Double-Click"));
+    QFont roomFont ("Adventure", 10);
+    instructions->setFont(roomFont);
+    instructions->setDefaultTextColor("white");
+    instructions->setPos(10,10);
+    addItem(instructions);
 }
 
 void Room::setExits(Room *north, Room *south, Room *east, Room *west) {
