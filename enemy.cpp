@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "gamePopup.h"
+#include "zorknamespace.h"// must include to use custom namespace
 #include <cstdlib>
 #include <cctype>
 #include <time.h>
@@ -19,7 +20,7 @@ Enemy::Enemy(string name,int damage,string imgPath)
     timer->start(200);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
     setPixmap(QPixmap(QString::fromStdString(imgPath)));
-    lives = new Healthbar(name,health);
+    lives = new Healthbar(this->name,health);
     lives->setPos(800,50);
 }
 
@@ -84,7 +85,7 @@ void Enemy::collision()
         {
              Player *player = (Player *)colliding_items[i];
              qDebug() << "Attacking the player";
-             Zork::combat(this,player);
+             combat(this,player);
              if(player->isAlive())
                  player->getHealthbar()->updateHealth(player->getHealth());
 //             setPos(x()+xIncrement*2,y()+yIncrement*2); // tbh its just a temp idea

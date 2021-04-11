@@ -1,5 +1,5 @@
 #include "gameitem.h"
-#include "game.h" // must include to use custom namespace
+#include "zorknamespace.h"// must include to use custom namespace
 #include <QMessageBox>
 #include <QDebug>
 

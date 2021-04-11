@@ -16,32 +16,6 @@
 #include "treasure.h"
 #include "roomkey.h"
 
-namespace Zork{
-   QString toQString(string s){
-        return QString::fromStdString(s);
-   }
-
-   string capitalise(string s){
-       s[0] = toupper(s[0]);
-       return s;
-   }
-
-   template<class T1,class T2> void combat(T1 attacker,T2 attackee)
-   {
-      qDebug() << attackee->getHealth();
-      qDebug() << attacker->getDamage();
-      *attacker + *attackee;
-      qDebug() << attackee->getHealth();
-      if(!attackee->isAlive())
-      {
-          qDebug() << "defeated";
-          attackee->getHealthbar()->updateHealth(0);
-          attackee->defeated();
-      }
-   }
-}
-
-
 class Player;
 class Enemy;
 class Weapon;

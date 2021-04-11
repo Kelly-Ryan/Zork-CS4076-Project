@@ -13,7 +13,8 @@ HEADERS += \
     room.h \
     roomkey.h \
     treasure.h \
-    weapon.h
+    weapon.h \
+    zorknamespace.h
 
 SOURCES += \
     enemy.cpp \
@@ -30,7 +31,8 @@ SOURCES += \
     roomkey.cpp \
     treasure.cpp \
     weapon.cpp \
-    weaponException.cpp
+    weaponException.cpp \
+    zorknamespace.cpp
 
 QT       += core gui \
          multimedia

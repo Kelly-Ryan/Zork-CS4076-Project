@@ -81,7 +81,7 @@ void Player::keyPressEvent(QKeyEvent *event) //player movement
             if(typeid(*(colliding_items[i])) == typeid(Enemy)){
                     Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
                     qDebug() << "Launching attack on enemy with " << holding.inHand.weapon->itemInfo();
-                    Zork::combat(holding.inHand.weapon,enemy);
+                    combat(holding.inHand.weapon,enemy);
                     if(enemy->isAlive())
                         enemy->getHealthbar()->updateHealth(enemy->getHealth());
             }
