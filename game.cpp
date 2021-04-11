@@ -23,11 +23,11 @@ Game::Game(QWidget *)
     mediaPlayer->play();
 
     createRooms();
-    currentRoom = stoneRoom;            //set current room/scene
+    currentRoom = a;            //set current room/scene
 
     player = new Player(475, 275, this);  //position player in centre of room
-    stoneRoom->addItem(player);         //add player to scene
-    stoneRoom->addItem(player->getHealthbar());
+    a->addItem(player);         //add player to scene
+    a->addItem(player->getHealthbar());
 
     armoury = new Inventory<Weapon>("Armoury",3);
     potions = new Inventory<HealthPotion>("Potions",1);
@@ -52,14 +52,14 @@ Game::Game(QWidget *)
     potions->setPosition(800,315);
     keys->setPosition(800,480);
 
-    setScene(stoneRoom);        //set first scene (room) in QGraphicsView
+    setScene(a);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
 
 void Game::createRooms()
 {
                         //room name, background image, isLocked
-    stoneRoom = new Room("Stone Room", QImage(":images/images/stoneRoom.png"), false);
+    a = new Room("Stone Room", QImage(":images/images/stoneRoom.png"), false);
     b = new Room("Room B", QImage(":images/images/stoneRoom.png"), true);
     c = new Room("Room C", QImage(":images/images/stoneRoom.png"), false);
     d = new Room("Room D", QImage(":images/images/stoneRoom.png"), false);
@@ -79,21 +79,21 @@ void Game::createRooms()
     i = new Room("Room I", QImage(":images/images/stoneRoom.png"), false);
 
     //         (N, S, E, W)
-    stoneRoom->setExits(f, d, b, c);
-    b->setExits(NULL, NULL, NULL, stoneRoom);
-    c->setExits(NULL, NULL, stoneRoom, NULL);
-    d->setExits(stoneRoom, NULL, e, i);
+    a->setExits(f, d, b, c);
+    b->setExits(NULL, NULL, NULL, a);
+    c->setExits(NULL, NULL, a, NULL);
+    d->setExits(a, NULL, e, i);
     e->setExits(NULL, NULL, NULL, d);
-    f->setExits(NULL, stoneRoom, g, h);
+    f->setExits(NULL, a, g, h);
     g->setExits(NULL, NULL, NULL, f);
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
 
     GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("sword",2,":/images/images/sword.png")};
-    stoneRoom->populateRoom(roomAItems,2);
+    a->populateRoom(roomAItems,2);
     Enemy *centaur = new Enemy("centaur",1,":/images/images/centaur.png");
-    stoneRoom->addItem(centaur);
-    stoneRoom->addItem(centaur->getHealthbar());
+    a->addItem(centaur);
+    a->addItem(centaur->getHealthbar());
 
     GameItem * roomBItems[] = {new Treasure,new Weapon("Axe",3,":/images/images/axe.png"),new HealthPotion(":/images/images/2Lives.png",2)};
     b->populateRoom(roomBItems,3);
@@ -148,7 +148,7 @@ Game::~Game()
     delete keys;
     delete mediaPlayer;
     delete playlist;
-    delete stoneRoom;
+    delete a;
     delete b;
     delete c;
     delete d;
