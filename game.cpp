@@ -16,7 +16,7 @@ Game::Game(QWidget *)
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
 
-    playlist->addMedia(QUrl("qrc:/sounds/sounds/makai-symphony-dragon-slayer.mp3"));
+    playlist->addMedia(QUrl(":/sounds/sounds/Adventure_Meme.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     mediaPlayer->setPlaylist(playlist);
     mediaPlayer->setAudioRole(QAudio::GameRole);
