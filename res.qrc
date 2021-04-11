@@ -23,6 +23,7 @@
         <file>images/centaur.png</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file>sounds/Adventure_Meme.mp3</file>
+        <file>sounds/gameWon.wav</file>
+        <file>sounds/Adventure Meme.mp3</file>
     </qresource>
 </RCC>
