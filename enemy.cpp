@@ -7,8 +7,7 @@
 
 Enemy::Enemy(string name,int damage,string imgPath)
 {
-    name[0] = toupper(name[0]);
-    this->name = name;
+    this->name = Zork::capitalise(name);
     this->alive = true;
     this->damage = damage;
     srand(time(NULL));
@@ -85,7 +84,7 @@ void Enemy::collision()
         {
              Player *player = (Player *)colliding_items[i];
              qDebug() << "Attacking the player";
-             combat(this,player);
+             Zork::combat(this,player);
              if(player->isAlive())
                  player->getHealthbar()->updateHealth(player->getHealth());
 //             setPos(x()+xIncrement*2,y()+yIncrement*2); // tbh its just a temp idea
