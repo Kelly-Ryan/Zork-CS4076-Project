@@ -15,8 +15,7 @@ Level : 1
 
 ### Credits
 #### Sound : 
-Dragon Slayer by 魔界Symphony | https://soundcloud.com/makai-symphony
-Music promoted by https://www.chosic.com
+Adventure Meme by Kevin MacLeod | https://incompetech.com/
 Creative Commons Attribution-ShareAlike 3.0 Unported
 https://creativecommons.org/licenses/by-sa/3.0/deed.en_US
 #### Art : 
