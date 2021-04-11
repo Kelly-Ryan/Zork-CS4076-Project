@@ -342,7 +342,7 @@ void Player::equipPlayer(GameItem *itemSelected)
         RoomKey* key = dynamic_cast<RoomKey*>(itemSelected);
         holding.inHand.key = key;
         holding.setType(KEY);
-    }
+     }
     else
     {
         HealthPotion *potion = dynamic_cast<HealthPotion*>(itemSelected);

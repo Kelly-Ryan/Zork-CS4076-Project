@@ -92,7 +92,7 @@ void Game::createRooms()
     b->addItem(dragon);
     b->addItem(dragon->getHealthbar());
 
-    GameItem * roomCItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    GameItem * roomCItems[] = {new HealthPotion(":/images/images/1Life .png",1)};
     c->populateRoom(roomCItems,1);
 
     Enemy *troll = new Enemy("Troll",2,":/images/images/troll.png");
@@ -109,13 +109,14 @@ void Game::createRooms()
     GameItem * roomGItems[] = {new HealthPotion(":/images/images/1Life.png",1), new RoomKey("Gold Key",":images/images/gold-key.png")};
     g->populateRoom(roomGItems,2);
 
+
     GameItem * roomHItems[] = {new Weapon("Axe",2,":/images/images/axe.png"), new RoomKey("Silver Key",":images/images/silver-key.png")};
     h->populateRoom(roomHItems,2);
     Enemy *cyclops = new Enemy("Cyclops",2,":/images/images/cyclops.png");
     h->addItem(cyclops);
     h->addItem(cyclops->getHealthbar());
 
-    GameItem * roomIItems[] = {new HealthPotion(":/images/images/1Life.png",1)};
+    GameItem * roomIItems[] = {new HealthPotion(":/images/images/1Life .png",1)};
     i->populateRoom(roomIItems,1);
 }
 

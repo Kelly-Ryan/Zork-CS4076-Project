@@ -5,25 +5,24 @@
         <file>images/exit.png</file>
         <file>images/westExit.png</file>
         <file>images/stoneRoom.png</file>
-        <file>images/2Lives.png</file>
-        <file>images/3Lives.png</file>
-        <file>images/1Life.png</file>
         <file>images/key.png</file>
-        <file>images/treasure.png</file>
         <file>images/bronze-key.png</file>
         <file>images/gold-key.png</file>
         <file>images/silver-key.png</file>
         <file>images/axe.png</file>
         <file>images/bow.png</file>
-        <file>images/centaur.png</file>
-        <file>images/cyclops.png</file>
         <file>images/dragon.png</file>
-        <file>images/giant.png</file>
-        <file>images/troll.png</file>
         <file>images/sword.png</file>
+        <file>images/1Life .png</file>
+        <file>images/2Lives.png</file>
+        <file>images/3Lives.png</file>
+        <file>images/cyclops.png</file>
+        <file>images/giant.png</file>
+        <file>images/treasure.png</file>
+        <file>images/troll.png</file>
+        <file>images/centaur.png</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file>sounds/gameWon.wav</file>
         <file>sounds/Adventure Meme.mp3</file>
     </qresource>
 </RCC>
