@@ -1,17 +1,18 @@
 #include "room.h"
+#include "zorknamespace.h"
 
 #include <cstdlib>
 #include <cctype>
 #include <time.h>
 
-Room::Room(string description, QImage background, bool isLocked)
+Room::Room(string name, QImage background, bool isLocked)
 {
-    this->description = description;                    //set room description
+    this->name = name;                    //set room description
     this->isLocked = isLocked;                          //set locked status
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 
-    QGraphicsTextItem *roomName = new QGraphicsTextItem(QString::fromStdString(description));
+    QGraphicsTextItem *roomName = new QGraphicsTextItem(Zork::toQString(name));
     QFont roomFont ("Adventure", 25);
     roomName->setFont(roomFont);
     roomName->setDefaultTextColor("white");
@@ -66,11 +67,11 @@ void Room::populateRoom(GameItem *roomItems[],int numItems)
 }
 
 string Room::getRoomName(){
-    return description;
+    return name;
 }
 
-void Room::setIsLocked(bool b){
-    isLocked = b;
+void Room::setIsLocked(bool locked){
+    isLocked = locked;
 }
 
 bool Room::getIsLocked(){

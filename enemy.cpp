@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "gamePopup.h"
+#include "zorknamespace.h"// must include to use custom namespace
 #include <cstdlib>
 #include <cctype>
 #include <time.h>
@@ -7,8 +8,7 @@
 
 Enemy::Enemy(string name,int damage,string imgPath)
 {
-    name[0] = toupper(name[0]);
-    this->name = name;
+    this->name = Zork::capitalise(name);
     this->alive = true;
     this->damage = damage;
     srand(time(NULL));
@@ -19,8 +19,8 @@ Enemy::Enemy(string name,int damage,string imgPath)
     timer = new QTimer();
     timer->start(200);
     connect(timer,SIGNAL(timeout()),this,SLOT(roam()));
-    setPixmap(QPixmap(QString::fromStdString(imgPath)));
-    lives = new Healthbar(name,health);
+    setPixmap(QPixmap(Zork::toQString(imgPath)));
+    lives = new Healthbar(this->name,health);
     lives->setPos(800,50);
 }
 
@@ -70,7 +70,7 @@ void Enemy::defeated()
 {
     timer->stop();
     GamePopup congrats;
-    congrats.setText("Congratulations you defeated the " + QString::fromStdString(name));
+    congrats.setText("Congratulations you defeated the " + Zork::toQString(name));
     congrats.exec();
     delete this;
 }

@@ -10,6 +10,7 @@ using std::string;
 
 class GameItem:public QGraphicsPixmapItem
 {
+    template<typename T> friend class Inventory;
 private:
     string imgPath;
     bool outOfUse = false;

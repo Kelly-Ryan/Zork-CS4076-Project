@@ -71,7 +71,7 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
     typename vector<T*>::iterator i;
     for (i = inventory.begin(); i != inventory.end(); i++)
     {
-        if(widgetItem->text().startsWith((*i)->getDescription()))
+        if(widgetItem->text().startsWith((*i)->qtDescription))
         {
             item = (*i);
             break;
@@ -86,7 +86,7 @@ template <typename T> void Inventory<T>::onSelected(QListWidgetItem *widgetItem)
     {
         qDebug() << "Chosen to use the item";
         emit itemSelected(item);
-        if(item->isOutOfUse())
+        if(item->outOfUse)
         {
             inventory.erase(i);
             delete widgetItem;
@@ -112,7 +112,7 @@ template <typename T> void Inventory<T>::addToInventory(GameItem *itemCollected)
         if(inventory.size() < maxCapacity)
         {
             inventory.push_back(item);
-            QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->getImgPath())),itemCollected->itemInfo());
+            QListWidgetItem * inventoryItem = new QListWidgetItem(QIcon(QString::fromStdString(itemCollected->imgPath)),itemCollected->itemInfo());
             addItem(inventoryItem);
             qDebug() << "Adding to inventory";
             emit itemAdded(itemCollected);

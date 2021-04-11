@@ -21,7 +21,6 @@ class Player : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
     enum Type{WEAPON,KEY};
 
-
     /* ItemHolding is a tagged union, the enum above acts as the tag
      * Need the tag to do exception checking and also to prevent undefined behaviour
      */

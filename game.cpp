@@ -52,13 +52,6 @@ Game::Game(QWidget *)
     potions->setPosition(800,315);
     keys->setPosition(800,480);
 
-    Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
-    Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
-    HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
-    HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
-
-    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives};
-    stoneRoom->populateRoom(roomAItems,4);
     setScene(stoneRoom);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
@@ -96,9 +89,9 @@ void Game::createRooms()
     h->setExits(NULL, NULL, f, NULL);
     i->setExits(NULL, NULL, d, NULL);
 
-    GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("Sword",2,":/images/images/sword.png")};
+    GameItem * roomAItems[] = {new HealthPotion(":/images/images/2Lives.png",2),new Weapon("sword",2,":/images/images/sword.png")};
     stoneRoom->populateRoom(roomAItems,2);
-    Enemy *centaur = new Enemy("Centaur",1,":/images/images/centaur.png");
+    Enemy *centaur = new Enemy("centaur",1,":/images/images/centaur.png");
     stoneRoom->addItem(centaur);
     stoneRoom->addItem(centaur->getHealthbar());
 

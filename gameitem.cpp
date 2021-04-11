@@ -1,6 +1,9 @@
 #include "gameitem.h"
+#include "zorknamespace.h"// must include to use custom namespace
 #include <QMessageBox>
 #include <QDebug>
+
+using namespace Zork;
 
 GameItem::GameItem()
 {
@@ -10,7 +13,7 @@ GameItem::GameItem (string description,string imgPath)
 {
     setDescription(description);
     this->imgPath = imgPath;
-    setPixmap(QPixmap(QString::fromStdString(imgPath)));
+    setPixmap(QPixmap(Zork::toQString(imgPath)));
 }
 
 GameItem::GameItem(std::string description)
@@ -27,7 +30,7 @@ GameItem::GameItem(const GameItem &item):QGraphicsPixmapItem()
 
 void GameItem::setDescription(string description)
 {
-    this->qtDescription = QString::fromStdString(description);
+   this->qtDescription = toQString(capitalise(description));
 }
 
 QString GameItem::itemInfo()
