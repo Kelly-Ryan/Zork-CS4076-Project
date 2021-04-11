@@ -11,7 +11,7 @@
 #include "weapon.h"
 #include "roomkey.h"
 
-#define SPEED 10
+#define SPEED 5
 #define MAX_HEALTH 10
 
 class Game;
