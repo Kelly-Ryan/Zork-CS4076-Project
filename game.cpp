@@ -48,9 +48,9 @@ Game::Game(QWidget *)
     connect(keys,SIGNAL(itemSelected(GameItem *)),player,SLOT(equipPlayer(GameItem *)));
     connect(keys,SIGNAL(restoreFocus()),this,SLOT(enableMovement()));
 
-    armoury->setPosition(760,150);
-    potions->setPosition(760,315);
-    keys->setPosition(760,480);
+    armoury->setPosition(800,150);
+    potions->setPosition(800,315);
+    keys->setPosition(800,480);
 
     Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
     Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");

@@ -44,7 +44,7 @@ template<typename T> Inventory<T>::Inventory(string title,int maxCapacity):maxCa
     setWindowFlags(Tool | CustomizeWindowHint | WindowTitleHint | WindowStaysOnTopHint);
     setHorizontalScrollBarPolicy(ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(ScrollBarAlwaysOff);
-    resize(240,120);
+    resize(200,120);
     show();
 }
 
