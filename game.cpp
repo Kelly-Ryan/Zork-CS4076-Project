@@ -16,7 +16,7 @@ Game::Game(QWidget *)
     setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     setFixedSize(1000,600);
 
-    playlist->addMedia(QUrl(":/sounds/sounds/Adventure_Meme.mp3"));
+    playlist->addMedia(QUrl("qrc:/sounds/sounds/Adventure_Meme.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     mediaPlayer->setPlaylist(playlist);
     mediaPlayer->setAudioRole(QAudio::GameRole);
@@ -52,13 +52,6 @@ Game::Game(QWidget *)
     potions->setPosition(760,315);
     keys->setPosition(760,480);
 
-    Weapon *weapon = new Weapon("sword",2,":/images/images/sword.png");
-    Weapon *sword = new Weapon("special sword",2,":/images/images/sword.png");
-    HealthPotion *oneLife = new HealthPotion(":/images/images/1Life.png",1);
-    HealthPotion *twoLives = new HealthPotion(":/images/images/2Lives.png",2);
-
-    GameItem * roomAItems[] = {weapon,sword,oneLife,twoLives};
-    stoneRoom->populateRoom(roomAItems,4);
     setScene(stoneRoom);        //set first scene (room) in QGraphicsView
     show(); //show QGraphicsView
 }
