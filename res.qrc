@@ -23,8 +23,6 @@
         <file>images/sword.png</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file>sounds/makai-symphony-dragon-slayer.mp3</file>
-        <file>sounds/Zelda.mp3</file>
         <file>sounds/Adventure_Meme.mp3</file>
     </qresource>
 </RCC>
