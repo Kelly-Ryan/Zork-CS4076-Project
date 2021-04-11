@@ -1,8 +1,12 @@
 #include "healthbar.h"
+#include "zorknamespace.h"
 #include <QFont>
+
+using namespace Zork;
+
 Healthbar::Healthbar(string entity, int health)
 {
-    this->entity = QString::fromStdString(entity);
+    this->entity = toQString(capitalise(entity));
     this->health = health;
     setDefaultTextColor(Qt::white);
     setFont(QFont("Adventure", 12));

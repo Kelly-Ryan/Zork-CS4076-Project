@@ -13,7 +13,7 @@ GameItem::GameItem (string description,string imgPath)
 {
     setDescription(description);
     this->imgPath = imgPath;
-    setPixmap(QPixmap(QString::fromStdString(imgPath)));
+    setPixmap(QPixmap(Zork::toQString(imgPath)));
 }
 
 GameItem::GameItem(std::string description)

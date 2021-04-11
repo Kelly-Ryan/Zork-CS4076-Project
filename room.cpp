@@ -1,4 +1,5 @@
 #include "room.h"
+#include "zorknamespace.h"
 
 #include <cstdlib>
 #include <cctype>
@@ -11,7 +12,7 @@ Room::Room(string name, QImage background, bool isLocked)
     setSceneRect(0,0,1000,600);                         //set scene dimensions
     setBackgroundBrush(QBrush(QImage(background)));     //set scene image
 
-    QGraphicsTextItem *roomName = new QGraphicsTextItem(QString::fromStdString(name));
+    QGraphicsTextItem *roomName = new QGraphicsTextItem(Zork::toQString(name));
     QFont roomFont ("Adventure", 25);
     roomName->setFont(roomFont);
     roomName->setDefaultTextColor("white");
