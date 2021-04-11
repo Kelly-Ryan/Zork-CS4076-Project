@@ -1,9 +1,17 @@
 #include "roomkey.h"
 
+namespace String{
+   QString toString(string s){
+        return QString::fromStdString(s);
+    }
+}
+
+using namespace String;
+
 RoomKey::RoomKey(string description, string imgPath):GameItem()
 {
-    this->qtDescription = QString::fromStdString(description);
-    setPixmap(QPixmap(QString::fromStdString(imgPath)));
+    this->qtDescription = toString(description);
+    setPixmap(QPixmap(toString(imgPath)));
     setImgPath(imgPath);
 }
 

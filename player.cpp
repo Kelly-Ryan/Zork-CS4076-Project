@@ -157,7 +157,7 @@ void Player::collision()
                 Room *nextRoom = game->currentRoom->nextRoom("east");
                 if (nextRoom != NULL)
                 {
-                    if(nextRoom->isLocked)
+                    if(nextRoom->getIsLocked())
                     {
                         if(nextRoom->getRoomName() == "Room G")     //if it is a locked room
                         {
@@ -166,7 +166,7 @@ void Player::collision()
                                if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Silver Key")
                                {
                                    game->currentRoom = nextRoom;
-                                   game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                   game->currentRoom->setIsLocked(false);    //permanently unlock room with key
                                    nextRoom->addItem(game->player);
                                    setPos(300,275);
                                    setFocus();
@@ -195,7 +195,7 @@ void Player::collision()
                                if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Gold Key")
                                {
                                     game->currentRoom = nextRoom;
-                                    game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                    game->currentRoom->setIsLocked(false);    //permanently unlock room with key
                                     nextRoom->addItem(game->player);
                                     setPos(300,275);
                                     setFocus();
@@ -245,17 +245,17 @@ void Player::collision()
                 Room *nextRoom = game->currentRoom->nextRoom("west");
                 if (nextRoom != NULL)
                 {
-                    if(nextRoom->isLocked)
+                    if(nextRoom->getIsLocked())
                     {
                         if(nextRoom->getRoomName() == "Room H")     //if it is a locked room
                         {
-                            if(holding.getType() != NULL && nextRoom->isLocked)           //if the player is holding an item
+                            if(holding.getType() != NULL)           //if the player is holding an item
                             {
                                 if(holding.getType() == KEY && holding.inHand.key->getDescription() == "Bronze Key")
                                 {
 
                                     game->currentRoom = nextRoom;
-                                    game->currentRoom->isLocked = false;    //permanently unlock room with key
+                                    game->currentRoom->setIsLocked(false);    //permanently unlock room with key
                                     nextRoom->addItem(game->player);
                                     setPos(650,275);
                                     setFocus();

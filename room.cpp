@@ -69,6 +69,14 @@ string Room::getRoomName(){
     return description;
 }
 
+void Room::setIsLocked(bool b){
+    isLocked = b;
+}
+
+bool Room::getIsLocked(){
+    return isLocked;
+}
+
 Room::~Room(){
     delete northExit;
     delete southExit;
