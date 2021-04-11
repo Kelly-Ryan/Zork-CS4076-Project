@@ -24,7 +24,6 @@
     </qresource>
     <qresource prefix="/sounds">
         <file>sounds/gameWon.wav</file>
-        <file>sounds/makai-symphony-dragon-slayer.mp3</file>
-        <file>sounds/Zelda.mp3</file>
+        <file>sounds/Adventure Meme.mp3</file>
     </qresource>
 </RCC>
