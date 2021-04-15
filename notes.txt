@@ -1,8 +1,0 @@
-weapon 
-item - potion & key inherit from this
-Potion needs to increase lives
-
-weapon and item inherit from game
-
-weapon and item for inventory template
-
